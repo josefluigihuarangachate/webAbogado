@@ -227,9 +227,9 @@ class CategoriaController extends Controller {
         //
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $id = htmlspecialchars(strtolower(trim($request->input('id'))));
-
+        @$imageAntigua = htmlspecialchars(trim($request->input('imageAntigua')));
+        
         $anidado = DB::table(table('subcategoria'))->where('idcategoria', $id)->first();
-
 
         if ($anidado) {
             $json = json('error', strings('relative_data'), '');
@@ -238,6 +238,10 @@ class CategoriaController extends Controller {
             try {
                 $affected = DB::table(table('categoria'))->where('id', '=', $id)->delete();
                 if ($affected) {
+
+                    if (!empty(@$imageAntigua)) {
+                        unlink(FOLDER_CATEGORIA . @$imageAntigua);
+                    }
                     $json = json('ok', strings('success_delete'), '');
                 } else {
                     $json = json('ok', strings('error_delete'), '');

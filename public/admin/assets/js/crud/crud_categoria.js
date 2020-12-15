@@ -195,7 +195,8 @@ function eliminar(id) {
         confirmButtonText: 'Si, Deseo eliminarlo!'
     }).then((result) => {
         if (result.value) {
-            $.post(ruta() + "eliminar" + globalName, {cmd: 'web', id: id}, function (json) {
+            var imageAntigua = document.getElementById("oldImage" + id).value;
+            $.post(ruta() + "eliminar" + globalName, {cmd: 'web', id: id, imageAntigua: imageAntigua}, function (json) {
                 if (json['status'] == 'Ok') {
                     Swal.fire(
                             'Aviso Importante',
