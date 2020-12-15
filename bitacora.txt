@@ -1,0 +1,22 @@
+INSTALAR DATATABLE:
+-------------------
+        composer require yajra/laravel-datatables-oracle
+
+
+CREAR VISTA, CONTROLADOR Y MODELO:
+----------------------------------
+        Ejem: https://laraveldaily.com/create-controller-model-one-artisan-command/
+
+	php artisan make:model Customer
+	php artisan make:controller CustomersController --resource
+
+
+	ESTE EQUIVALE A LOS DOS , LARAVEL REALMENTE LE PREGUNTARÁ SI DESEA GENERAR EL MODELO:
+	php artisan make:controller CustomersController --model=Customer
+
+
+COMO PUEDO VER MI PROYECTO LARAVEL EN UNA RED LOCAL:
+----------------------------------------------------
+        * EN HOST PONER LA IP DE TU PC
+        * EN PORT DEJARLO ASI
+        php artisan serve --host=192.168.0.105 --port=8000

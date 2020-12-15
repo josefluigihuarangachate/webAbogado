@@ -1,0 +1,467 @@
+/**********************************************************************
+***********************************************************************
+### App Email CSS
+*********************************************************************
+*********************************************************************/
+
+.mailbox-page-inner,
+.chat-page-inner {
+	height: calc(100% - 60px);
+}
+
+.mailbox-mini-sidebar {
+	width: 240px;
+	display: block;
+	overflow: hidden;
+	float: left;
+}
+
+.mailbox-mini-sidebar .compose-mail {
+	border-bottom: $bd-default;
+	padding: 7px 15px;
+}
+
+.mailbox-mini-sidebar .mail-menu-scroll {
+	min-height: 100%;
+	width: 240px;
+	position: absolute;
+	top: 56px;
+	bottom: 0px;
+	left: 0;
+	flex-direction: column;
+}
+
+.mailbox-mini-sidebar .mail-menu {
+	margin: 20px 0px;
+}
+
+.mailbox-mini-sidebar .mail-menu li:hover {
+	background-color: #f2f4f7;
+	border-left: $bd-primary;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.6s;
+	transition: all 0.5s;
+}
+
+.mailbox-mini-sidebar .mail-menu li:hover a span svg {
+	color: #5c76fb;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.6s;
+	transition: all 0.5s;
+}
+
+.mailbox-mini-sidebar .label-menu li a,
+.mailbox-mini-sidebar .tag-menu li a,
+.mailbox-mini-sidebar .mail-menu li a {
+	font-size: 13px;
+	padding: 8px 15px;
+	/*color: #4e5e7c;*/
+	-webkit-transition: all .35s ease!important;
+	transition: all .35s ease!important;
+}
+
+.mailbox-mini-sidebar .mail-menu li:hover a {
+	color: #5c76fb;
+	-webkit-transition: all .35s ease!important;
+	transition: all .35s ease!important;
+}
+
+.mailbox-mini-sidebar .label-menu li:hover a,
+.mailbox-mini-sidebar .tag-menu li:hover a {
+	color: #5c76fb;
+	border-left: $bd-primary;
+	background-color: #f2f4f7;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.6s;
+	transition: all 0.5s;
+}
+
+.mailbox-mini-sidebar .tag-menu {
+	margin-bottom: 70px;
+}
+
+.mailbox-list-sidebar,
+.chat-list-sidebar {
+	width: 320px;
+	display: block;
+	overflow: hidden;
+	float: left;
+	border-right: $bd-default;
+	height: 100%;
+}
+
+.mailbox-list-sidebar .search-mini,
+.chat-list-sidebar .search-mini {
+	border-bottom: $bd-default;
+	border-left: $bd-default;
+	padding: 10.5px 15px;
+}
+
+.mailbox-list-sidebar .search-mini input:focus,
+.chat-list-sidebar .search-mini input:focus,
+.mailbox-list-sidebar .search-mini .form-control:focus,
+.chat-list-sidebar .search-mini .form-control:focus,
+.search-form .form-control:focus {
+	border-color: transparent!important;
+	box-shadow: none!important;
+	transition-duration: .5s;
+}
+
+.mailbox-list-sidebar .search-mini input,
+.chat-list-sidebar .search-mini input,
+.mailbox-list-sidebar .search-mini .form-control,
+.chat-list-sidebar .search-mini .form-control {
+	border: none;
+	margin-left: 5px!important;
+}
+
+.mailbox-list-sidebar .search-mini select.form-control,
+.chat-list-sidebar .search-mini select.form-control {
+	padding: 0;
+	font-weight: $font-weight-medium;
+	height: 30px;
+	cursor: pointer;
+}
+
+.mailbox-list-sidebar .search-mini #slWrapper,
+.chat-list-sidebar .search-mini #slWrapper {
+	width: 65px;
+}
+
+.mailbox-list-sidebar .mailbox-mail-list {
+	min-height: 100%;
+	width: 320px;
+	position: absolute;
+	top: 56px;
+	bottom: 0px;
+	flex-direction: column;
+}
+
+.mailbox-list-sidebar .mailbox-mail-list .messages-name,
+.chat-list-sidebar .chat-contact-list .messages-name {
+	color: $brand-color;
+}
+
+.mailbox-list-sidebar .mailbox-mail-list a:hover .messages-name,
+.chat-list-sidebar .chat-contact-list a:hover .messages-name {
+	color: #5c76fb;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.mailbox-list-sidebar .mailbox-mail-list a.active .messages-name,
+.chat-list-sidebar .chat-contact-list a.active .messages-name {
+	color: #5c76fb;
+}
+
+.mailbox-list-sidebar .mailbox-mail-list .messages-date {
+	background: #eff1f7;
+	padding: 8px 20px;
+}
+
+.mailbox-list-sidebar .mailbox-mail-list .messages-load-more,
+.chat-list-sidebar .chat-contact-list .chat-contact-load-more {
+	background: #eff1f7;
+	padding: 8px 20px;
+	text-align: center;
+	margin-bottom: 52px;
+}
+
+.mailbox-details {
+	min-height: 100%;
+	width: auto;
+	left: 560px;
+	position: absolute;
+	right: 0;
+}
+
+.mailbox-details p,
+.mailbox-details small,
+.mailbox-details address {
+	font-weight: $font-weight-ligh;
+	font-size: 12px;
+}
+
+.mailbox-details .mailbox-details-header {
+	border-bottom: $bd-default;
+	padding: 8px 15px;
+}
+
+.mailbox-details .mailbox-details-body,
+.mailbox-details .mailbox-details-scroll-1,
+.mailbox-details .mailbox-details-scroll-2,
+.mailbox-details .mailbox-details-scroll-3,
+.mailbox-details .mailbox-details-scroll-4,
+.mailbox-details .mailbox-details-scroll-5,
+.mailbox-details .mailbox-details-scroll-6,
+.mailbox-details .mailbox-details-scroll-7,
+.mailbox-details .mailbox-details-scroll-8,
+.mailbox-details .mailbox-details-scroll-9,
+.mailbox-details .mailbox-details-scroll-10,
+.mailbox-details .mailbox-details-scroll-11,
+.mailbox-details .mailbox-details-scroll-12,
+.mailbox-details .mailbox-details-scroll-13,
+.mailbox-details .mailbox-details-scroll-14,
+.mailbox-details .mailbox-details-scroll-15 {
+	padding: 20px;
+	min-height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 56px;
+	bottom: 0px;
+	flex-direction: column;
+}
+
+.mailbox-mail-list .list-group-item.active {
+	color: #5c76fb;
+	background-color: #F2F3F9;
+	border-color: #eee;
+}
+
+.mailbox-mail-list .list-group-item.active div>div>div.space-normal,
+.header-right .dropdown-item.active,
+.dropdown-item:hover div>div>div.space-normal {
+	color: $brand-color;
+}
+
+.mailbox-mail-list .list-group-item {
+	padding: 15px;
+	border: $bd-default;
+}
+
+.mail-compose-sidebar {
+	background: #fff;
+}
+
+.mail-compose-sidebar .form-control {
+	display: flex;
+	align-items: center;
+	margin-bottom: 0;
+	font-size: 13px;
+	font-weight: $font-weight-normal;
+	color: #021222;
+	padding: 0;
+}
+
+
+/*quil editor*/
+
+.ql-container.ql-snow {
+	border: $bd-default;
+}
+
+.ql-toolbar.ql-snow {
+	border: $bd-default;
+	font-family: "Poppins", sans-serif;
+}
+
+.ql-editor p,
+.ql-editor ol,
+.ql-editor ul,
+.ql-editor pre,
+.ql-editor blockquote,
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6 {
+	font-family: $font-family-poppins;
+	font-weight: $font-weight-normal;
+}
+
+.ql-snow .ql-stroke {
+	stroke: $brand-color;
+}
+
+.ql-snow .ql-picker {
+	color: $brand-color;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label,
+.ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label,
+.ql-snow .ql-picker-options .ql-picker-item {
+	border-color: $brand-color;
+	font-weight: $font-weight-normal;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label {
+	border: $bd-default;
+}
+
+
+/*tab css*/
+
+.tabcontent {
+	display: none;
+	padding: 15px;
+	-webkit-animation: fadeEffect 1s;
+	animation: fadeEffect 1s;
+}
+
+@-webkit-keyframes fadeEffect {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeEffect {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+
+/*Emoji Picker*/
+
+.lsx-emojipicker-container {
+	top: -300px!important;
+	left: 0px!important;
+	right: inherit!important;
+}
+
+.lsx-emojipicker-container:after {
+	left: 5px;
+	margin-bottom: -10px;
+	border-width: 10px 10px 0 10px;
+	border-color: #eeeeee transparent transparent transparent;
+}
+
+.lsx-emojipicker-emoji.lsx-emoji-tab {
+	width: 300px!important;
+}
+
+ul.lsx-emojipicker-tabs {
+	padding: 0!important;
+	background-color: #f0f3ff!important;
+	border-top: $bd-default!important;
+}
+
+ul.lsx-emojipicker-tabs li.selected {
+	border-bottom: 2px solid #5c76fb!important;
+}
+
+
+/*email picker*/
+
+.selectize-control.contacts .selectize-input {
+	border: $bd-default;
+	padding: 10px;
+	box-shadow: none;
+	box-shadow: none;
+	border-radius: 3px;
+}
+
+.selectize-control.multi .selectize-input.has-items {
+	padding: 6px;
+}
+
+.selectize-control.form-control {
+	display: initial!important;
+	overflow: hidden!important;
+	border: none!important;
+}
+
+.selectize-control.contacts .selectize-dropdown-content {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: 200px;
+	-webkit-overflow-scrolling: touch;
+	background: #fff;
+	z-index: 999;
+}
+
+.selectize-control.contacts .selectize-dropdown [data-selectable] {
+	padding: 5px 10px;
+}
+
+.selectize-control.contacts .selectize-dropdown [data-selectable]:hover {
+	background: #F2F3F9;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.selectize-control.contacts .selectize-dropdown [data-selectable] {
+	font-weight: $font-weight-medium;
+}
+
+.selectize-control.contacts .selectize-control.multi .selectize-input.has-items {
+	border: $bd-default;
+}
+
+.selectize-control.contacts .selectize-input.dropdown-active {
+	border: $bd-primary;
+}
+
+.selectize-control.contacts .selectize-input>div {
+	padding: 1px 10px;
+	font-size: 13px;
+	font-weight: $font-weight-normal;
+	-webkit-font-smoothing: auto;
+	color: #f7fbff;
+	text-shadow: 0 1px 0 rgba(8, 32, 65, 0.2);
+	background: #5c76fb;
+	background: -moz-linear-gradient(top, #5c76fb 0%, #5c76fb 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5c76fb), color-stop(100%, #5c76fb));
+	background: -webkit-linear-gradient(top, #5c76fb 0%, #5c76fb 100%);
+	background: -o-linear-gradient(top, #5c76fb 0%, #5c76fb 100%);
+	background: -ms-linear-gradient(top, #5c76fb 0%, #5c76fb 100%);
+	background: linear-gradient(to bottom, #5c76fb 0%, #5c76fb 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5c76fb', endColorstr='#5c76fb', GradientType=0);
+	border: 1px solid #0f65d2;
+	-webkit-border-radius: 999px;
+	-moz-border-radius: 999px;
+	border-radius: 999px;
+}
+
+.selectize-control.contacts .selectize-input>div.active {
+	background: #0059c7;
+	background: -moz-linear-gradient(top, #0059c7 0%, #0051c1 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0059c7), color-stop(100%, #0051c1));
+	background: -webkit-linear-gradient(top, #0059c7 0%, #0051c1 100%);
+	background: -o-linear-gradient(top, #0059c7 0%, #0051c1 100%);
+	background: -ms-linear-gradient(top, #0059c7 0%, #0051c1 100%);
+	background: linear-gradient(to bottom, #0059c7 0%, #0051c1 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0059c7', endColorstr='#0051c1', GradientType=0);
+	border-color: #0051c1;
+}
+
+.selectize-control.contacts .selectize-input>div .email {
+	opacity: 0.8;
+}
+
+.selectize-control.contacts .selectize-input>div .name+.email {
+	margin-left: 5px;
+}
+
+.selectize-control.contacts .selectize-input>div .email:before {
+	content: '<';
+}
+
+.selectize-control.contacts .selectize-input>div .email:after {
+	content: '>';
+}
+
+.selectize-control.contacts .selectize-dropdown .caption {
+	font-size: 11px;
+	font-weight: $font-weight-normal;
+	display: block;
+	color: $brand-color;
+}

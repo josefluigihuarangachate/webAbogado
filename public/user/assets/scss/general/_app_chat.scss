@@ -1,0 +1,171 @@
+/**********************************************************************
+***********************************************************************
+### App Chat CSS 
+*********************************************************************
+*********************************************************************/
+
+.chat-contact-list nav.chat-channel-list a:hover {
+	color: #5c76fb;
+	background: #f2f4f7;
+	border-left: $bd-primary;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.chat-contact-list .chat-date {
+	background: #eff1f7;
+	padding: 7px 20px;
+}
+
+.chat-contact-list .chat-contact-content {
+	width: 100%;
+	overflow: hidden;
+}
+
+.chat-contact-list .list-group-item.active {
+	color: #5c76fb;
+	background-color: #F2F3F9;
+	border-color: #eee;
+}
+
+.chat-list-sidebar .chat-contact-list {
+	min-height: 100%;
+	width: 320px;
+	position: absolute;
+	top: 56px;
+	bottom: 0px;
+	flex-direction: column;
+}
+
+.chat-contact-list .list-group-item {
+	padding: 1rem 1.25rem;
+	display: block;
+}
+
+.chat-details {
+	min-height: 100%;
+	overflow: hidden;
+	background-image: url(../images/bg/chat-bg.png);
+}
+
+.chat-details .chat-details-body-scroll-1,
+.chat-details .chat-details-body-scroll-2,
+.chat-details .chat-details-body-scroll-3,
+.chat-details .chat-details-body-scroll-4,
+.chat-details .chat-details-body-scroll-5,
+.chat-details .chat-details-body-scroll-6,
+.chat-details .chat-details-body-scroll-7,
+.chat-details .chat-details-body-scroll-8,
+.chat-details .chat-details-body-scroll-9,
+.chat-details .chat-details-body-scroll-10,
+.chat-details .chat-details-body-scroll-11,
+.chat-details .chat-details-body-scroll-12,
+.chat-details .chat-details-body-scroll-13,
+.chat-details .chat-details-body-scroll-14,
+.chat-details .chat-details-body-scroll-15 {
+	left: 325px;
+	position: absolute;
+	top: 56px;
+	bottom: 0px;
+	flex-direction: column;
+}
+
+.chat-details .chat-details-header {
+	padding: 9.5px 15px;
+	border-bottom: $bd-default;
+	background: #fff;
+}
+
+.chat-details .chat-details-header .dropdown {
+	line-height: 0;
+}
+
+.chat-details .chat-details-header .chat-right-icons a {
+	color: $brand-color;
+	border-radius: 2px;
+	align-items: center;
+	display: flex;
+}
+
+.chat-details .chat-details-header .chat-right-icons a:hover {
+	color: #5c76fb;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+.chat-details .chat-details-header .chat-right-icons div.dropdown-menu {
+	width: 200px;
+}
+
+.chat-details .normal {
+	color: $brand-color;
+	padding: 15px;
+	width: 50%;
+	background-color: rgb(226, 234, 255);
+	border-radius: 5px;
+}
+
+.chat-details .reverse {
+	padding: 15px 0;
+}
+
+.chat-details .normal span.small,
+.chat-details .reverse span.small {
+	color: #a5a9bb;
+}
+
+.chat-details .middle .flex-row-reverse:hover a {
+	color: #5c76fb;
+}
+
+.chat-details .flex-row-reverse {
+	background: $color-white;
+	padding: 15px;
+	border-radius: 5px;
+	width: 50%;
+}
+
+.chat-details .attachment {
+	background: #fff;
+	padding: 15px;
+	margin: 20px 0;
+}
+
+.chat-details .chat-content-bottom .chat-footer-icon {
+	float: left;
+	margin-right: 15px;
+}
+
+.chat-details .chat-content-bottom {
+	background: #fff;
+	position: absolute;
+	bottom: 0;
+	left: 320px;
+	right: 0;
+	padding: 15px;
+	border-top: $bd-default;
+	overflow: hidden;
+	display: block;
+}
+
+.chat-details .middle {
+	margin-bottom: 60px;
+	padding: 30px 15px;
+}
+
+.chat-details .chat-content-bottom .chat-attachment {
+	padding: 10px;
+	color: $brand-color;
+}
+
+#addContacts input {
+	border: $bd-default;
+	transition-duration: .5s;
+	background: #fff;
+}

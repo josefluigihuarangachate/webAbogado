@@ -1,0 +1,137 @@
+/**********************************************************************
+***********************************************************************
+### App Cantacts CSS
+*********************************************************************
+*********************************************************************/
+
+.label.label-table {
+	padding: 5px 10px;
+	overflow: hidden;
+	font-size: 10px;
+	border-radius: 2px;
+}
+
+.label.label-table.label-success {
+	background-color: rgba(43, 173, 13, 0.15) !important;
+	color: #2bad0d !important;
+	letter-spacing: 0.5px;
+}
+
+.label.label-table.label-warning {
+	background-color: rgba(243, 170, 18, 0.15) !important;
+	color: #f3ab12 !important;
+	letter-spacing: 0.5px;
+}
+
+.label.label-table.label-danger {
+	background-color: rgba(244, 67, 54, 0.15) !important;
+	color: #ff2b2b !important;
+	letter-spacing: 0.5px;
+}
+
+.label.label-table.label-dark {
+	background-color: rgb(237, 239, 242) !important;
+	color: #0e122b !important;
+	letter-spacing: 0.5px;
+}
+
+.foo-accordion {
+	margin-bottom: 0;
+}
+
+.foo-accordion tr.footable-odd td.footable-visible.footable-first-column,
+.foo-accordion tr.footable-even td.footable-visible.footable-first-column {
+	display: -ms-flexbox!important;
+	display: flex!important;
+}
+
+.foo-accordion tr.footable-even td.footable-visible,
+.foo-accordion tr.footable-odd td.footable-visible {
+	vertical-align: middle;
+}
+
+.footable.breakpoint>tbody>tr>td>span.footable-toggle {
+	display: inline-flex;
+	font-family: 'footable';
+	speak: none;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: bold;
+	font-variant: normal;
+	text-transform: none;
+	-webkit-font-smoothing: antialiased;
+	padding-right: 20px;
+	color: #5c76fb;
+	-ms-flex-align: center!important;
+	align-items: center!important;
+}
+
+.foo-accordion tr.footable-even td.footable-visible.footable-last-column .dropdown .dropdown-menu,
+.foo-accordion tr.footable-odd td.footable-visible.footable-last-column .dropdown .dropdown-menu {
+	width: 230px;
+}
+
+.foo-accordion .footable-row-detail-value .badge {
+	margin: 2px 0;
+}
+
+.foo-accordion .footable-row-detail-cell {
+	padding: 20px 30px 40px;
+}
+
+.footable-odd,
+.footable-row-detail {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+.foo-accordion tr td ul.pagination li a {
+	padding: 7px 12px;
+	border-radius: 2px;
+	display: block;
+	border: $bd-default;
+}
+
+.foo-accordion tr td ul.pagination li a:hover,
+.foo-accordion tr td ul.pagination li.active a {
+	background: #edeff2;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-ms-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+@keyframes anim {
+	0% {
+		transform: scaleY(0.5);
+	}
+	100% {
+		transform: scaleY(1);
+	}
+}
+
+.foo-accordion tr.footable-row-detail {
+	animation: anim 0.5s ease-out;
+}
+
+.add-sidebar {
+	background: #fff;
+}
+
+.contact-add-sidebar .form-control {
+	padding: .575rem .75rem;
+}
+
+.contact-add-sidebar .form-group.birthday-select select {
+	padding: .375rem .75rem;
+	box-shadow: none;
+	font-size: 13px;
+	border-color: #eee;
+	width: 32.33%;
+}
+
+.contact-add-sidebar .form-group.birthday-select select:focus {
+	padding: .375rem .75rem;
+	box-shadow: none;
+	border-color: #5c76fb;
+	outline: none;
+}
