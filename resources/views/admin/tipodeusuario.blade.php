@@ -117,7 +117,7 @@ $v = "?v=" . date('YmdHis');
                                 <input type="text" class="form-control" id="Enombre" name="Enombre" placeholder="*Nombre">
                             </div>
                             <div class="form-group">
-                                <label for="Etipousuario">Tipo de Usuario</label>
+                                <label for="Etipousuario">Estado</label>
                                 <select class="form-control" id="Etipousuario" name="Etipousuario">
                                 </select>
                             </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2020 a las 15:02:16
+-- Tiempo de generación: 15-12-2020 a las 21:33:18
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -55,9 +55,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estado`, `modificado_por`) VALUES
-(1, 'assets/images/photos/AM20201107013432_Gianluigi_Buffon_(2014).jpg', 'AER890', 'Cortes', 'CORTES DE TODO LOS ESTILOS', 'inactivo', NULL),
-(2, NULL, '5TR5UU', 'Peinados', 'PEINADOS EN TODO LOS ESTILOS', 'activo', NULL),
-(4, NULL, 'MD7899', 'Peinado Frances', 'PEINADOS EN TODO LOS ESTILOS', 'activo', NULL);
+(1, 'AA15122020185303justicia_ciega.jpg', 'AER890', 'Civil', 'Acerca de casas', 'inactivo', 1),
+(2, NULL, '5TR5UU', 'Penal', 'Acerca de carcel', 'activo', 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +79,7 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`id`, `codigo`, `nombre`, `descripcion`, `estado`, `idcategoria`, `modificado_por`) VALUES
-(4, 'YUS086', 'CORTE CLASICO', 'CORTES CLASICOS COMO CORTE ESCOLAR', 'inactivo', 4, NULL);
+(4, 'YUS086', 'CORTE CLASICO', 'CORTES CLASICOS COMO CORTE ESCOLAR', 'inactivo', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -90,7 +89,7 @@ INSERT INTO `subcategoria` (`id`, `codigo`, `nombre`, `descripcion`, `estado`, `
 
 CREATE TABLE `tipo_usuario` (
   `id` int(25) NOT NULL,
-  `nombre` varchar(25) NOT NULL,
+  `nombre` varchar(500) NOT NULL,
   `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
   `modificado_por` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -201,7 +200,7 @@ ALTER TABLE `subcategoria`
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
 --
 ALTER TABLE `tipo_usuario`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

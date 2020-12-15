@@ -66,7 +66,7 @@ $v = "?v=" . date('YmdHis');
                                                     <div class="row col-md-2">
                                                     </div>
                                                     <div class="row col-md-5">
-                                                        <label for="Rtipousuario">Tipo de Usuario</label>                                                
+                                                        <label for="Rtipousuario">Estado</label>                                                
                                                         <select class="form-control" id="Rtipousuario" name="Rtipousuario">
                                                             <option value="activo">Activo</option>
                                                             <option value="inactivo">Inactivo</option>

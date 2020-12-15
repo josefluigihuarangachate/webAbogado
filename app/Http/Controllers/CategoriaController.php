@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TipoUsuario;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 // Agregar 
 use Exception;
@@ -17,17 +17,82 @@ include 'tools/function.php'; // Si funciona
 include 'tools/json.php'; // Si funciona
 // Fin Agregar
 
-class TipoUsuarioController extends Controller {
+class CategoriaController extends Controller {
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function cargarImgCategory(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $idCategoria = htmlspecialchars(strtolower(trim($request->input('idCategoria'))));
+        @$antiguaImagen = htmlspecialchars(strtolower(trim($request->input('imgAntigua'))));
+
+        if (empty(@$_FILES['imageFile']['name']) || empty($idCategoria)) {
+            $json = json('error', 'Debe subir una imagen', '');
+        } else {
+
+            $rules = [
+                'idCategoria' => 'required|integer',
+                'cmd' => 'required|string',
+                'imageFile' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                if (
+                        empty($idCategoria) ||
+                        empty(@$antiguaImagen)
+                ) {
+                    $json = json('error', strings('error_empty'), '');
+                } else {
+                    $json = json('error', strings('error_option'), '');
+                }
+            } else {
+
+                try {
+
+                    // Ejm : https://stackoverrun.com/es/q/5101323
+
+                    $image = $request->file('imageFile');
+                    $rutaTemporal = @$_FILES['imageFile']['tmp_name'];
+                    $nombreImagen = 'AA' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["imageFile"]["name"]));
+                    $rutaDestino = FOLDER_CATEGORIA . $nombreImagen;
+
+                    // Registro los datos
+                    $affected = DB::table(table('categoria'))
+                            ->where('id', $idCategoria)
+                            ->update(
+                            [
+                                'foto' => $nombreImagen,
+                                'modificado_por' => session('id')
+                            ],
+                    );
+
+                    if ($affected && $image->move(public_path(FOLDER_CATEGORIA), $nombreImagen)) {
+
+                        if (!empty(@$antiguaImagen)) {
+                            @unlink(FOLDER_CATEGORIA . @$antiguaImagen);
+                        }
+
+                        $json = json('ok', strings('success_update'), '');
+                    } else {
+                        $json = json('error', strings('error_update'), '');
+                    }
+                } catch (Exception $e) {
+                    $json = json('error', strings('error_update'), '');
+                }
+            }
+
+            return jsonPrint($json, $cmd);
+        }
+    }
+
     public function index(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
-        $data = DB::table(table('tipo_usuario'))
-                ->where('id', '>', 3)
+        $data = DB::table(table('categoria'))
+                ->where('id', '>', 0)
                 ->get();
         if ($data) {
             $json = json('ok', strings('success_login'), $data);
@@ -42,49 +107,8 @@ class TipoUsuarioController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request) {
-        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
-        $name = htmlspecialchars(ucwords(trim($request->input('Rnombre'))));
-        $status = htmlspecialchars(strtolower(trim($request->input('Rtipousuario'))));
-
-        $rules = [
-            'Rnombre' => 'required|string|min:3|max:255',
-            'Rtipousuario' => 'required|string',
-        ];
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            if (
-                    empty($name) ||
-                    empty($status)
-            ) {
-                $json = json('error', strings('error_empty'), '');
-            } else {
-                $json = json('error', strings('error_option'), '');
-            }
-        } else {
-
-            try {
-                // Registro los datos
-                $id = DB::table(table('tipo_usuario'))->insertGetId(
-                        [
-                            'nombre' => $name,
-                            'estado' => $status,
-                            'modificado_por' => session('id')
-                        ]
-                );
-
-                if ($id) {
-                    $json = json('ok', strings('success_create'), '');
-                } else {
-                    $json = json('error', strings('error_create'), '');
-                }
-            } catch (Exception $e) {
-                $json = json('error', strings('error_create'), '');
-            }
-        }
-
-        return jsonPrint($json, $cmd);
+    public function create() {
+        //
     }
 
     /**
@@ -100,14 +124,14 @@ class TipoUsuarioController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $id = htmlspecialchars(strtolower(trim($request->input('id'))));
 
-        $data = DB::table(table('tipo_usuario'))
+        $data = DB::table(table('categoria'))
                 ->where('id', '=', $id)
                 ->first();
 
@@ -122,10 +146,10 @@ class TipoUsuarioController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request) {
+    public function edit(Categoria $categoria) {
         //
     }
 
@@ -133,28 +157,35 @@ class TipoUsuarioController extends Controller {
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+
         $id = htmlspecialchars(strtolower(trim($request->input('Eid'))));
+        $code = htmlspecialchars(strtoupper(trim($request->input('Ecodigo'))));
         $name = htmlspecialchars(ucwords(trim($request->input('Enombre'))));
-        $typeuser = htmlspecialchars(strtolower(trim($request->input('Etipousuario'))));
+        $describe = htmlspecialchars(trim($request->input('Edescripcion')));
+        $status = htmlspecialchars(strtolower(trim($request->input('Eestado'))));
 
 
         $rules = [
             'Eid' => 'required|integer',
+            'Ecodigo' => 'required|string',
             'Enombre' => 'required|string',
-            'Etipousuario' => 'required|string',
+            'Edescripcion' => 'required|string',
+            'Eestado' => 'required|string',
         ];
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             if (
                     empty($id) ||
+                    empty($code) ||
                     empty($name) ||
-                    empty($typeuser)
+                    empty($describe) ||
+                    empty($status)
             ) {
                 $json = json('error', strings('error_empty'), '');
             } else {
@@ -164,12 +195,14 @@ class TipoUsuarioController extends Controller {
 
 
             // Registro los datos
-            $affected = DB::table(table('tipo_usuario'))
+            $affected = DB::table(table('categoria'))
                     ->where('id', $id)
                     ->update(
                     [
+                        'codigo' => $code,
                         'nombre' => $name,
-                        'estado' => $typeuser,
+                        'estado' => $status,
+                        'descripcion' => $describe,
                         'modificado_por' => session('id')
                     ],
             );
@@ -187,7 +220,7 @@ class TipoUsuarioController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request) {
@@ -195,14 +228,15 @@ class TipoUsuarioController extends Controller {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $id = htmlspecialchars(strtolower(trim($request->input('id'))));
 
+        $anidado = DB::table(table('subcategoria'))->where('idcategoria', $id)->first();
 
 
-        if ($id == 1 || $id == 2 || $id == 3) {
-            $json = json('error', 'No puede eliminar datos que son por defectos', '');
+        if ($anidado) {
+            $json = json('error', strings('relative_data'), '');
         } else {
 
             try {
-                $affected = DB::table(table('tipo_usuario'))->where('id', '=', $id)->delete();
+                $affected = DB::table(table('categoria'))->where('id', '=', $id)->delete();
                 if ($affected) {
                     $json = json('ok', strings('success_delete'), '');
                 } else {

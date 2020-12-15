@@ -90,8 +90,8 @@
                         <span>Categoria</span><i class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="../grid/grid-utilities-layout.html">Lista de Categorias</a></li>
-                        <li><a href="../grid/grid-auto-layout-columns.html">Nueva Categoria</a></li>
+                        <li><a href="./listaCategory">Lista de Categorias</a></li>
+                        <li><a href="./nuevoCategory">Nueva Categoria</a></li>
                     </ul>
                 </li>
                 <li>

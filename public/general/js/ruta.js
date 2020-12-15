@@ -4,4 +4,5 @@ function ruta() {
     return window.location.origin + '/';
 }
 
+var FOLDER_IMAGE = 'general/fotos/';
 

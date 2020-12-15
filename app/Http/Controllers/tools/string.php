@@ -6,9 +6,9 @@ function strings($name) {
         'error_ajax' => 'Acceso Denegado',
         'error_cmd' => 'Tipo de cmd no valido',
         'error_empty' => 'No debe haber campos vacios',
-        'error_option'=> 'Hubo un error en los datos, verifiquelo',
-        'error_anidado'=> 'No puede eliminar datos relacionados',
-        'verify_user'=> 'El nombre de usuario no está disponible',
+        'error_option' => 'Hubo un error en los datos, verifiquelo',
+        'error_anidado' => 'No puede eliminar datos relacionados',
+        'verify_user' => 'El nombre de usuario no está disponible',
         'existing_code' => 'El codigo que trata de registrar ya existe',
         'error_method' => 'Tipo de metodo no reconocido',
         'success_login' => 'Los datos son correctos',
@@ -28,3 +28,5 @@ function strings($name) {
 
     return @$string[$name];
 }
+
+define('FOLDER_CATEGORIA', 'general/fotos/');
