@@ -107,8 +107,57 @@ class CategoriaController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        //
+    public function create(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $code = htmlspecialchars(strtoupper(trim($request->input('Rcodigo'))));
+        $name = htmlspecialchars(ucwords(trim($request->input('Rnombre'))));
+        $describe = htmlspecialchars(trim($request->input('Rdescripcion')));
+        $status = htmlspecialchars(strtolower(trim($request->input('Restado'))));
+
+        $rules = [
+            'Rcodigo' => 'required|string',
+            'Rnombre' => 'required|string|min:3|max:255',
+            'Rdescripcion' => 'required|string',
+            'Restado' => 'required|string',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            if (
+                    empty($code) ||
+                    empty($name) ||
+                    empty($descripcion) ||
+                    empty($status)
+            ) {
+                $json = json('error', strings('error_empty'), '');
+            } else {
+                $json = json('error', strings('error_option'), '');
+            }
+        } else {
+
+            try {
+                // Registro los datos
+                $id = DB::table(table('categoria'))->insertGetId(
+                        [
+                            'codigo' => $status,
+                            'nombre' => $name,
+                            'descripcion' => $describe,
+                            'estado' => $status,
+                            'modificado_por' => session('id')
+                        ]
+                );
+
+                if ($id) {
+                    $json = json('ok', strings('success_create'), '');
+                } else {
+                    $json = json('error', strings('error_create'), '');
+                }
+            } catch (Exception $e) {
+                $json = json('error', strings('error_create'), '');
+            }
+        }
+
+        return jsonPrint($json, $cmd);
     }
 
     /**
@@ -228,7 +277,7 @@ class CategoriaController extends Controller {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $id = htmlspecialchars(strtolower(trim($request->input('id'))));
         @$imageAntigua = htmlspecialchars(trim($request->input('imageAntigua')));
-        
+
         $anidado = DB::table(table('subcategoria'))->where('idcategoria', $id)->first();
 
         if ($anidado) {

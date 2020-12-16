@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2020 a las 21:33:18
+-- Tiempo de generación: 16-12-2020 a las 02:38:41
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -55,7 +55,6 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estado`, `modificado_por`) VALUES
-(1, 'AA15122020185303justicia_ciega.jpg', 'AER890', 'Civil', 'Acerca de casas', 'inactivo', 1),
 (2, NULL, '5TR5UU', 'Penal', 'Acerca de carcel', 'activo', 1);
 
 -- --------------------------------------------------------
@@ -188,7 +187,7 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
