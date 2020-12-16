@@ -83,3 +83,5 @@ $v = "?v=" . date('YmdHis');
 
     busqueda.addEventListener('keyup', buscaTabla);
 </script>
+
+<script src="admin/assets/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>

@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController; // LOGIN (CLIENTE,ABOGADO)
 use App\Http\Controllers\AdminController; // LOGIN (ADMINISTRADOR)
 use App\Http\Controllers\TipoUsuarioController; // TIPO USUARIO (ADMINISTRADOR)
 use App\Http\Controllers\CategoriaController; // Categoria (ADMINISTRADOR)
+use App\Http\Controllers\SubCategoriaController; // SubCategoria (ADMINISTRADOR)
 
 /*
   |--------------------------------------------------------------------------
@@ -72,5 +73,21 @@ Route::post('/editarCategory', [CategoriaController::class, 'update']); // Envia
 Route::post('/eliminarCategory', [CategoriaController::class, 'destroy']);
 Route::post('/uploadImgCategory', [CategoriaController::class, 'cargarImgCategory']);
 // END CATEGORIA
+//
+//
+// SUB CATEGORIA
+Route::get('/listaSubCategory', function () {
+    return view('admin/subcategoria');
+});
+Route::get('/nuevoSubCategory', function () {
+    return view('admin/nuevasubcategoria');
+});
+Route::post('/listadoSubCategory', [SubCategoriaController::class, 'index']);
+Route::post('/categoriaSubCategory', [SubCategoriaController::class, 'loadCategory']);
+Route::post('/registrarSubCategory', [SubCategoriaController::class, 'create']);
+Route::post('/obtenerSubCategory', [SubCategoriaController::class, 'show']); // Obtener datos para editar
+Route::post('/editarSubCategory', [SubCategoriaController::class, 'update']); // Enviar datos para editarlos
+Route::post('/eliminarSubCategory', [SubCategoriaController::class, 'destroy']);
+// END SUB CATEGORIA
 //
 //

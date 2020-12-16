@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2020 a las 02:38:41
+-- Tiempo de generación: 16-12-2020 a las 15:23:13
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -55,7 +55,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estado`, `modificado_por`) VALUES
-(2, NULL, '5TR5UU', 'Penal', 'Acerca de carcel', 'activo', 1);
+(2, NULL, '5TR5UU', 'Penal', 'Acerca de carcel', 'activo', 1),
+(12, NULL, 'activo', 'Juridica', 'ayuda juridica', 'activo', 1);
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,7 @@ CREATE TABLE `subcategoria` (
   `nombre` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
   `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
-  `idcategoria` int(25) NOT NULL,
+  `idcategoria` int(25) DEFAULT NULL,
   `modificado_por` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -78,7 +79,8 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`id`, `codigo`, `nombre`, `descripcion`, `estado`, `idcategoria`, `modificado_por`) VALUES
-(4, 'YUS086', 'CORTE CLASICO', 'CORTES CLASICOS COMO CORTE ESCOLAR', 'inactivo', 2, NULL);
+(4, 'YUS086', 'Sub Penal', 'Sub penal consiste en ayuda en penales', 'activo', 12, 1),
+(7, 'YUS0867', 'Sub Penal7', 'Sub penal7', 'activo', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -187,13 +189,13 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`

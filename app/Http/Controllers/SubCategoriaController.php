@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categoria;
+use App\Models\SubCategoria;
 use Illuminate\Http\Request;
 // Agregar 
 use Exception;
@@ -17,83 +17,37 @@ include 'tools/function.php'; // Si funciona
 include 'tools/json.php'; // Si funciona
 // Fin Agregar
 
-class CategoriaController extends Controller {
+class SubCategoriaController extends Controller {
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function cargarImgCategory(Request $request) {
-        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
-        $idCategoria = htmlspecialchars(strtolower(trim($request->input('idCategoria'))));
-        @$antiguaImagen = htmlspecialchars(strtolower(trim($request->input('imgAntigua'))));
-
-        if (empty(@$_FILES['imageFile']['name']) || empty($idCategoria)) {
-            $json = json('error', 'Debe subir una imagen', '');
-        } else {
-
-            $rules = [
-                'idCategoria' => 'required|integer',
-                'cmd' => 'required|string',
-                'imageFile' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            ];
-            $validator = Validator::make($request->all(), $rules);
-
-            if ($validator->fails()) {
-                if (
-                        empty($idCategoria) ||
-                        empty(@$antiguaImagen)
-                ) {
-                    $json = json('error', strings('error_empty'), '');
-                } else {
-                    $json = json('error', strings('error_option'), '');
-                }
-            } else {
-
-                try {
-
-                    // Ejm : https://stackoverrun.com/es/q/5101323
-
-                    $image = $request->file('imageFile');
-                    $rutaTemporal = @$_FILES['imageFile']['tmp_name'];
-                    $nombreImagen = 'AA' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["imageFile"]["name"]));
-                    $rutaDestino = FOLDER_CATEGORIA . $nombreImagen;
-
-                    // Registro los datos
-                    $affected = DB::table(table('categoria'))
-                            ->where('id', $idCategoria)
-                            ->update(
-                            [
-                                'foto' => $nombreImagen,
-                                'modificado_por' => session('id')
-                            ],
-                    );
-
-                    if ($affected && $image->move(public_path(FOLDER_CATEGORIA), $nombreImagen)) {
-
-                        if (!empty(@$antiguaImagen)) {
-                            @unlink(FOLDER_CATEGORIA . @$antiguaImagen);
-                        }
-
-                        $json = json('ok', strings('success_update'), '');
-                    } else {
-                        $json = json('error', strings('error_update'), '');
-                    }
-                } catch (Exception $e) {
-                    $json = json('error', strings('error_update'), '');
-                }
-            }
-
-            return jsonPrint($json, $cmd);
-        }
-    }
-
-    public function index(Request $request) {
+    function loadCategory(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $data = DB::table(table('categoria'))
                 ->where('id', '>', 0)
                 ->get();
+        if ($data) {
+            $json = json('ok', strings('success_login'), $data);
+        } else {
+            $json = json('error', strings('error_login'), '');
+        }
+        return jsonPrint($json, $cmd);
+    }
+
+    public function index(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+
+        $data = DB::table(table('subcategoria'))
+                ->join(table('categoria'), function ($join) {
+                    $join->on(table('categoria') . '.id', '=', table('subcategoria') . '.idcategoria')
+                    ->orWhere(table('subcategoria') . '.id', '=', null);
+                })
+                ->select(table('subcategoria') . '.*', table('categoria') . '.nombre AS nombrecategoria')
+                ->get();
+
         if ($data) {
             $json = json('ok', strings('success_login'), $data);
         } else {
@@ -112,12 +66,14 @@ class CategoriaController extends Controller {
         $code = htmlspecialchars(strtoupper(trim($request->input('Rcodigo'))));
         $name = htmlspecialchars(ucwords(trim($request->input('Rnombre'))));
         $describe = htmlspecialchars(trim($request->input('Rdescripcion')));
+        $category = htmlspecialchars(trim($request->input('Rcategoria')));
         $status = htmlspecialchars(strtolower(trim($request->input('Restado'))));
 
         $rules = [
             'Rcodigo' => 'required|string',
             'Rnombre' => 'required|string|min:3|max:255',
             'Rdescripcion' => 'required|string',
+            'Rcategoria' => 'required|integer',
             'Restado' => 'required|string',
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -127,6 +83,7 @@ class CategoriaController extends Controller {
                     empty($code) ||
                     empty($name) ||
                     empty($describe) ||
+                    empty($category) ||
                     empty($status)
             ) {
                 $json = json('error', strings('error_empty'), '');
@@ -137,11 +94,12 @@ class CategoriaController extends Controller {
 
             try {
                 // Registro los datos
-                $id = DB::table(table('categoria'))->insertGetId(
+                $id = DB::table(table('subcategoria'))->insertGetId(
                         [
                             'codigo' => $code,
                             'nombre' => $name,
                             'descripcion' => $describe,
+                            'idcategoria' => $category,
                             'estado' => $status,
                             'modificado_por' => session('id')
                         ]
@@ -173,14 +131,14 @@ class CategoriaController extends Controller {
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\SubCategoria  $subCategoria
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $id = htmlspecialchars(strtolower(trim($request->input('id'))));
 
-        $data = DB::table(table('categoria'))
+        $data = DB::table(table('subcategoria'))
                 ->where('id', '=', $id)
                 ->first();
 
@@ -189,16 +147,19 @@ class CategoriaController extends Controller {
         } else {
             $json = json('error', strings('error_read'), '');
         }
+
+        $categorias = DB::table(table('categoria'))->where('estado', 'activo')->get();
+        $json['categories'] = $categorias;
         return jsonPrint($json, $cmd);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\SubCategoria  $subCategoria
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categoria $categoria) {
+    public function edit(Request $request) {
         //
     }
 
@@ -206,7 +167,7 @@ class CategoriaController extends Controller {
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\SubCategoria  $subCategoria
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request) {
@@ -216,6 +177,7 @@ class CategoriaController extends Controller {
         $code = htmlspecialchars(strtoupper(trim($request->input('Ecodigo'))));
         $name = htmlspecialchars(ucwords(trim($request->input('Enombre'))));
         $describe = htmlspecialchars(trim($request->input('Edescripcion')));
+        $idcategory = htmlspecialchars(trim($request->input('Ecategoria')));
         $status = htmlspecialchars(strtolower(trim($request->input('Eestado'))));
 
 
@@ -224,6 +186,7 @@ class CategoriaController extends Controller {
             'Ecodigo' => 'required|string',
             'Enombre' => 'required|string',
             'Edescripcion' => 'required|string',
+            'Ecategoria' => 'required|integer',
             'Eestado' => 'required|string',
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -234,6 +197,7 @@ class CategoriaController extends Controller {
                     empty($code) ||
                     empty($name) ||
                     empty($describe) ||
+                    empty($idcategory) ||
                     empty($status)
             ) {
                 $json = json('error', strings('error_empty'), '');
@@ -244,7 +208,7 @@ class CategoriaController extends Controller {
 
 
             // Registro los datos
-            $affected = DB::table(table('categoria'))
+            $affected = DB::table(table('subcategoria'))
                     ->where('id', $id)
                     ->update(
                     [
@@ -252,6 +216,7 @@ class CategoriaController extends Controller {
                         'nombre' => $name,
                         'estado' => $status,
                         'descripcion' => $describe,
+                        'idcategoria' => $idcategory,
                         'modificado_por' => session('id')
                     ],
             );
@@ -269,28 +234,23 @@ class CategoriaController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Categoria  $categoria
+     * @param  \App\Models\SubCategoria  $subCategoria
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request) {
-        //
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $id = htmlspecialchars(strtolower(trim($request->input('id'))));
-        @$imageAntigua = htmlspecialchars(trim($request->input('imageAntigua')));
 
-        $anidado = DB::table(table('subcategoria'))->where('idcategoria', $id)->first();
+        // SELECCIONO TODO LA SUBCATEGORIA PARA AVERIGUAR SI EL IDCATEGORIA TIENE DATO
+        $categoria = DB::table(table('subcategoria'))->where('id', $id)->first();
 
-        if ($anidado) {
+        if (@$categoria->idcategoria) {
             $json = json('error', strings('relative_data'), '');
         } else {
 
             try {
-                $affected = DB::table(table('categoria'))->where('id', '=', $id)->delete();
+                $affected = DB::table(table('subcategoria'))->where('id', '=', $id)->delete();
                 if ($affected) {
-
-                    if (!empty(@$imageAntigua)) {
-                        unlink(FOLDER_CATEGORIA . @$imageAntigua);
-                    }
                     $json = json('ok', strings('success_delete'), '');
                 } else {
                     $json = json('ok', strings('error_delete'), '');

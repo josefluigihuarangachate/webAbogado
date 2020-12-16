@@ -40,10 +40,10 @@
                         <rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1"></rect>
                         </g>
                         </svg>
-                        <span>Subscripciones</span><i class="accordion-icon fa fa-angle-left"></i>
+                        <span>Suscripciones</span><i class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="../grid/grid-utilities-layout.html">Lista de Subscripciones</a></li>
+                        <li><a href="../grid/grid-utilities-layout.html">Lista de Suscripciones</a></li>
                     </ul>
                 </li>
                 <li>
@@ -106,8 +106,8 @@
                         <span>Sub Categoria</span><i class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="../grid/grid-utilities-layout.html">Lista de Sub Categorias</a></li>
-                        <li><a href="../grid/grid-auto-layout-columns.html">Nueva Sub Categoria</a></li>
+                        <li><a href="./listaSubCategory">Lista de Sub Categorias</a></li>
+                        <li><a href="./nuevoSubCategory">Nueva Sub Categoria</a></li>
                     </ul>
                 </li>
 
