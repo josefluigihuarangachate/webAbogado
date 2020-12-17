@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Abogado;
 use Illuminate\Http\Request;
 // Agregar 
 use Auth;
@@ -19,112 +19,13 @@ include 'tools/function.php'; // Si funciona
 include 'tools/json.php'; // Si funciona
 // Fin Agregar
 
-class AdminController extends Controller {
+class AbogadoController extends Controller {
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request) {
-        // Login de usuario
-        $usuario = htmlspecialchars(trim($request->input('usuario')));
-        $clave = htmlspecialchars(trim($request->input('clave')));
-        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
-
-        $rules = [
-            'usuario' => 'required|string|min:4|max:255',
-            'clave' => 'required|string|min:4|max:255'
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            if (
-                    empty($usuario) ||
-                    empty($clave)
-            ) {
-                $json = json('error', strings('error_empty'), '');
-            } else {
-                $json = json('error', strings('error_option'), '');
-            }
-        } else {
-            // Login de usuario
-            $data = DB::table(table('usuario'))
-                            ->join(table('tipo_usuario'), function ($join) {
-                                $join->on(
-                                        table('tipo_usuario') . '.id', '=', table('usuario') . '.idtipo'
-                                )
-                                ->where(
-                                        [
-                                            [table('tipo_usuario') . '.estado', '=', 'activo'],
-                                        ]
-                                );
-                            })
-                            ->select(
-                                    [
-                                        table('usuario') . '.*',
-                                        table('tipo_usuario') . '.nombre AS tipo_usuario',
-                                        table('tipo_usuario') . '.estado AS estado_tipo',
-                                    ]
-                            )
-                            ->where(
-                                    [
-                                        [table('usuario') . '.usuario', '=', $usuario],
-                                        [table('usuario') . '.idtipo', '=', 1], // QUE SEA ADMINISTRADOR
-                                        [table('usuario') . '.estado', '=', 'activo'],
-                                    ]
-                            )->first();
-
-            if ($data && password_verify($clave, $data->clave)) {
-                $json = json('ok', strings('success_login'), $data);
-                $json['redirect'] = "/dashboardAdmin";
-
-                session_start();
-                session_regenerate_id(true);
-                $name = $data->nombre;
-                $nombre = explode(' ', $name);
-
-
-                $foto = $data->foto;
-                if (empty($data->foto)) {
-                    $foto = "general/fotos/empty/empty-photo.jpg";
-                }
-                session(['acceso' => true]);
-                session(['id' => $data->id]);
-                session(['foto' => $foto]);
-                session(['nombre' => $data->nombre]);
-                session(['nombre_corto' => $nombre[0] . ' ' . @$nombre[1]]);
-                session(['correo' => $data->correo]);
-                session(['usuario' => $data->usuario]);
-                session(['clave' => $data->clave]);
-//                session(['fecha_registro' => $data->fecha_registro]);
-                session(['idtipo' => $data->idtipo]);
-                session(['estado' => $data->estado]);
-                session(['tipo_usuario' => $data->tipo_usuario]);
-                session(['estado_tipo' => $data->estado_tipo]);
-            } else {
-                $json = json('error', strings('error_login'), '');
-            }
-        }
-        return jsonPrint($json, $cmd);
-    }
-
-    public function logout() {
-        session_start();
-        session_unset();
-        session_destroy();
-        $_SESSION = array();
-        session_write_close();
-        setcookie(session_name(), '', 0, '/');
-
-        Auth::logout();
-        Session::flush();
-
-        session(['acceso' => false]);
-        return redirect('/');
-    }
-
     public function cargarImgUser(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $idCategoria = htmlspecialchars(strtolower(trim($request->input('idadmin'))));
@@ -193,19 +94,11 @@ class AdminController extends Controller {
     public function index(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
 
-        $data = "";
-        if (session('id') == 1) {
-            $data = DB::table(table('usuario'))
-                    ->where('idtipo', '=', 1)
-                    ->get();
-        } else {
-            $data = DB::table(table('usuario'))
-                    ->where([
-                        ['idtipo', '=', 1],
-                        ['id', '!=', 1]
-                    ])
-                    ->get();
-        }
+
+        $data = DB::table(table('usuario'))
+                ->where('idtipo', '=', 2)
+                ->get();
+
 
         if ($data) {
             $json = json('ok', strings('success_read'), $data);
@@ -290,7 +183,7 @@ class AdminController extends Controller {
                             'longitud' => $longitud,
                             'usuario' => $usuario,
                             'clave' => password_hash($clave, PASSWORD_BCRYPT, $opciones),
-                            'idtipo' => 1,
+                            'idtipo' => 2,
                             'estado' => $status,
                             'modificado_por' => session('id')
                         ]
@@ -459,22 +352,21 @@ class AdminController extends Controller {
 
         // SELECCIONO TODO LA SUBCATEGORIA PARA AVERIGUAR SI EL IDCATEGORIA TIENE DATO
         //$categoria = DB::table(table('subcategoria'))->where('id', $id)->first();
+        //if ($id == 1) {
+        //    $json = json('error', 'No puede eliminar estos datos', '');
+        //} else {
 
-        if ($id == 1) {
-            $json = json('error', 'No puede eliminar estos datos', '');
-        } else {
-
-            try {
-                $affected = DB::table(table('usuario'))->where('id', '=', $id)->delete();
-                if ($affected) {
-                    $json = json('ok', strings('success_delete'), '');
-                } else {
-                    $json = json('ok', strings('error_delete'), '');
-                }
-            } catch (Exception $t) {
+        try {
+            $affected = DB::table(table('usuario'))->where('id', '=', $id)->delete();
+            if ($affected) {
+                $json = json('ok', strings('success_delete'), '');
+            } else {
                 $json = json('ok', strings('error_delete'), '');
             }
+        } catch (Exception $t) {
+            $json = json('ok', strings('error_delete'), '');
         }
+        //}       
 
         return jsonPrint($json, $cmd);
     }

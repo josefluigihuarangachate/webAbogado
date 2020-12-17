@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController; // LOGIN (CLIENTE,ABOGADO)
-use App\Http\Controllers\AdminController; // LOGIN (ADMINISTRADOR)
+use App\Http\Controllers\AdminController; // LOGIN, ADMINISTRADOR (ADMINISTRADOR)
+use App\Http\Controllers\AbogadoController; // ABOGADO (ADMINISTRADOR)
+use App\Http\Controllers\ClienteController; // CLIENTE (ADMINISTRADOR)
+use App\Http\Controllers\OtroUsuarioController; // OTRO USUARIO (ADMINISTRADOR)
 use App\Http\Controllers\TipoUsuarioController; // TIPO USUARIO (ADMINISTRADOR)
 use App\Http\Controllers\CategoriaController; // Categoria (ADMINISTRADOR)
 use App\Http\Controllers\SubCategoriaController; // SubCategoria (ADMINISTRADOR)
@@ -18,6 +21,7 @@ use App\Http\Controllers\SubCategoriaController; // SubCategoria (ADMINISTRADOR)
   |
  */
 
+// ------------------------------- PARA LA WEB --------------------------------------------
 // PAGINA PRINCIPAL
 Route::get('/', function () {
     return view('admin/login');
@@ -25,23 +29,70 @@ Route::get('/', function () {
 // END PAGINA PRINCIPAL
 //
 //
-// USUARIO
-Route::get('/app', function () {
-    return view('user/login');
-});
-Route::post('/login_user', [LoginController::class, 'index']);
-Route::post('/register_user', [LoginController::class, 'create']);
-Route::get('/dashboardUser', function () {
-    return view('user/dashboard');
-});
-// END USUARIO
-//
-//
 // ADMINISTRADOR
 Route::get('/dashboardAdmin', function () {
     return view('admin/dashboard');
 });
-Route::post('/login_admin', [AdminController::class, 'index']);
+Route::get('/listaAdministrador', function () {
+    return view('admin/administrador');
+});
+Route::get('/nuevoAdministrador', function () {
+    return view('admin/nuevoadministrador');
+});
+Route::post('/login_admin', [AdminController::class, 'login']);
+Route::get('/cerrarSesion', [AdminController::class, 'logout']);
+Route::post('/listadoAdministrador', [AdminController::class, 'index']);
+Route::post('/obtenerAdministrador', [AdminController::class, 'show']); // Obtener datos para editar
+Route::post('/editarAdministrador', [AdminController::class, 'update']); // Enviar datos para editarlos
+Route::post('/eliminarAdministrador', [AdminController::class, 'destroy']);
+Route::post('/registrarAdministrador', [AdminController::class, 'create']);
+Route::post('/uploadImgAdministrador', [AdminController::class, 'cargarImgUser']);
+//
+//
+// ABOGADO
+Route::get('/listaAbogado', function () {
+    return view('admin/abogado');
+});
+Route::get('/nuevoAbogado', function () {
+    return view('admin/nuevoabogado');
+});
+Route::post('/listadoAbogado', [AbogadoController::class, 'index']);
+Route::post('/obtenerAbogado', [AbogadoController::class, 'show']); // Obtener datos para editar
+Route::post('/editarAbogado', [AbogadoController::class, 'update']); // Enviar datos para editarlos
+Route::post('/eliminarAbogado', [AbogadoController::class, 'destroy']);
+Route::post('/registrarAbogado', [AbogadoController::class, 'create']);
+Route::post('/uploadImgAbogado', [AbogadoController::class, 'cargarImgUser']);
+//
+//
+// CLIENTE
+Route::get('/listaCliente', function () {
+    return view('admin/cliente');
+});
+Route::get('/nuevoCliente', function () {
+    return view('admin/nuevocliente');
+});
+Route::post('/listadoCliente', [ClienteController::class, 'index']);
+Route::post('/obtenerCliente', [ClienteController::class, 'show']); // Obtener datos para editar
+Route::post('/editarCliente', [ClienteController::class, 'update']); // Enviar datos para editarlos
+Route::post('/eliminarCliente', [ClienteController::class, 'destroy']);
+Route::post('/registrarCliente', [ClienteController::class, 'create']);
+Route::post('/uploadImgCliente', [ClienteController::class, 'cargarImgUser']);
+//
+//
+// OTRO USUARIO
+Route::get('/listaOtroUsuario', function () {
+    return view('admin/otrousuario');
+});
+Route::get('/nuevoOtroUsuario', function () {
+    return view('admin/nuevootrousuario');
+});
+Route::post('/listadoOtroUsuario', [OtroUsuarioController::class, 'index']);
+Route::post('/obtenerOtroUsuario', [OtroUsuarioController::class, 'show']); // Obtener datos para editar
+Route::post('/editarOtroUsuario', [OtroUsuarioController::class, 'update']); // Enviar datos para editarlos
+Route::post('/eliminarOtroUsuario', [OtroUsuarioController::class, 'destroy']);
+Route::post('/registrarOtroUsuario', [OtroUsuarioController::class, 'create']);
+Route::post('/uploadImgOtroUsuario', [OtroUsuarioController::class, 'cargarImgUser']);
+Route::post('/tipousuarioOtroUsuario', [OtroUsuarioController::class, 'loadTypeUser']);
 //
 //
 // TIPO USUARIO
@@ -89,5 +140,18 @@ Route::post('/obtenerSubCategory', [SubCategoriaController::class, 'show']); // 
 Route::post('/editarSubCategory', [SubCategoriaController::class, 'update']); // Enviar datos para editarlos
 Route::post('/eliminarSubCategory', [SubCategoriaController::class, 'destroy']);
 // END SUB CATEGORIA
+//
+//
+// ------------------------------- PARA LA APP --------------------------------------------
+// USUARIO
+Route::get('/app', function () {
+    return view('user/login');
+});
+Route::post('/login_user', [LoginController::class, 'index']);
+Route::post('/register_user', [LoginController::class, 'create']);
+Route::get('/dashboardUser', function () {
+    return view('user/dashboard');
+});
+// END USUARIO
 //
 //

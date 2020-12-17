@@ -6,7 +6,7 @@ $.ajaxSetup({
     }
 });
 
-var globalName = "Category";
+var globalName = "Abogado";
 
 // LISTAR DATOS
 function listar() {
@@ -15,7 +15,7 @@ function listar() {
     $.post(ruta() + "listado" + globalName, {cmd: 'web'}, function (json) {
 
         var tbody = '<tr>';
-        tbody += '<td colspan="6">';
+        tbody += '<td colspan="9">';
         tbody += '<center>';
         tbody += 'No se encontraron datos';
         tbody += '</center>';
@@ -51,7 +51,7 @@ function listar() {
                     tbody += '<i class="fa fa-picture-o"></i>&nbsp;Cargar...';
                     tbody += '</span>';
                     tbody += '</label><br>';
-                    tbody += '<button type="button" id="btnupload' + datos[i].id + '" name=id="btnupload' + datos[i].id + '" disabled="disabled" class="btn btn-success btn-sm" style="width: 100px;color: #fff !important;" onclick="uploadImageCategoria(' + datos[i].id + ')">';
+                    tbody += '<button type="button" id="btnupload' + datos[i].id + '" name=id="btnupload' + datos[i].id + '" disabled="disabled" class="btn btn-success btn-sm" style="width: 100px;color: #fff !important;" onclick="uploadImageAdministrador(' + datos[i].id + ')">';
                     tbody += '<i class="fa fa-save"></i>&nbsp; Guardar';
                     tbody += '</button>';
                     tbody += '</form>';
@@ -59,15 +59,37 @@ function listar() {
                     tbody += '</div>';
                     tbody += '</td>';
 
-                    tbody += '<td>';
-                    tbody += datos[i].codigo;
-                    tbody += '</td>';
+
                     tbody += '<td>';
                     tbody += datos[i].nombre;
                     tbody += '</td>';
                     tbody += '<td>';
-                    tbody += datos[i].descripcion;
+                    tbody += datos[i].dni;
                     tbody += '</td>';
+                    tbody += '<td>';
+                    tbody += '<a href="mailto:' + datos[i].correo + '">';
+                    tbody += '<i class="fa fa-envelope-o"></i>&nbsp;';
+                    tbody += datos[i].correo;
+                    tbody += '</a>';
+                    tbody += '</td>';
+                    tbody += '<td>';
+                    tbody += '<a href="tel:' + datos[i].celular + '">';
+                    tbody += '<i class="fa fa-phone"></i>&nbsp;';
+                    tbody += datos[i].celular;
+                    tbody += '</a>';
+                    tbody += '</td>';
+                    tbody += '<td>';
+                    tbody += datos[i].direccion;
+                    tbody += '</td>';
+                    tbody += '<td>';
+                    tbody += '<a target="_blank" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=' + datos[i].latitud + ',' + datos[i].longitud + '">';
+                    tbody += '<i class="fa fa-crosshairs"></i> Mapa';
+                    tbody += '</a>';
+                    tbody += '</td>';
+                    tbody += '<td>';
+                    tbody += datos[i].usuario;
+                    tbody += '</td>';
+
                     tbody += '<td>';
                     if (datos[i].estado == 'activo') {
                         tbody += '<span class="badge badge-success">' + datos[i].estado.charAt(0).toUpperCase() + datos[i].estado.slice(1) + '</span>';
@@ -99,7 +121,12 @@ listar();
 
 function registrar() {
     var formData = new FormData($('#RformData')[0]);
+    var latitudMap = parseFloat(document.getElementById('txtlatitud').value);
+    var longitudMap = parseFloat(document.getElementById('txtlongitud').value);
+
     formData.append('cmd', 'web');
+    formData.append('txtlatitud', latitudMap);
+    formData.append('txtlongitud', longitudMap);
 
     $.ajax({
         url: ruta() + 'registrar' + globalName,
@@ -136,9 +163,40 @@ function obtener(id) {
             var Odatos = json['data'];
 
             document.getElementById("Eid").value = Odatos.id;
-            document.getElementById("Ecodigo").value = Odatos.codigo;
             document.getElementById("Enombre").value = Odatos.nombre;
-            document.getElementById("Edescripcion").value = Odatos.descripcion;
+            document.getElementById("Edni").value = Odatos.dni;
+            document.getElementById("Ecorreo").value = Odatos.correo;
+            document.getElementById("Ecelular").value = Odatos.celular;
+            document.getElementById("Edireccion").value = Odatos.direccion;
+            document.getElementById("txtlatitud").value = Odatos.latitud;
+            document.getElementById("txtlongitud").value = Odatos.longitud;
+            document.getElementById("Eusuario").value = Odatos.usuario;
+
+
+
+            // SIRVE PARA SABER SI ESTA ACTIVO O INACTIVO
+            var option_categoria = "<option value=''>Seleccionar Tipo de Usuario</option>";
+            try {
+                if (json['typeuser'] != null) {
+
+                    var tipousuario = json['typeuser'];
+                    for (var c = 0; c < tipousuario.length; c++) {
+
+                        var selected = "";
+                        if (Odatos.idtipo == tipousuario[c].id) {
+                            selected = "selected='selected'";
+                        }
+                        option_categoria += "<option " + selected + " data-subtext=' (" + tipousuario[c].estado + ")' value='" + tipousuario[c].id + "'>" + tipousuario[c].nombre + "</option>";
+                    }
+                }
+            } catch (err) {
+                //console.error(err);
+            }
+            $("#Etipo").html(option_categoria);
+            $('#Etipo').selectpicker('refresh');
+
+
+
 
             // SIRVE PARA SABER SI ESTA ACTIVO O INACTIVO
             var option_estado = "<option value='activo'>Activo</option>";
@@ -148,6 +206,7 @@ function obtener(id) {
                 option_estado += "<option value='inactivo'>Inactivo</option>";
             }
             $("#Eestado").html(option_estado);
+            console.log(option_estado);
         }
     });
 }
@@ -155,7 +214,13 @@ $(document).ready(function () {
     // Ejm : https://makitweb.com/how-to-upload-image-file-using-ajax-and-jquery/
     $(".EsaveData").click(function () {
         var formData = new FormData($('#EformData')[0]);
+
+        var latitudMap = parseFloat(document.getElementById('txtlatitud').value);
+        var longitudMap = parseFloat(document.getElementById('txtlongitud').value);
+
         formData.append('cmd', 'web');
+        formData.append('txtlatitud', latitudMap);
+        formData.append('txtlongitud', longitudMap);
 
         $.ajax({
             url: ruta() + 'editar' + globalName,
@@ -171,7 +236,7 @@ $(document).ready(function () {
                             json['msg'],
                             'success'
                             );
-
+                    document.getElementById("closeModal").click();
                     listar();
                 } else {
                     Swal.fire(

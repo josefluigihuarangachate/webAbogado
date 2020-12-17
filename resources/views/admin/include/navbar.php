@@ -475,7 +475,7 @@
                             <a href="" class="dropdown-item d-flex align-items-center"><span data-feather="layout" class="wd-16 ht-16 mr-2"></span>Forum</a>
                             <a href="" class="dropdown-item d-flex align-items-center"><span data-feather="headphones" class="wd-16 ht-16 mr-2"></span>Support</a>
                             <a href="" class="dropdown-item d-flex align-items-center"><span data-feather="life-buoy" class="wd-16 ht-16 mr-2"></span>Help</a>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span data-feather="log-out" class="wd-16 ht-16 mr-2"></span>Sign Out</a>
+                            <a href="./cerrarSesion" class="dropdown-item d-flex align-items-center"><span data-feather="log-out" class="wd-16 ht-16 mr-2"></span>Cerrar Sesion</a>
                         </div>
                     </div>
                 </li>

@@ -82,9 +82,9 @@
                     <a href="">
                         <svg width="24px" height="24px" class="adata-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <rect x="0" y="0" width="24" height="24"></rect>
+                        <path d="M3,4 L20,4 C20.5522847,4 21,4.44771525 21,5 L21,7 C21,7.55228475 20.5522847,8 20,8 L3,8 C2.44771525,8 2,7.55228475 2,7 L2,5 C2,4.44771525 2.44771525,4 3,4 Z M3,10 L13,10 C13.5522847,10 14,10.4477153 14,11 L14,13 C14,13.5522847 13.5522847,14 13,14 L3,14 C2.44771525,14 2,13.5522847 2,13 L2,11 C2,10.4477153 2.44771525,10 3,10 Z M3,16 L13,16 C13.5522847,16 14,16.4477153 14,17 L14,19 C14,19.5522847 13.5522847,20 13,20 L3,20 C2.44771525,20 2,19.5522847 2,19 L2,17 C2,16.4477153 2.44771525,16 3,16 Z" fill="#000000"></path>
+                        <rect fill="#000000" opacity="0.3" x="16" y="10" width="5" height="10" rx="1"></rect>
                         </g>
                         </svg>
                         <span>Categoria</span><i class="accordion-icon fa fa-angle-left"></i>
@@ -98,9 +98,9 @@
                     <a href="">
                         <svg width="24px" height="24px" class="adata-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <rect x="0" y="0" width="24" height="24"></rect>
+                        <path d="M10.5,5 L20.5,5 C21.3284271,5 22,5.67157288 22,6.5 L22,9.5 C22,10.3284271 21.3284271,11 20.5,11 L10.5,11 C9.67157288,11 9,10.3284271 9,9.5 L9,6.5 C9,5.67157288 9.67157288,5 10.5,5 Z M10.5,13 L20.5,13 C21.3284271,13 22,13.6715729 22,14.5 L22,17.5 C22,18.3284271 21.3284271,19 20.5,19 L10.5,19 C9.67157288,19 9,18.3284271 9,17.5 L9,14.5 C9,13.6715729 9.67157288,13 10.5,13 Z" fill="#000000"></path>
+                        <rect fill="#000000" opacity="0.3" x="2" y="5" width="5" height="14" rx="1"></rect>
                         </g>
                         </svg>
                         <span>Sub Categoria</span><i class="accordion-icon fa fa-angle-left"></i>
@@ -124,8 +124,8 @@
                         <span>Administradores</span><i class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="../ui-element/uie-accordion.html">Lista de Administradores</a></li>
-                        <li><a href="../ui-element/uie-alert.html">Nuevo de Administrador</a></li>
+                        <li><a href="./listaAdministrador">Lista de Administradores</a></li>
+                        <li><a href="./nuevoAdministrador">Nuevo de Administrador</a></li>
                     </ul>
                 </li>
                 <li>
@@ -133,15 +133,15 @@
                         <svg width="24px" height="24px" class="adata-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                        <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                        <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
                         </g>
                         </svg>
                         <span>Abogados</span><i class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="../ui-utilitie/uiu-background.html">Lista de Abogados</a></li>
-                        <li><a href="../ui-utilitie/uiu-borders.html">Nuevo de Abogado</a></li>
+                        <li><a href="./listaAbogado">Lista de Abogados</a></li>
+                        <li><a href="./nuevoAbogado">Nuevo de Abogado</a></li>
                     </ul>
                 </li>
                 <li>
@@ -156,8 +156,24 @@
                         <span>Clientes</span><i class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="../grid/grid-utilities-layout.html">Lista de Clientes</a></li>
-                        <li><a href="../grid/grid-auto-layout-columns.html">Nuevo de Cliente</a></li>
+                        <li><a href="./listaCliente">Lista de Clientes</a></li>
+                        <li><a href="./nuevoCliente">Nuevo de Cliente</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="">
+                        <svg width="24px" height="24px" class="adata-svg-icon">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+                        </g>
+                        </svg>
+                        <span>Otros Usuarios</span><i class="accordion-icon fa fa-angle-left"></i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="./listaOtroUsuario">Lista de Otros Usuarios</a></li>
+                        <li><a href="./nuevoOtroUsuario">Nuevo Usuario</a></li>
                     </ul>
                 </li>
 

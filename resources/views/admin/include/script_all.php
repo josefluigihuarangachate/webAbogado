@@ -67,21 +67,26 @@ $v = "?v=" . date('YmdHis');
 <script>
     // Ejm : https://jsfiddle.net/xfxstudios/2az4nbvb/
     var busqueda = document.getElementById('buscar');
-    var table = document.getElementById("tabla").tBodies[0];
 
-    buscaTabla = function () {
-        texto = busqueda.value.toLowerCase();
-        var r = 0;
-        while (row = table.rows[r++])
-        {
-            if (row.innerText.toLowerCase().indexOf(texto) !== -1)
-                row.style.display = null;
-            else
-                row.style.display = 'none';
+    try {
+        var table = document.getElementById("tabla").tBodies[0];
+
+        buscaTabla = function () {
+            texto = busqueda.value.toLowerCase();
+            var r = 0;
+            while (row = table.rows[r++])
+            {
+                if (row.innerText.toLowerCase().indexOf(texto) !== -1)
+                    row.style.display = null;
+                else
+                    row.style.display = 'none';
+            }
         }
+
+        busqueda.addEventListener('keyup', buscaTabla);
+    } catch (error) {
     }
 
-    busqueda.addEventListener('keyup', buscaTabla);
 </script>
 
 <script src="admin/assets/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>

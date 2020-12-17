@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2020 a las 15:23:13
+-- Tiempo de generación: 17-12-2020 a las 04:23:36
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -125,16 +125,19 @@ CREATE TABLE `usuario` (
   `idtipo` int(25) NOT NULL DEFAULT 3 COMMENT 'POR DEFECTO ESTA EN EL 3 YA QUE ESE TIPO DE USUARIO ES CLIENTE',
   `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
   `latitud` varchar(20) DEFAULT NULL,
-  `longitud` varchar(20) DEFAULT NULL
+  `longitud` varchar(20) DEFAULT NULL,
+  `modificado_por` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`) VALUES
-(1, 'assets/images/photos/AM20201107013432_Gianluigi_Buffon_(2014).jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-11.23305121', '-77.36426133'),
-(2, NULL, 'Luigi Huuaranga Chate', NULL, 'josefluigihuarangachate@gmail.com', NULL, NULL, 'luigi', '$2y$11$PHQVclhPsj6VLxFzteTniOa1774UbuHI3.WFvycRcNG/uL7YCcGdy', 3, 'activo', NULL, NULL);
+INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`) VALUES
+(1, 'AA161220201640452016.1)[1].jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', NULL, NULL, 1),
+(2, NULL, 'Luigi Huuaranga Chate', '98777777', 'luigi@gmail.com', '7567543455345', 'San Miguel - Plaza Vea', 'luigi', '$2y$11$PHQVclhPsj6VLxFzteTniOa1774UbuHI3.WFvycRcNG/uL7YCcGdy', 2, 'activo', '-30.72591643', '28.406114515', 1),
+(3, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1),
+(20, NULL, 'Armando', '75465433', 'armando@gmail.com', '987654321', 'av lima', 'armando', '$2y$11$isEVa2B/peB4SYlJ.6ZgO.c/N/HqfFUjmEruhG1tO82ndKw61lZwm', 5, 'activo', '-2.117193031', '-65.0643062', 1);
 
 --
 -- Índices para tablas volcadas
@@ -207,7 +210,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas

@@ -6,3 +6,7 @@ function ruta() {
 
 var FOLDER_IMAGE = 'general/fotos/';
 
+var defaultLatitud = 29.0585179;
+var defaultLongitud = -77.3689937;
+var defaultZoom = 2;
+

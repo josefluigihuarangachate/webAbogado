@@ -23,40 +23,42 @@ function listar() {
             tbody += '</center>';
             tbody += '</td>';
             tbody += '</tr>';
+            try {
+                if (json['data']) {
+                    var datos = json['data'];
+                    tbody = "";
+                    for (var i = 0; i < datos.length; i++) {
+                        tbody += '<tr>';
+                        tbody += '<td>';
+                        tbody += datos[i].codigo;
+                        tbody += '</td>';
+                        tbody += '<td>';
+                        tbody += datos[i].nombre;
+                        tbody += '</td>';
+                        tbody += '<td>';
+                        tbody += datos[i].descripcion;
+                        tbody += '</td>';
+                        tbody += '<td>';
+                        tbody += datos[i].nombrecategoria;
+                        tbody += '</td>';
+                        tbody += '<td>';
+                        if (datos[i].estado == 'activo') {
+                            tbody += '<span class="badge badge-success">' + datos[i].estado.charAt(0).toUpperCase() + datos[i].estado.slice(1) + '</span>';
+                        } else {
+                            tbody += '<span class="badge badge-danger">' + datos[i].estado.charAt(0).toUpperCase() + datos[i].estado.slice(1) + '</span>';
+                        }
+                        tbody += '</td>';
 
-            if (json['data']) {
-                var datos = json['data'];
-                tbody = "";
-                for (var i = 0; i < datos.length; i++) {
-                    tbody += '<tr>';
-                    tbody += '<td>';
-                    tbody += datos[i].codigo;
-                    tbody += '</td>';
-                    tbody += '<td>';
-                    tbody += datos[i].nombre;
-                    tbody += '</td>';
-                    tbody += '<td>';
-                    tbody += datos[i].descripcion;
-                    tbody += '</td>';
-                    tbody += '<td>';
-                    tbody += datos[i].nombrecategoria;
-                    tbody += '</td>';
-                    tbody += '<td>';
-                    if (datos[i].estado == 'activo') {
-                        tbody += '<span class="badge badge-success">' + datos[i].estado.charAt(0).toUpperCase() + datos[i].estado.slice(1) + '</span>';
-                    } else {
-                        tbody += '<span class="badge badge-danger">' + datos[i].estado.charAt(0).toUpperCase() + datos[i].estado.slice(1) + '</span>';
+                        tbody += '<td>';
+                        tbody += "<button type='button' data-toggle='modal' data-target='#editar' class='btn btn-warning btn-sm waves-effect' style='color: #fff;' onclick=\"obtener(" + datos[i].id + ")\">Editar</button>";
+                        tbody += "&nbsp;&nbsp;";
+                        tbody += "<button class='btn btn-danger btn-sm' onclick=\"eliminar(" + datos[i].id + ")\">Eliminar</button>";
+                        tbody += '</td>';
+
+                        tbody += '</tr>';
                     }
-                    tbody += '</td>';
-
-                    tbody += '<td>';
-                    tbody += "<button type='button' data-toggle='modal' data-target='#editar' class='btn btn-warning btn-sm waves-effect' style='color: #fff;' onclick=\"obtener(" + datos[i].id + ")\">Editar</button>";
-                    tbody += "&nbsp;&nbsp;";
-                    tbody += "<button class='btn btn-danger btn-sm' onclick=\"eliminar(" + datos[i].id + ")\">Eliminar</button>";
-                    tbody += '</td>';
-
-                    tbody += '</tr>';
                 }
+            } catch (err) {
             }
             document.getElementById("listado_table").innerHTML = tbody;
         });

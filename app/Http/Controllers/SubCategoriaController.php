@@ -30,9 +30,9 @@ class SubCategoriaController extends Controller {
                 ->where('id', '>', 0)
                 ->get();
         if ($data) {
-            $json = json('ok', strings('success_login'), $data);
+            $json = json('ok', strings('success_read'), $data);
         } else {
-            $json = json('error', strings('error_login'), '');
+            $json = json('error', strings('error_read'), '');
         }
         return jsonPrint($json, $cmd);
     }
