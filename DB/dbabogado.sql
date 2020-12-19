@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-12-2020 a las 04:23:36
+-- Tiempo de generación: 19-12-2020 a las 22:40:29
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -55,8 +55,32 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estado`, `modificado_por`) VALUES
-(2, NULL, '5TR5UU', 'Penal', 'Acerca de carcel', 'activo', 1),
+(2, 'AA17122020044533justicia_ciega.jpg', '5TR5UU', 'Penal', 'Acerca de carcel', 'activo', 1),
 (12, NULL, 'activo', 'Juridica', 'ayuda juridica', 'activo', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicio`
+--
+
+CREATE TABLE `servicio` (
+  `id` int(25) NOT NULL,
+  `idsubcategoria` int(25) NOT NULL,
+  `idusuario` int(25) NOT NULL COMMENT 'ID DEL ABOGADO',
+  `nombre` varchar(255) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `precio` varchar(255) NOT NULL,
+  `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
+  `modificado_por` int(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `servicio`
+--
+
+INSERT INTO `servicio` (`id`, `idsubcategoria`, `idusuario`, `nombre`, `descripcion`, `precio`, `estado`, `modificado_por`) VALUES
+(1, 4, 3, 'Caso Civil', 'Acerca de las casas', '70.00', 'activo', 1);
 
 -- --------------------------------------------------------
 
@@ -157,6 +181,14 @@ ALTER TABLE `categoria`
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
+-- Indices de la tabla `servicio`
+--
+ALTER TABLE `servicio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_idsubcategoria` (`idsubcategoria`),
+  ADD KEY `FK_idbarbero` (`idusuario`);
+
+--
 -- Indices de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
@@ -195,6 +227,12 @@ ALTER TABLE `categoria`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT de la tabla `servicio`
+--
+ALTER TABLE `servicio`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
@@ -215,6 +253,13 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `servicio`
+--
+ALTER TABLE `servicio`
+  ADD CONSTRAINT `FK_idbarbero` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `FK_idsubcategoria` FOREIGN KEY (`idsubcategoria`) REFERENCES `subcategoria` (`id`);
 
 --
 -- Filtros para la tabla `subcategoria`

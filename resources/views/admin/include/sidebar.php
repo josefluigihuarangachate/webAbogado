@@ -5,7 +5,7 @@
     <div class="logo">
         <a class="logo-img" href="./dashboardAdmin">		
             <img class="desktop-logo" src="general/img/logo-onlaw.png" alt="" style="width: 180px;padding: 13px;">
-            <img class="small-logo" src="general/img/logo-onlaw.png" alt="" style="width: 180px;padding: 13px;">
+            <img class="small-logo" src="general/img/icono-blue.png" alt="">
         </a>			
         <a id="sidebar-toggle-button-close"><i class="wd-20 ht-20" data-feather="x"></i> </a>
     </div>
@@ -59,7 +59,7 @@
                     <ul class="sub-menu">
                         <li><a href="../grid/grid-utilities-layout.html">Lista de Notificaciones</a></li>
                     </ul>
-                </li>
+                </li>                
                 <li>
                     <a href="">
                         <svg width="24px" height="24px" class="adata-svg-icon">
@@ -110,7 +110,22 @@
                         <li><a href="./nuevoSubCategory">Nueva Sub Categoria</a></li>
                     </ul>
                 </li>
-
+                <li>
+                    <a href="">
+                        <svg width="24px" height="24px" class="adata-svg-icon">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <rect x="0" y="0" width="24" height="24"></rect>
+                        <path d="M4.5,21 L21.5,21 C22.3284271,21 23,20.3284271 23,19.5 L23,8.5 C23,7.67157288 22.3284271,7 21.5,7 L11,7 L8.43933983,4.43933983 C8.15803526,4.15803526 7.77650439,4 7.37867966,4 L4.5,4 C3.67157288,4 3,4.67157288 3,5.5 L3,19.5 C3,20.3284271 3.67157288,21 4.5,21 Z" fill="#000000" opacity="0.3"></path>
+                        <path d="M2.5,19 L19.5,19 C20.3284271,19 21,18.3284271 21,17.5 L21,6.5 C21,5.67157288 20.3284271,5 19.5,5 L9,5 L6.43933983,2.43933983 C6.15803526,2.15803526 5.77650439,2 5.37867966,2 L2.5,2 C1.67157288,2 1,2.67157288 1,3.5 L1,17.5 C1,18.3284271 1.67157288,19 2.5,19 Z" fill="#000000"></path>
+                        </g>
+                        </svg>
+                        <span>Servicios</span><i class="accordion-icon fa fa-angle-left"></i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="./listaService">Lista de Servicios</a></li>
+                        <li><a href="./nuevoService">Nuevo Servicio</a></li>
+                    </ul>
+                </li>
                 <li class="menu-label">Miembros</li>
                 <li>
                     <a href="">
@@ -164,9 +179,10 @@
                     <a href="">
                         <svg width="24px" height="24px" class="adata-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                        <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                        <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <rect x="0" y="0" width="24" height="24"></rect>
+                        <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"></path>
+                        <path d="M12,11 C10.8954305,11 10,10.1045695 10,9 C10,7.8954305 10.8954305,7 12,7 C13.1045695,7 14,7.8954305 14,9 C14,10.1045695 13.1045695,11 12,11 Z" fill="#000000" opacity="0.3"></path>
+                        <path d="M7.00036205,16.4995035 C7.21569918,13.5165724 9.36772908,12 11.9907452,12 C14.6506758,12 16.8360465,13.4332455 16.9988413,16.5 C17.0053266,16.6221713 16.9988413,17 16.5815,17 C14.5228466,17 11.463736,17 7.4041679,17 C7.26484009,17 6.98863236,16.6619875 7.00036205,16.4995035 Z" fill="#000000" opacity="0.3"></path>
                         </g>
                         </svg>
                         <span>Otros Usuarios</span><i class="accordion-icon fa fa-angle-left"></i>

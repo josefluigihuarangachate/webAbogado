@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController; // LOGIN, ADMINISTRADOR (ADMINISTRADOR
 use App\Http\Controllers\AbogadoController; // ABOGADO (ADMINISTRADOR)
 use App\Http\Controllers\ClienteController; // CLIENTE (ADMINISTRADOR)
 use App\Http\Controllers\OtroUsuarioController; // OTRO USUARIO (ADMINISTRADOR)
+use App\Http\Controllers\ServicioController; // SERVICIOS (ADMINISTRADOR)
 use App\Http\Controllers\TipoUsuarioController; // TIPO USUARIO (ADMINISTRADOR)
 use App\Http\Controllers\CategoriaController; // Categoria (ADMINISTRADOR)
 use App\Http\Controllers\SubCategoriaController; // SubCategoria (ADMINISTRADOR)
@@ -47,6 +48,7 @@ Route::post('/editarAdministrador', [AdminController::class, 'update']); // Envi
 Route::post('/eliminarAdministrador', [AdminController::class, 'destroy']);
 Route::post('/registrarAdministrador', [AdminController::class, 'create']);
 Route::post('/uploadImgAdministrador', [AdminController::class, 'cargarImgUser']);
+// END ADMINISTRADOR
 //
 //
 // ABOGADO
@@ -62,6 +64,7 @@ Route::post('/editarAbogado', [AbogadoController::class, 'update']); // Enviar d
 Route::post('/eliminarAbogado', [AbogadoController::class, 'destroy']);
 Route::post('/registrarAbogado', [AbogadoController::class, 'create']);
 Route::post('/uploadImgAbogado', [AbogadoController::class, 'cargarImgUser']);
+// END ABOGADO
 //
 //
 // CLIENTE
@@ -77,6 +80,7 @@ Route::post('/editarCliente', [ClienteController::class, 'update']); // Enviar d
 Route::post('/eliminarCliente', [ClienteController::class, 'destroy']);
 Route::post('/registrarCliente', [ClienteController::class, 'create']);
 Route::post('/uploadImgCliente', [ClienteController::class, 'cargarImgUser']);
+// END CLIENTE
 //
 //
 // OTRO USUARIO
@@ -93,6 +97,7 @@ Route::post('/eliminarOtroUsuario', [OtroUsuarioController::class, 'destroy']);
 Route::post('/registrarOtroUsuario', [OtroUsuarioController::class, 'create']);
 Route::post('/uploadImgOtroUsuario', [OtroUsuarioController::class, 'cargarImgUser']);
 Route::post('/tipousuarioOtroUsuario', [OtroUsuarioController::class, 'loadTypeUser']);
+// END OTRO USUARIO
 //
 //
 // TIPO USUARIO
@@ -140,6 +145,30 @@ Route::post('/obtenerSubCategory', [SubCategoriaController::class, 'show']); // 
 Route::post('/editarSubCategory', [SubCategoriaController::class, 'update']); // Enviar datos para editarlos
 Route::post('/eliminarSubCategory', [SubCategoriaController::class, 'destroy']);
 // END SUB CATEGORIA
+//
+//
+// SERVICIO
+Route::get('/listaService', function () {
+    return view('admin/servicio');
+});
+Route::get('/nuevoService', function () {
+    return view('admin/nuevoservicio');
+});
+Route::post('/listadoService', [ServicioController::class, 'index']);
+Route::post('/abogadoService', [ServicioController::class, 'loadLaywer']);
+Route::post('/subcategoriaService', [ServicioController::class, 'loadSubCategory']);
+Route::post('/registrarService', [ServicioController::class, 'create']);
+Route::post('/obtenerService', [ServicioController::class, 'show']); // Obtener datos para editar
+Route::post('/editarService', [ServicioController::class, 'update']); // Enviar datos para editarlos
+Route::post('/eliminarService', [ServicioController::class, 'destroy']);
+// END SERVICIO
+//
+//
+//
+//
+//
+//
+//
 //
 //
 // ------------------------------- PARA LA APP --------------------------------------------

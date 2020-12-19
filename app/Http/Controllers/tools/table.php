@@ -6,7 +6,7 @@ function table($name) {
         //'solicitud' => 'solicitud',
         'categoria' => 'categoria',
         'subcategoria' => 'subcategoria',
-        //'servicio' => 'servicio',
+        'servicio' => 'servicio',
         'tipo_usuario' => 'tipo_usuario',
         'usuario' => 'usuario',
     );

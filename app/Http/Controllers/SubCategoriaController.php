@@ -244,7 +244,12 @@ class SubCategoriaController extends Controller {
         // SELECCIONO TODO LA SUBCATEGORIA PARA AVERIGUAR SI EL IDCATEGORIA TIENE DATO
         $categoria = DB::table(table('subcategoria'))->where('id', $id)->first();
 
-        if (@$categoria->idcategoria) {
+        // ANTES DE ELIMINAR CONSULTO SI ESTE ID NO ESTA ANIDADO CON LOS SERVICIOS DEL USUARIO
+        $servicio = DB::table(table('servicio'))->where('idsubcategoria', $id)->first();
+
+        if ($servicio) {
+            $json = json('error', strings('error_anidado'), '');
+        } else if (@$categoria->idcategoria) {
             $json = json('error', strings('relative_data'), '');
         } else {
 

@@ -86,7 +86,8 @@ class LoginController extends Controller {
                 $foto = $data->foto;
                 if (empty($data->foto)) {
                     // Ruta general/fotos/
-                    $foto = "empty/empty-photo.jpg";
+                    //$foto = "empty/empty-photo.jpg";
+                    $foto = "";
                 }
                 session(['acceso' => true]);
                 session(['id' => $data->id]);
