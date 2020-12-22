@@ -1,6 +1,6 @@
 
 <!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);" class="select-multilanguage chosen-select">
+<select onchange="doGTranslate(this);" class="select-multilanguage chosen-select" style="text-align-last:center;">
     <option value="">Idiomas</option>
     <option value="es|af">Afrikaans</option>
     <option value="es|sq">Albanian</option>

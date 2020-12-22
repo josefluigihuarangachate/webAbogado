@@ -13,6 +13,30 @@ $v = "?v=" . date('YmdHis');
 <html>
     <head>
         @include('admin/include/head_all')
+        <style>
+            .inputUpload{
+                width: 0.1px;
+                height: 0.1px;
+                opacity: 0;
+                overflow: hidden;
+                position: absolute;
+                z-index: -1;
+            }
+
+            .labelUpload{
+                font-size: 10px;
+                font-weight: 600;
+                color: #fff;
+                background-color: #106BA0;
+                display: inline-block;
+                transition: all .5s;
+                cursor: pointer;
+                padding: 5px 8px !important;
+                text-transform: uppercase;
+                width: fit-content;
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <!--================================-->
@@ -65,7 +89,9 @@ $v = "?v=" . date('YmdHis');
 
                                                     <thead>
                                                         <tr>
-                                                            <th>Sub Categoria</th>
+                                                            <th>Icono</th>
+                                                            <th>Diagrama</th>
+                                                            <th>Categoria</th>
                                                             <th>Nombre del Abogado</th>
                                                             <th>Nombre</th>
                                                             <th>Descripcion</th>
@@ -134,8 +160,8 @@ $v = "?v=" . date('YmdHis');
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="Esubcategoria">Sub Categoria</label><br>
-                                <select class="selectpicker form-control" data-live-search="true" id="Esubcategoria" name="Esubcategoria">
+                                <label for="Ecategoria">Sub Categoria</label><br>
+                                <select class="selectpicker form-control" data-live-search="true" id="Ecategoria" name="Ecategoria">
                                 </select>
                             </div>
                             <div class="form-group">
@@ -174,5 +200,124 @@ $v = "?v=" . date('YmdHis');
 
         @include('admin/include/script_all')
         <script src="admin/assets/js/crud/crud_servicio.js<?php echo $v; ?>"></script>
+
+        <script>
+            function uploadChange(id) {
+                var fileInput = document.getElementById('uploadImage' + id);
+                var filePath = fileInput.value;
+
+                // Allowing file type 
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+                if (!allowedExtensions.exec(filePath)) {
+                    fileInput.value = '';
+                    document.getElementById("labelUpload" + id).innerHTML = '<i class="fa fa-picture-o"></i>&nbsp;Cargar...';
+                    Swal.fire(
+                            'Mensaje Importante',
+                            'Tipo de imagen  no permitida',
+                            'warning' // question,warning,error
+                            );
+                    listar();
+                    //document.getElementById('btnuploadimage').disabled = true;
+                } else {
+                    var filename = jQuery("#uploadImage" + id).val().split('\\').pop();
+                    document.getElementById("labelUpload" + id).innerHTML = "Cargado!";
+                    document.getElementById('btnupload' + id).disabled = false;
+                }
+            }
+
+            function uploadImageCategoria(id) {
+                // https://stackoverflow.com/questions/21044798/how-to-use-formdata-for-ajax-file-upload
+                var formData = new FormData($('#formData' + id)[0]);
+                formData.append('cmd', 'web');
+                formData.append('idServicio', id);
+                formData.append('imageFile', $("#uploadImage" + id)[0].files[0]); // PONER UN INPUT FILE EN UN APPEND
+                formData.append('imgAntigua', $("#oldImage" + id).val());
+                $.ajax({
+                    url: ruta() + 'uploadImg' + globalName,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    success: function (json) {
+                        if (json['status'] == 'Ok') {
+                            Swal.fire(
+                                    'Aviso Importante',
+                                    json['msg'],
+                                    'success'
+                                    );
+
+                            listar();
+                        } else {
+                            Swal.fire(
+                                    'Aviso Importante',
+                                    json['msg'],
+                                    'error'
+                                    );
+                        }
+                    }
+                });
+            }
+
+
+            function iuploadChange(id) {
+                var fileInput = document.getElementById('iuploadImage' + id);
+                var filePath = fileInput.value;
+
+                // Allowing file type 
+                var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+                if (!allowedExtensions.exec(filePath)) {
+                    fileInput.value = '';
+                    document.getElementById("ilabelUpload" + id).innerHTML = '<i class="fa fa-picture-o"></i>&nbsp;Cargar...';
+                    Swal.fire(
+                            'Mensaje Importante',
+                            'Tipo de imagen  no permitida',
+                            'warning' // question,warning,error
+                            );
+                    listar();
+                    //document.getElementById('btnuploadimage').disabled = true;
+                } else {
+                    var filename = jQuery("#iuploadImage" + id).val().split('\\').pop();
+                    document.getElementById("ilabelUpload" + id).innerHTML = "Cargado!";
+                    document.getElementById('ibtnupload' + id).disabled = false;
+                }
+            }
+
+            function iuploadImageCategoria(id) {
+                // https://stackoverflow.com/questions/21044798/how-to-use-formdata-for-ajax-file-upload
+                var formData = new FormData($('#iformData' + id)[0]);
+                formData.append('cmd', 'web');
+                formData.append('idServicio', id);
+                formData.append('imageFile', $("#iuploadImage" + id)[0].files[0]); // PONER UN INPUT FILE EN UN APPEND
+                formData.append('imgAntigua', $("#ioldImage" + id).val());
+                $.ajax({
+                    url: ruta() + 'uploadIcono' + globalName,
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    success: function (json) {
+                        if (json['status'] == 'Ok') {
+                            Swal.fire(
+                                    'Aviso Importante',
+                                    json['msg'],
+                                    'success'
+                                    );
+
+                            listar();
+                        } else {
+                            Swal.fire(
+                                    'Aviso Importante',
+                                    json['msg'],
+                                    'error'
+                                    );
+                        }
+                    }
+                });
+            }
+        </script>
     </body>
 </html>

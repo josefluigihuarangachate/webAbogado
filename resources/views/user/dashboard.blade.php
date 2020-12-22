@@ -18,7 +18,8 @@ header('Content-Type: text/html; charset=UTF-8');
         @include('user/include/loading')
         <!--End Loading-->
 
-        <div class="app-layout">
+        <!--<div class="app-layout">-->
+        <div class="app-layout theme-black">
 
             <!-- Navbar Top-->
             @include('user/include/navbar-top')
@@ -36,8 +37,6 @@ header('Content-Type: text/html; charset=UTF-8');
             @php($titulo = "Inicio")
             @include('user/include/header-page')
             <!-- End Footer Page -->
-
-
 
             <section>
                 <div class="gap no-gap">
@@ -117,54 +116,6 @@ header('Content-Type: text/html; charset=UTF-8');
                     </div>
                 </div>
             </section>
-
-            <div class="search-post">
-                <span class="close-btn"><i class="lni lni-cross-circle"></i></span>
-                <div class="search-area">
-                    <h5 class="main-title">Buscar Abogados</h5>
-                    <form method="post">
-                        <input type="text" placeholder="Buscar Abogados..">
-                        <div class="filter-search">
-<!--                            <div>
-                                <i class="lni lni-users"></i>
-                                <input type="checkbox" id="find-friend">
-                                <label for="find-friend">Find Friends</label>
-                            </div>
-                            <div>
-                                <i class="lni lni-signal"></i>
-                                <input type="checkbox" id="nearby">
-                                <label for="nearby">Nearby</label>
-                            </div>
-                            <div>
-                                <i class="lni lni-calendar"></i>
-                                <input type="checkbox" id="event">
-                                <label for="event">Events</label>
-                            </div>
-                            <div>
-                                <i class="lni lni-save"></i>
-                                <input type="checkbox" id="saved">
-                                <label for="saved">Saved Posts</label>
-                            </div>
-                            <div>
-                                <i class="lni lni-network"></i>
-                                <input type="checkbox" id="group">
-                                <label for="group">Groups</label>
-                            </div>
-                            <div>
-                                <i class="lni lni-add-files"></i>
-                                <input type="checkbox" id="pages">
-                                <label for="pages">Pages</label>
-                            </div>
-                            <div>
-                                <i class="lni lni-map-marker"></i>
-                                <input type="checkbox" id="loc">
-                                <label for="loc">Select Location</label>
-                            </div>-->
-                        </div>
-                        <button type="submit">Buscar</button>
-                    </form>
-                </div>
-            </div><!-- search -->
 
             <div class="create-new">
                 <div class="post-form">
@@ -284,6 +235,11 @@ header('Content-Type: text/html; charset=UTF-8');
 
         </div>
 
+        
+        
+        <div style="text-align: center;display: none;">
+            @include('user/include/translate')
+        </div>
         @include('user/include/script_all')
     </body>
 </html>

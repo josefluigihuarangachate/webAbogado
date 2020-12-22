@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Abogado;
 use Illuminate\Http\Request;
+
 // Agregar 
 use Auth;
 use Exception;
@@ -59,7 +60,7 @@ class AbogadoController extends Controller {
 
                     $image = $request->file('imageFile');
                     $rutaTemporal = @$_FILES['imageFile']['tmp_name'];
-                    $nombreImagen = 'AA' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["imageFile"]["name"]));
+                    $nombreImagen = 'Profile' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["imageFile"]["name"]));
                     $rutaDestino = FOLDER_CATEGORIA . $nombreImagen;
 
                     // Registro los datos

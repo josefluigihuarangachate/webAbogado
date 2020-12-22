@@ -94,7 +94,7 @@
                         <li><a href="./nuevoCategory">Nueva Categoria</a></li>
                     </ul>
                 </li>
-                <li>
+<!--                <li>
                     <a href="">
                         <svg width="24px" height="24px" class="adata-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -109,7 +109,7 @@
                         <li><a href="./listaSubCategory">Lista de Sub Categorias</a></li>
                         <li><a href="./nuevoSubCategory">Nueva Sub Categoria</a></li>
                     </ul>
-                </li>
+                </li>-->
                 <li>
                     <a href="">
                         <svg width="24px" height="24px" class="adata-svg-icon">
@@ -195,7 +195,7 @@
 
                 <li class="menu-label">Soporte</li>
                 <li>
-                    <a href="https://themeforest.net/user/colorlibcode/portfolio" target="_blank">
+                    <a href="tel:+51934505203">
                         <svg  class="adata-svg-icon">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <rect x="0" y="0" width="24" height="24"/>

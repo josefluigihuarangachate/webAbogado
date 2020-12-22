@@ -8,8 +8,10 @@ use App\Http\Controllers\ClienteController; // CLIENTE (ADMINISTRADOR)
 use App\Http\Controllers\OtroUsuarioController; // OTRO USUARIO (ADMINISTRADOR)
 use App\Http\Controllers\ServicioController; // SERVICIOS (ADMINISTRADOR)
 use App\Http\Controllers\TipoUsuarioController; // TIPO USUARIO (ADMINISTRADOR)
-use App\Http\Controllers\CategoriaController; // Categoria (ADMINISTRADOR)
-use App\Http\Controllers\SubCategoriaController; // SubCategoria (ADMINISTRADOR)
+use App\Http\Controllers\CategoriaController; // CATEGORIA (ADMINISTRADOR)
+use App\Http\Controllers\SubCategoriaController; // SUBCATEGORIA (ADMINISTRADOR)
+use App\Http\Controllers\CategoriaUserController; // CATEGORIA (USER,LAWYER)
+use App\Http\Controllers\ProfileController; // PERFIL (USER,LAWYER)
 
 /*
   |--------------------------------------------------------------------------
@@ -154,9 +156,11 @@ Route::get('/listaService', function () {
 Route::get('/nuevoService', function () {
     return view('admin/nuevoservicio');
 });
+Route::post('/uploadIconoService', [ServicioController::class, 'cargarIconoService']);
 Route::post('/listadoService', [ServicioController::class, 'index']);
 Route::post('/abogadoService', [ServicioController::class, 'loadLaywer']);
-Route::post('/subcategoriaService', [ServicioController::class, 'loadSubCategory']);
+Route::post('/categoriaService', [ServicioController::class, 'loadCategory']);
+Route::post('/uploadImgService', [ServicioController::class, 'cargarDiagrama']);
 Route::post('/registrarService', [ServicioController::class, 'create']);
 Route::post('/obtenerService', [ServicioController::class, 'show']); // Obtener datos para editar
 Route::post('/editarService', [ServicioController::class, 'update']); // Enviar datos para editarlos
@@ -178,9 +182,25 @@ Route::get('/app', function () {
 });
 Route::post('/login_user', [LoginController::class, 'index']);
 Route::post('/register_user', [LoginController::class, 'create']);
+Route::get('/appcerrarSesion', [LoginController::class, 'logout']);
 Route::get('/dashboardUser', function () {
     return view('user/dashboard');
 });
 // END USUARIO
+//
+//
+// GENERAL
+Route::post('/appcategoriaGeneral', [CategoriaUserController::class, 'loadCategoryGeneral']);
+
+Route::get('/applistaGeneral', function () {
+    return view('user/servicio');
+});
+Route::post('/appidservicioGeneral', [CategoriaUserController::class, 'sessionServiceGeneral']);
+Route::post('/appservicioGeneral', [CategoriaUserController::class, 'loadServiceGeneral']);
+Route::get('/appprofileGeneral', function () {
+    return view('user/profile');
+});
+Route::post('/appprofileactualizarGeneral', [ProfileController::class, 'update']);
+// END GENERAL
 //
 //

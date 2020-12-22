@@ -1,3 +1,8 @@
+PARA LOS INCLUDE NO BLADE
+-------------------------
+        composer update --no-scripts
+
+
 INSTALAR DATATABLE:
 -------------------
         composer require yajra/laravel-datatables-oracle

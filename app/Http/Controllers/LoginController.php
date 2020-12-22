@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Login;
 use Illuminate\Http\Request;
 // Agregar 
+use Auth;
+use Exception;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
@@ -23,6 +26,21 @@ class LoginController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
+        $_SESSION = array();
+        session_write_close();
+        setcookie(session_name(), '', 0, '/');
+
+        Auth::logout();
+        Session::flush();
+
+        session(['acceso' => false]);
+        return redirect('/app');
+    }
+
     public function index(Request $request) {
         // Login de usuario
         $usuario = htmlspecialchars(trim($request->input('logUser')));
@@ -48,30 +66,30 @@ class LoginController extends Controller {
         } else {
             // Login de usuario
             $data = DB::table(table('usuario'))
-                            ->join(table('tipo_usuario'), function ($join) {
-                                $join->on(
-                                        table('tipo_usuario') . '.id', '=', table('usuario') . '.idtipo'
-                                )
-                                ->where(
-                                        [
-                                            [table('tipo_usuario') . '.estado', '=', 'activo'],
-                                        ]
-                                );
-                            })
-                            ->select(
-                                    [
-                                        table('usuario') . '.*',
-                                        table('tipo_usuario') . '.nombre AS tipo_usuario',
-                                        table('tipo_usuario') . '.estado AS estado_tipo',
-                                    ]
-                            )
-                            ->where(
-                                    [
-                                        [table('usuario') . '.usuario', '=', $usuario],
-                                        [table('usuario') . '.idtipo', '!=', 1], // QUE SEA DIFERENTE AL ADMINISTRADOR
-                                        [table('usuario') . '.estado', '=', 'activo'],
-                                    ]
-                            )->first();
+                    ->join(table('tipo_usuario'), function ($join) {
+                        $join->on(
+                                table('tipo_usuario') . '.id', '=', table('usuario') . '.idtipo'
+                        )
+                        ->where(
+                                [
+                                    [table('tipo_usuario') . '.estado', '=', 'activo'],
+                                ]
+                        );
+                    })
+                    ->select(
+                            [
+                                table('usuario') . '.*',
+                                table('tipo_usuario') . '.nombre AS tipo_usuario',
+                                table('tipo_usuario') . '.estado AS estado_tipo',
+                            ]
+                    )
+                    ->where(
+                            [
+                                [table('usuario') . '.usuario', '=', $usuario],
+                                [table('usuario') . '.estado', '=', 'activo'],
+                            ]
+                    )->whereIn(table('usuario') . '.idtipo', [2, 3])
+                    ->first();
 
             if ($data && password_verify($clave, $data->clave)) {
                 $json = json('ok', strings('success_login'), $data);
@@ -92,6 +110,9 @@ class LoginController extends Controller {
                 session(['acceso' => true]);
                 session(['id' => $data->id]);
                 session(['foto' => $foto]);
+                session(['dni' => $data->dni]);
+                session(['celular' => $data->celular]);
+                session(['direccion' => $data->direccion]);
                 session(['nombre' => $data->nombre]);
                 session(['nombre_corto' => $nombre[0] . ' ' . @$nombre[1]]);
                 session(['correo' => $data->correo]);
@@ -102,6 +123,9 @@ class LoginController extends Controller {
                 session(['estado' => $data->estado]);
                 session(['tipo_usuario' => $data->tipo_usuario]);
                 session(['estado_tipo' => $data->estado_tipo]);
+                session(['latitud' => $data->latitud]);
+                session(['longitud' => $data->longitud]);
+                session(['modificado_por' => $data->modificado_por]);
             } else {
                 $json = json('error', strings('error_login'), '');
             }

@@ -51,30 +51,30 @@ class AdminController extends Controller {
         } else {
             // Login de usuario
             $data = DB::table(table('usuario'))
-                            ->join(table('tipo_usuario'), function ($join) {
-                                $join->on(
-                                        table('tipo_usuario') . '.id', '=', table('usuario') . '.idtipo'
-                                )
-                                ->where(
-                                        [
-                                            [table('tipo_usuario') . '.estado', '=', 'activo'],
-                                        ]
-                                );
-                            })
-                            ->select(
-                                    [
-                                        table('usuario') . '.*',
-                                        table('tipo_usuario') . '.nombre AS tipo_usuario',
-                                        table('tipo_usuario') . '.estado AS estado_tipo',
-                                    ]
-                            )
-                            ->where(
-                                    [
-                                        [table('usuario') . '.usuario', '=', $usuario],
-                                        [table('usuario') . '.idtipo', '=', 1], // QUE SEA ADMINISTRADOR
-                                        [table('usuario') . '.estado', '=', 'activo'],
-                                    ]
-                            )->first();
+                    ->join(table('tipo_usuario'), function ($join) {
+                        $join->on(
+                                table('tipo_usuario') . '.id', '=', table('usuario') . '.idtipo'
+                        )
+                        ->where(
+                                [
+                                    [table('tipo_usuario') . '.estado', '=', 'activo'],
+                                ]
+                        );
+                    })
+                    ->select(
+                            [
+                                table('usuario') . '.*',
+                                table('tipo_usuario') . '.nombre AS tipo_usuario',
+                                table('tipo_usuario') . '.estado AS estado_tipo',
+                            ]
+                    )
+                    ->where(
+                            [
+                                [table('usuario') . '.usuario', '=', $usuario],
+                                [table('usuario') . '.estado', '=', 'activo'],
+                            ]
+                    )->whereNotIn(table('usuario') . '.idtipo', [2, 3]) // QUE SEA ADMINISTRADOR
+                    ->first();
 
             if ($data && password_verify($clave, $data->clave)) {
                 $json = json('ok', strings('success_login'), $data);
@@ -158,7 +158,7 @@ class AdminController extends Controller {
 
                     $image = $request->file('imageFile');
                     $rutaTemporal = @$_FILES['imageFile']['tmp_name'];
-                    $nombreImagen = 'AA' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["imageFile"]["name"]));
+                    $nombreImagen = 'Profile' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["imageFile"]["name"]));
                     $rutaDestino = FOLDER_CATEGORIA . $nombreImagen;
 
                     // Registro los datos

@@ -66,8 +66,8 @@ $v = "?v=" . date('YmdHis');
                                                     <div class="row col-md-2">
                                                     </div>
                                                     <div class="row col-md-5">
-                                                        <label for="Rsubcategoria">Sub Categoria</label>
-                                                        <select class="selectpicker form-control" data-live-search="true" id="Rsubcategoria" name="Rsubcategoria">                                                            
+                                                        <label for="Rcategoria">Categoria</label>
+                                                        <select class="selectpicker form-control" data-live-search="true" id="Rcategoria" name="Rcategoria">                                                            
                                                         </select>
                                                     </div>
 

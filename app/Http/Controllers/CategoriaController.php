@@ -57,7 +57,7 @@ class CategoriaController extends Controller {
 
                     $image = $request->file('imageFile');
                     $rutaTemporal = @$_FILES['imageFile']['tmp_name'];
-                    $nombreImagen = 'AA' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["imageFile"]["name"]));
+                    $nombreImagen = 'Category' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["imageFile"]["name"]));
                     $rutaDestino = FOLDER_CATEGORIA . $nombreImagen;
 
                     // Registro los datos
@@ -84,9 +84,8 @@ class CategoriaController extends Controller {
                     $json = json('error', strings('error_update'), '');
                 }
             }
-
-            return jsonPrint($json, $cmd);
         }
+        return jsonPrint($json, $cmd);
     }
 
     public function index(Request $request) {
@@ -278,7 +277,7 @@ class CategoriaController extends Controller {
         $id = htmlspecialchars(strtolower(trim($request->input('id'))));
         @$imageAntigua = htmlspecialchars(trim($request->input('imageAntigua')));
 
-        $anidado = DB::table(table('subcategoria'))->where('idcategoria', $id)->first();
+        $anidado = DB::table(table('servicio'))->where('idcategoria', $id)->first();
 
         if ($anidado) {
             $json = json('error', strings('relative_data'), '');

@@ -6,10 +6,7 @@
                 <div class="col-12">
                     <div class="head-meta">
                         <h5><?php echo @$titulo; ?></h5>
-                        <ul class="breadcrumb">
-                            <li><a href="#" title="">Inicio</a></li>
-                            <li><?php echo @$titulo; ?></li>
-                        </ul>
+                        
                     </div>
                 </div>
             </div>

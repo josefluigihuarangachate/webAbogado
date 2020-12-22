@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-12-2020 a las 22:40:29
+-- Tiempo de generación: 22-12-2020 a las 06:18:49
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -55,8 +55,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estado`, `modificado_por`) VALUES
-(2, 'AA17122020044533justicia_ciega.jpg', '5TR5UU', 'Penal', 'Acerca de carcel', 'activo', 1),
-(12, NULL, 'activo', 'Juridica', 'ayuda juridica', 'activo', 1);
+(2, 'AA19122020235924penal.jpg', '5TR5UU', 'Penal', 'Acerca de carcel  - En todos los casos', 'activo', 23),
+(12, 'AA19122020235914juridico.jpg', 'ACTIVO', 'Juridica', 'ayuda juridica - En todos los casos', 'activo', 23),
+(13, 'AA20122020051615civil2.jpg', 'RETYU', 'Civil', 'sistema civil - En todos los casos', 'activo', 23);
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,9 @@ INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estad
 
 CREATE TABLE `servicio` (
   `id` int(25) NOT NULL,
-  `idsubcategoria` int(25) NOT NULL,
+  `icono` varchar(500) DEFAULT NULL,
+  `foto` varchar(500) DEFAULT NULL COMMENT 'SIRVE PARA SUBIR LA IMAGEN DE DIAGRAMA',
+  `idcategoria` int(25) NOT NULL,
   `idusuario` int(25) NOT NULL COMMENT 'ID DEL ABOGADO',
   `nombre` varchar(255) NOT NULL,
   `descripcion` text DEFAULT NULL,
@@ -79,8 +82,11 @@ CREATE TABLE `servicio` (
 -- Volcado de datos para la tabla `servicio`
 --
 
-INSERT INTO `servicio` (`id`, `idsubcategoria`, `idusuario`, `nombre`, `descripcion`, `precio`, `estado`, `modificado_por`) VALUES
-(1, 4, 3, 'Caso Civil', 'Acerca de las casas', '70.00', 'activo', 1);
+INSERT INTO `servicio` (`id`, `icono`, `foto`, `idcategoria`, `idusuario`, `nombre`, `descripcion`, `precio`, `estado`, `modificado_por`) VALUES
+(6, 'Icono21122020224128descarga.png', 'Service20122020053836Imagen1.png', 2, 3, 'Carcel', 'EEFSDFS F', '58.00', 'activo', 24),
+(7, 'Icono22122020025918descarga.jpg', NULL, 2, 23, 'Publico', 'gsfdfsdf ds fsd f dsf sd fds f dsf dfs', '78.00', 'activo', 1),
+(8, NULL, NULL, 12, 23, 'Juridico Judicial', 'dasdasd sad asdasd asd sa dasdasd ad sa as dasd asdas dasd ads', '67.00', 'activo', 23),
+(9, NULL, NULL, 13, 23, 'Civil de Casas', 'Civil de Casas', '80.00', 'activo', 1);
 
 -- --------------------------------------------------------
 
@@ -103,8 +109,9 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`id`, `codigo`, `nombre`, `descripcion`, `estado`, `idcategoria`, `modificado_por`) VALUES
-(4, 'YUS086', 'Sub Penal', 'Sub penal consiste en ayuda en penales', 'activo', 12, 1),
-(7, 'YUS0867', 'Sub Penal7', 'Sub penal7', 'activo', 2, 1);
+(4, 'YUS086', 'Sub Penal 1.0', 'Penal 1.0 consiste en ayuda penal', 'activo', 2, 23),
+(7, 'YUS0867', 'Sub Juridica 1.1', 'Juridica 1.1 consiste en ayuda juridica', 'activo', 12, 23),
+(10, 'TEWEW', 'Sub Civil 1.2', 'Civil 1.2 consiste en ayuda civil', 'activo', 13, 23);
 
 -- --------------------------------------------------------
 
@@ -140,7 +147,7 @@ CREATE TABLE `usuario` (
   `id` int(25) NOT NULL,
   `foto` varchar(500) DEFAULT NULL COMMENT 'Guardar la ruta de la imagen completa con toda y carpeta\r\n\r\nEjemplo :\r\nassets/images/photos/gerente.png\r\n\r\nSi esta vacio el campo foto se pondra :\r\nassets/images/photos/empty/empty-avatar.png',
   `nombre` varchar(255) NOT NULL,
-  `dni` varchar(12) DEFAULT NULL,
+  `dni` varchar(15) DEFAULT NULL,
   `correo` varchar(255) NOT NULL,
   `celular` varchar(15) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL,
@@ -158,10 +165,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`) VALUES
-(1, 'AA161220201640452016.1)[1].jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', NULL, NULL, 1),
-(2, NULL, 'Luigi Huuaranga Chate', '98777777', 'luigi@gmail.com', '7567543455345', 'San Miguel - Plaza Vea', 'luigi', '$2y$11$PHQVclhPsj6VLxFzteTniOa1774UbuHI3.WFvycRcNG/uL7YCcGdy', 2, 'activo', '-30.72591643', '28.406114515', 1),
+(1, 'AA161220201640452016.1)[1].jpg', 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654321', 'San Miguel', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', NULL, NULL, 1),
 (3, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1),
-(20, NULL, 'Armando', '75465433', 'armando@gmail.com', '987654321', 'av lima', 'armando', '$2y$11$isEVa2B/peB4SYlJ.6ZgO.c/N/HqfFUjmEruhG1tO82ndKw61lZwm', 5, 'activo', '-2.117193031', '-65.0643062', 1);
+(23, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-12.04335513', '-77.04049551', 1),
+(24, NULL, 'Juan Cliente Huaman Rojas', '987655', 'juancliente@gmail.com', '987654321', 'san marcos mz b lote 100', 'cliente', '$2y$11$wUIXpJURmBy7kDBTcBCj0uvVMFEU.Q7OVgLSKuIW9fssL9A.Gpyqq', 3, 'activo', '1.836919152', '-59.79019192', 24);
 
 --
 -- Índices para tablas volcadas
@@ -185,8 +192,8 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `servicio`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_idsubcategoria` (`idsubcategoria`),
-  ADD KEY `FK_idbarbero` (`idusuario`);
+  ADD KEY `FK_idbarbero` (`idusuario`),
+  ADD KEY `FK_idsubcategoria` (`idcategoria`) USING BTREE;
 
 --
 -- Indices de la tabla `subcategoria`
@@ -224,19 +231,19 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`
@@ -248,7 +255,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas
@@ -258,13 +265,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  ADD CONSTRAINT `FK_idbarbero` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`),
-  ADD CONSTRAINT `FK_idsubcategoria` FOREIGN KEY (`idsubcategoria`) REFERENCES `subcategoria` (`id`);
-
---
--- Filtros para la tabla `subcategoria`
---
-ALTER TABLE `subcategoria`
+  ADD CONSTRAINT `FK_idabogado` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `FK_idcategoria` FOREIGN KEY (`idcategoria`) REFERENCES `categoria` (`id`);
 
 --

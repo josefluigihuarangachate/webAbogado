@@ -10,6 +10,9 @@ $v = "?v=" . date('YmdHis');
 <title>ABOGADOS | BIENVENIDO</title>
 <meta name="csrf-token" content="<?php echo csrf_token() ?>" />
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <script src="general/js/ruta.js<?php echo $v; ?>"></script>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <!-- BEGIN: Custom CSS-->  
@@ -61,3 +64,9 @@ $v = "?v=" . date('YmdHis');
         color: #333;
     }
 </style>
+
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsS1Y0-4vNu3rAiYF8Vo1wK9_oW6cvv_c&callback=initMap&libraries=&v=weekly"
+    defer
+></script>

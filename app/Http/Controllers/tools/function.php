@@ -9,3 +9,10 @@
 function objectToArray(&$object) {
     return @json_decode(json_encode($object), true);
 }
+
+function imprimir($data) {
+    echo "<pre>", print_r($data), "</pre>";
+}
+
+
+

@@ -17,7 +17,7 @@ function listar() {
         $.post(ruta() + "listado" + globalName, {cmd: 'web'}, function (json) {
 
             var tbody = '<tr>';
-            tbody += '<td colspan="7">';
+            tbody += '<td colspan="9">';
             tbody += '<center>';
             tbody += 'No se encontraron datos';
             tbody += '</center>';
@@ -29,8 +29,99 @@ function listar() {
                     tbody = "";
                     for (var i = 0; i < datos.length; i++) {
                         tbody += '<tr>';
+
+
+
+
+
+                        tbody += '<td style="text-align: center;">';
+
+                        var btnWithIcono = "primary";
+                        if (datos[i].icono != null) {
+                            // tbody += datos[i].foto;
+                            btnWithIcono = "success";
+                        }
+
+                        tbody += '<div class="dropdown">';
+                        tbody += '<button class="btn btn-' + btnWithIcono + ' btn-sm dropdown-toggle waves-effect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                        tbody += 'Icono';
+                        tbody += '</button>';
+                        tbody += '<div class="dropdown-menu tx-13" style="text-align: center;">';
+
+                        if (datos[i].icono != null) {
+                            // tbody += datos[i].foto;
+                            tbody += '<img src="' + FOLDER_IMAGE + datos[i].icono + '" style="width: 100px;"><br><br>';
+                        }
+
+                        tbody += '<form action="#" method="POST" enctype="multipart/form-data" id="iformData' + datos[i].id + '" name="iformData' + datos[i].id + '">';
+                        tbody += '<input type="hidden" hidden="hidden" value="' + datos[i].icono + '" id="ioldImage' + datos[i].id + '" name="ioldImage' + datos[i].id + '">';
+                        tbody += '<span>';
+                        tbody += '<input type="file" onchange="iuploadChange(' + datos[i].id + ')" id="iuploadImage' + datos[i].id + '" name="iuploadImage' + datos[i].id + '" class="inputUpload">';
+                        tbody += '</span>';
+                        tbody += '<label class="btn btn-primary btn-sm" style="width: 100px;" for="iuploadImage' + datos[i].id + '">';
+                        tbody += '<span id="ilabelUpload' + datos[i].id + '" name="ilabelUpload' + datos[i].id + '">';
+                        tbody += '<i class="fa fa-picture-o"></i>&nbsp;Cargar...';
+                        tbody += '</span>';
+                        tbody += '</label><br>';
+                        tbody += '<button type="button" id="ibtnupload' + datos[i].id + '" name="ibtnupload' + datos[i].id + '" disabled="disabled" class="btn btn-success btn-sm" style="width: 100px;color: #fff !important;" onclick="iuploadImageCategoria(' + datos[i].id + ')">';
+                        tbody += '<i class="fa fa-save"></i>&nbsp; Guardar';
+                        tbody += '</button>';
+                        tbody += '</form>';
+                        tbody += '</div>';
+                        tbody += '</div>';
+                        tbody += '</td>';
+
+
+
+
+
+
+
+                        tbody += '<td style="text-align: center;">';
+
+                        var btnWithDiagram = "primary";
+                        if (datos[i].foto != null) {
+                            // tbody += datos[i].foto;
+                            btnWithDiagram = "success";
+                        }
+
+                        tbody += '<div class="dropdown">';
+                        tbody += '<button class="btn btn-' + btnWithDiagram + ' btn-sm dropdown-toggle waves-effect" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                        tbody += 'Imagen';
+                        tbody += '</button>';
+                        tbody += '<div class="dropdown-menu tx-13" style="text-align: center;">';
+
+                        if (datos[i].foto != null) {
+                            // tbody += datos[i].foto;
+                            tbody += '<img src="' + FOLDER_IMAGE + datos[i].foto + '" style="width: 100px;"><br><br>';
+                        }
+
+                        tbody += '<form action="#" method="POST" enctype="multipart/form-data" id="formData' + datos[i].id + '" name="formData' + datos[i].id + '">';
+                        tbody += '<input type="hidden" hidden="hidden" value="' + datos[i].foto + '" id="oldImage' + datos[i].id + '" name="oldImage' + datos[i].id + '">';
+                        tbody += '<span>';
+                        tbody += '<input type="file" onchange="uploadChange(' + datos[i].id + ')" id="uploadImage' + datos[i].id + '" name="uploadImage' + datos[i].id + '" class="inputUpload">';
+                        tbody += '</span>';
+                        tbody += '<label class="btn btn-primary btn-sm" style="width: 100px;" for="uploadImage' + datos[i].id + '">';
+                        tbody += '<span id="labelUpload' + datos[i].id + '" name="labelUpload' + datos[i].id + '">';
+                        tbody += '<i class="fa fa-picture-o"></i>&nbsp;Cargar...';
+                        tbody += '</span>';
+                        tbody += '</label><br>';
+                        tbody += '<button type="button" id="btnupload' + datos[i].id + '" name="btnupload' + datos[i].id + '" disabled="disabled" class="btn btn-success btn-sm" style="width: 100px;color: #fff !important;" onclick="uploadImageCategoria(' + datos[i].id + ')">';
+                        tbody += '<i class="fa fa-save"></i>&nbsp; Guardar';
+                        tbody += '</button>';
+                        tbody += '</form>';
+                        tbody += '</div>';
+                        tbody += '</div>';
+                        tbody += '</td>';
+
+
+
+
+
+
+
                         tbody += '<td>';
-                        tbody += datos[i].nombresubcategoria;
+                        tbody += datos[i].nombrecategoria;
                         tbody += '</td>';
                         tbody += '<td>';
                         tbody += datos[i].nombreabogado;
@@ -120,8 +211,6 @@ function obtener(id) {
             document.getElementById("Edescripcion").value = Odatos.descripcion;
 
 
-
-
             // SIRVE PARA SABER SELECCIONAR AL ABOGADO
             var option_abogado = "<option value=''>Buscar Abogado</option>";
             try {
@@ -145,26 +234,26 @@ function obtener(id) {
 
 
 
-            // SIRVE PARA SABER SELECCIONAR LAS SUB CATEGORIA
-            var option_subcategoria = "<option value=''>Seleccionar Sub Categoria</option>";
+            // SIRVE PARA SABER SELECCIONAR LA CATEGORIA
+            var option_categoria = "<option value=''>Seleccionar Sub Categoria</option>";
             try {
-                if (json['subcategory'] != null) {
+                if (json['category'] != null) {
 
-                    var subcategorias = json['subcategory'];
-                    for (var c = 0; c < subcategorias.length; c++) {
+                    var categorias = json['category'];
+                    for (var c = 0; c < categorias.length; c++) {
 
                         var selected = "";
-                        if (Odatos.idsubcategoria == subcategorias[c].id) {
+                        if (Odatos.idcategoria == categorias[c].id) {
                             selected = "selected='selected'";
                         }
-                        option_subcategoria += "<option " + selected + " data-subtext=' (" + subcategorias[c].estado + ")' value='" + subcategorias[c].id + "'>" + subcategorias[c].nombre + "</option>";
+                        option_categoria += "<option " + selected + " data-subtext=' (" + categorias[c].estado + ")' value='" + categorias[c].id + "'>" + categorias[c].nombre + "</option>";
                     }
                 }
             } catch (err) {
                 //console.error(err);
             }
-            $("#Esubcategoria").html(option_subcategoria);
-            $('#Esubcategoria').selectpicker('refresh');
+            $("#Ecategoria").html(option_categoria);
+            $('#Ecategoria').selectpicker('refresh');
 
 
             // SIRVE PARA SABER SI ESTA ACTIVO O INACTIVO
@@ -271,25 +360,25 @@ function cargarAbogados() {
 }
 cargarAbogados();
 
-function cargarSubCategoria() {
+function cargarCategoria() {
     // var txt = $("input").val();
-    $.post(ruta() + "subcategoria" + globalName, {cmd: 'web'}, function (json) {
+    $.post(ruta() + "categoria" + globalName, {cmd: 'web'}, function (json) {
 
         // SIRVE PARA SABER SI ESTA ACTIVO O INACTIVO
-        var option_subcategoria = "<option value='' selected='selected'>Seleccionar Sub Categoria</option>";
+        var option_categoria = "<option value='' selected='selected'>Seleccionar Categoria</option>";
         try {
             if (json['data'] != null) {
 
-                var subcategoria = json['data'];
-                for (var c = 0; c < subcategoria.length; c++) {
-                    option_subcategoria += "<option value='" + subcategoria[c].id + "' data-subtext=' (" + subcategoria[c].estado + ")'>" + subcategoria[c].nombre + "</option>";
+                var categorias = json['data'];
+                for (var c = 0; c < categorias.length; c++) {
+                    option_categoria += "<option value='" + categorias[c].id + "' data-subtext=' (" + categorias[c].estado + ")'>" + categorias[c].nombre + "</option>";
                 }
             }
         } catch (err) {
             //console.error(err);
         }
-        $("#Rsubcategoria").html(option_subcategoria);
-        $('#Rsubcategoria').selectpicker('refresh');
+        $("#Rcategoria").html(option_categoria);
+        $('#Rcategoria').selectpicker('refresh');
     });
 }
-cargarSubCategoria();
+cargarCategoria();
