@@ -12,7 +12,7 @@ header('Content-Type: text/html; charset=UTF-8');
     <head>
         @include('user/include/head_all')
     </head>
-    <body class="full-page" onload="loadServicios();">
+    <body class="full-page" onload="loadAbogados();">
 
         <!--Loading-->
         @include('user/include/loading')
@@ -34,7 +34,7 @@ header('Content-Type: text/html; charset=UTF-8');
             <!-- End Sidebar Right -->
 
             <!-- Footer Page -->
-            @php($titulo = "Servicios")
+            @php($titulo = "Abogados")
             @include('user/include/header-page')
             <!-- End Footer Page -->
 
@@ -43,8 +43,8 @@ header('Content-Type: text/html; charset=UTF-8');
                     <div class="container">
                         <div class="row">
                             <div class="col-12">
-                                <h5 class="main-title">Búsqueda Servicio</h5>
-                                <input type="text" class="search-input" placeholder="Buscar servicios..." id="filterServices" name="filterServices">
+                                <h5 class="main-title">Búsqueda Abogado</h5>
+                                <input type="text" class="search-input" placeholder="Buscar Abogado..." id="filterServices" name="filterServices">
                             </div>
                         </div>
                     </div>

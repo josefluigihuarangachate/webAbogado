@@ -53,6 +53,7 @@ loadCategoria();
 
 function saveIdCategory(id) {
     $.post(ruta() + "appidservicio" + globalName, {cmd: 'web', idcategoria: id}, function (json) {
+        console.log("Id del servicio fue guardado temporalmente");
     });
 }
 
@@ -67,6 +68,8 @@ function loadServicios() {
                 var datos = json['data'];
                 for (var i = 0; i < datos.length; i++) {
                     innerHTML += '<div class="activity">';
+                    innerHTML += '<a onclick="saveNameService(\'' + datos[i].nombre + '\')" href="/applistaservicoxabogado' + globalName + '" class="btn btn-danger" style="border-radius: 50px;margin-top: 13px;margin-right: 75px;position: absolute; right: 0;"><i class="lni lni-files"></i></a>';
+                    innerHTML += '<a onclick="saveNameService(\'' + datos[i].nombre + '\')" href="/applistaservicoxabogado' + globalName + '" class="btn btn-primary" style="border-radius: 50px;margin-top: 13px;margin-right: 18px;position: absolute; right: 0;"><i class="lni lni-users"></i></a>';
                     innerHTML += '<figure>';
 
                     if (datos[i].icono != null) {
@@ -78,9 +81,9 @@ function loadServicios() {
                     innerHTML += '<span><img src="user/assets/images/svg/trending.png" alt=""></span>';
                     innerHTML += '</figure>';
                     innerHTML += '<div class="history-meta">';
-                    innerHTML += '<h5><a title="" href="#">' + datos[i].nombre + '</a></h5>';
-                    innerHTML += '<span>Nombre : ' + datos[i].nombreAbogado + '</span>';
-                    innerHTML += '<br><span><img src="user/assets/images/dinero.png" width="38" height="38"> <sup style="font-size: 12px;color: #66bb6a;">S/. ' + datos[i].precio + '</sup></span>';
+                    innerHTML += '<h3><a title="" href="#">' + datos[i].nombre + '</a></h3>';
+                    //innerHTML += '<span>Nombre : ' + datos[i].nombreAbogado + '</span>';
+                    //innerHTML += '<br><span><img src="user/assets/images/dinero.png" width="38" height="38"> <sup style="font-size: 12px;color: #66bb6a;">S/. ' + datos[i].precio + '</sup></span>';
                     innerHTML += '</div>';
                     innerHTML += '</div>';
                 }
@@ -93,9 +96,58 @@ function loadServicios() {
         document.getElementById("listado_servicios").innerHTML = innerHTML;
     });
 }
-loadServicios();
 
 
+function loadAbogados() {
+    $.post(ruta() + "appnombreabogado" + globalName, {cmd: 'web'}, function (json) {
+
+        document.getElementById("listado_servicios").innerHTML = "";
+        var innerHTML = "";
+        if (json['status']) {
+            if (json['data']) {
+                var datos = json['data'];
+                for (var i = 0; i < datos.length; i++) {
+                    innerHTML += '<div class="activity">';
+                    innerHTML += '<a onclick="saveIdAbogadoChatTemp(\'' + datos[i].idAbogado + '\')" href="/appchatabogado' + globalName + '" class="btn btn-primary" style="border-radius: 50px;margin-top: 13px;margin-right: 18px;position: absolute; right: 0;"><i class="lni lni-wechat"></i></a>';
+                    innerHTML += '<figure>';
+
+                    if (datos[i].fotoAbogado != null) {
+                        innerHTML += '<img alt="Icono" src="' + FOLDER_IMAGE + datos[i].fotoAbogado + '" style="width: 60px;height: 60px;">';
+                    } else {
+                        innerHTML += '<img alt="Icono" src="' + FOLDER_IMAGE + 'empty/empty-photo.jpg" style="width: 60px;height: 60px;">';
+                    }
+
+                    innerHTML += '<span><img src="user/assets/images/svg/trending.png" alt=""></span>';
+                    innerHTML += '</figure>';
+                    innerHTML += '<div class="history-meta">';
+                    innerHTML += '<h5><a title="" href="#">' + datos[i].nombreAbogado + '</a></h5>';
+                    innerHTML += '<span>' + datos[i].correoAbogado + '</span>';
+                    innerHTML += '<br><span><sup style="font-size: 10px;color: #ccc;">' + datos[i].celularAbogado + '</sup></span>';
+                    innerHTML += '</div>';
+                    innerHTML += '</div>';
+                }
+            } else {
+                innerHTML = "<center>No se encontraron datos</center>";
+            }
+        } else {
+            innerHTML = "<center>" + json['msg'] + "</center>";
+        }
+        document.getElementById("listado_servicios").innerHTML = innerHTML;
+    });
+}
+
+
+function saveNameService(nombre) {
+    $.post(ruta() + "appnameservicio" + globalName, {cmd: 'web', nameservice: nombre}, function (json) {
+        console.log("Nombre del servicio fue guardado temporalmente");
+    });
+}
+
+function saveIdAbogadoChatTemp(id) {
+    $.post(ruta() + "appidabogado" + globalName, {cmd: 'web', idabogado: id}, function (json) {
+        console.log("Id de abogado fue guardado temporalmente");
+    });
+}
 
 
 
@@ -128,3 +180,32 @@ $(document).ready(function ()
 
 
 });
+
+
+
+function loadInfoLawyer() {
+    $.post(ruta() + "appchatinfoabogado" + globalName, {cmd: 'web'}, function (json) {
+        if (json['status'] == 'Ok') {
+            if (json['data']) {
+                var datos = json['data'];
+
+                var src = FOLDER_IMAGE + "empty/empty-photo.jpg";
+                if (datos.foto != null) {
+                    src = FOLDER_IMAGE + datos.foto;
+                }
+                
+                
+                document.getElementById("imginfoAbogado").src = "" + src;
+                document.getElementById("nombreinfoAbogado").innerHTML = "" + datos.nombre;
+                //var datos = json['data'];
+                //for (var i = 0; i < datos.length; i++) {
+                //    document.getElementById("nombreinfoAbogado").innerHTML = "dsds" + datos.nombre;
+                //}
+            } else {
+                window.history.back();
+            }
+        } else {
+            window.history.back();
+        }
+    });
+}

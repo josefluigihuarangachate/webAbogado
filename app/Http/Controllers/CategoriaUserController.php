@@ -26,29 +26,127 @@ class CategoriaUserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function loadCatInfoAbogadoGeneral(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $data = DB::table(table('usuario'))->where('id', session('IdLawyerChatTemp'))->first();
+        if ($data) {
+            $json = json('ok', strings('success_read'), $data);
+        } else {
+            $json = json('error', strings('error_read'), '');
+        }
+        return jsonPrint($json, $cmd);
+    }
+
     public function sessionServiceGeneral(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $idcategory = htmlspecialchars(intval(trim($request->input('idcategoria'))));
         session(['idCategoryTemp' => $idcategory]);
     }
 
+    public function sessionNameServiceGeneral(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $nameservice = htmlspecialchars(strval(trim($request->input('nameservice'))));
+        session(['NameServiceTemp' => $nameservice]);
+    }
+
+    public function sessionIdLawyerChatGeneral(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $nameservice = htmlspecialchars(strval(trim($request->input('idabogado'))));
+        session(['IdLawyerChatTemp' => $nameservice]);
+    }
+
     public function loadServiceGeneral(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
 
         if (session('idtipo') == 2) { // ABOGADO
-        } else if (session('idtipo') == 3) { // CLIENTE
-            // $data = DB::table(table('servicio'))->where('idcategoria', session('idCategoryTemp'))->get();
             $data = DB::table(table('servicio'))
                     ->join(table('usuario'), table('usuario') . '.id', '=', table('servicio') . '.idusuario')
                     ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
                     ->select(
                             table('servicio') . '.icono',
-                            table('servicio') . '.nombre',                            
-                            table('servicio') . '.precio',
-                            table('usuario') . '.nombre AS nombreAbogado',
+                            table('servicio') . '.nombre',
+                            //table('servicio') . '.precio',
+                            //table('usuario') . '.nombre AS nombreAbogado',
+                    )
+                    ->where([
+                        [table('usuario') . '.id', '=', session('id')],
+                        [table('servicio') . '.idcategoria', '=', session('idCategoryTemp')],
+                        [table('categoria') . '.estado', '=', 'activo'],
+                        [table('servicio') . '.estado', '=', 'activo'],
+                        [table('usuario') . '.idtipo', '=', 2]
+                    ])
+                    ->get();
+        } else if (session('idtipo') == 3) { // CLIENTE            
+            $data = DB::table(table('servicio'))
+                    ->join(table('usuario'), table('usuario') . '.id', '=', table('servicio') . '.idusuario')
+                    ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
+                    ->select(
+                            table('servicio') . '.icono',
+                            table('servicio') . '.nombre',
+                            //table('servicio') . '.precio',
+                            //table('usuario') . '.nombre AS nombreAbogado',
                     )
                     ->where([
                         [table('servicio') . '.idcategoria', '=', session('idCategoryTemp')],
+                        [table('categoria') . '.estado', '=', 'activo'],
+                        [table('servicio') . '.estado', '=', 'activo'],
+                        [table('usuario') . '.idtipo', '=', 2]
+                    ])
+                    ->get();
+        }
+
+        $data = @array_unique(objectToArray($data), SORT_REGULAR);
+        sort($data);
+
+        if ($data) {
+            $json = json('ok', strings('success_read'), $data);
+        } else {
+            $json = json('error', strings('error_read'), '');
+        }
+        return jsonPrint($json, $cmd);
+    }
+
+    public function loadServiceAbogadosGeneral(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+
+        if (session('idtipo') == 2) { // ABOGADO
+            $data = DB::table(table('servicio'))
+                    ->join(table('usuario'), table('usuario') . '.id', '=', table('servicio') . '.idusuario')
+                    ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
+                    ->select(
+                            table('servicio') . '.icono',
+                            table('servicio') . '.nombre',
+                            //table('servicio') . '.precio',
+                            table('usuario') . '.id AS idAbogado',
+                            table('usuario') . '.foto AS fotoAbogado',
+                            table('usuario') . '.nombre AS nombreAbogado',
+                            table('usuario') . '.correo AS correoAbogado',
+                            table('usuario') . '.celular AS celularAbogado',
+                    )
+                    ->where([
+                        [table('usuario') . '.id', '=', session('id')],
+                        [table('servicio') . '.nombre', '=', session('NameServiceTemp')],
+                        [table('categoria') . '.estado', '=', 'activo'],
+                        [table('servicio') . '.estado', '=', 'activo'],
+                        [table('usuario') . '.idtipo', '=', 2]
+                    ])
+                    ->get();
+        } else if (session('idtipo') == 3) { // CLIENTE            
+            $data = DB::table(table('servicio'))
+                    ->join(table('usuario'), table('usuario') . '.id', '=', table('servicio') . '.idusuario')
+                    ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
+                    ->select(
+                            table('servicio') . '.icono',
+                            table('servicio') . '.nombre',
+                            //table('servicio') . '.precio',
+                            table('usuario') . '.id AS idAbogado',
+                            table('usuario') . '.foto AS fotoAbogado',
+                            table('usuario') . '.nombre AS nombreAbogado',
+                            table('usuario') . '.correo AS correoAbogado',
+                            table('usuario') . '.celular AS celularAbogado',
+                    )
+                    ->where([
+                        [table('servicio') . '.nombre', '=', session('NameServiceTemp')],
                         [table('categoria') . '.estado', '=', 'activo'],
                         [table('servicio') . '.estado', '=', 'activo'],
                         [table('usuario') . '.idtipo', '=', 2]

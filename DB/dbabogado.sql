@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-12-2020 a las 06:18:49
+-- Tiempo de generación: 23-12-2020 a las 18:10:01
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -62,6 +62,21 @@ INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estad
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `plan`
+--
+
+CREATE TABLE `plan` (
+  `id` int(25) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `descripcion` text NOT NULL,
+  `precio` varchar(255) NOT NULL,
+  `plan` enum('Mensual','Anual') NOT NULL,
+  `horas` varchar(80) NOT NULL DEFAULT '03:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `servicio`
 --
 
@@ -73,7 +88,7 @@ CREATE TABLE `servicio` (
   `idusuario` int(25) NOT NULL COMMENT 'ID DEL ABOGADO',
   `nombre` varchar(255) NOT NULL,
   `descripcion` text DEFAULT NULL,
-  `precio` varchar(255) NOT NULL,
+  `precio` varchar(255) NOT NULL DEFAULT '00.00',
   `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
   `modificado_por` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -86,7 +101,8 @@ INSERT INTO `servicio` (`id`, `icono`, `foto`, `idcategoria`, `idusuario`, `nomb
 (6, 'Icono21122020224128descarga.png', 'Service20122020053836Imagen1.png', 2, 3, 'Carcel', 'EEFSDFS F', '58.00', 'activo', 24),
 (7, 'Icono22122020025918descarga.jpg', NULL, 2, 23, 'Publico', 'gsfdfsdf ds fsd f dsf sd fds f dsf dfs', '78.00', 'activo', 1),
 (8, NULL, NULL, 12, 23, 'Juridico Judicial', 'dasdasd sad asdasd asd sa dasdasd ad sa as dasd asdas dasd ads', '67.00', 'activo', 23),
-(9, NULL, NULL, 13, 23, 'Civil de Casas', 'Civil de Casas', '80.00', 'activo', 1);
+(9, NULL, NULL, 13, 23, 'Civil de Casas', 'Civil de Casas', '80.00', 'activo', 1),
+(10, 'Icono22122020025918descarga.jpg', NULL, 2, 3, 'Publico', 'gsfdfsdf ds fsd f dsf sd fds f dsf dfs', '', 'activo', 1);
 
 -- --------------------------------------------------------
 
@@ -112,6 +128,21 @@ INSERT INTO `subcategoria` (`id`, `codigo`, `nombre`, `descripcion`, `estado`, `
 (4, 'YUS086', 'Sub Penal 1.0', 'Penal 1.0 consiste en ayuda penal', 'activo', 2, 23),
 (7, 'YUS0867', 'Sub Juridica 1.1', 'Juridica 1.1 consiste en ayuda juridica', 'activo', 12, 23),
 (10, 'TEWEW', 'Sub Civil 1.2', 'Civil 1.2 consiste en ayuda civil', 'activo', 13, 23);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `suscripcion`
+--
+
+CREATE TABLE `suscripcion` (
+  `id` int(25) NOT NULL,
+  `idusuario` int(25) NOT NULL,
+  `idplan` int(25) NOT NULL,
+  `precio` varchar(300) NOT NULL,
+  `total` varchar(300) NOT NULL,
+  `restan_horas` varchar(80) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -166,7 +197,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`) VALUES
 (1, 'AA161220201640452016.1)[1].jpg', 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654321', 'San Miguel', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', NULL, NULL, 1),
-(3, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1),
+(3, 'Profile23122020164046abogado.jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1),
 (23, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-12.04335513', '-77.04049551', 1),
 (24, NULL, 'Juan Cliente Huaman Rojas', '987655', 'juancliente@gmail.com', '987654321', 'san marcos mz b lote 100', 'cliente', '$2y$11$wUIXpJURmBy7kDBTcBCj0uvVMFEU.Q7OVgLSKuIW9fssL9A.Gpyqq', 3, 'activo', '1.836919152', '-59.79019192', 24);
 
@@ -188,6 +219,12 @@ ALTER TABLE `categoria`
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
+-- Indices de la tabla `plan`
+--
+ALTER TABLE `plan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `servicio`
 --
 ALTER TABLE `servicio`
@@ -201,6 +238,12 @@ ALTER TABLE `servicio`
 ALTER TABLE `subcategoria`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_idcategoria` (`idcategoria`);
+
+--
+-- Indices de la tabla `suscripcion`
+--
+ALTER TABLE `suscripcion`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tipo_usuario`
@@ -234,16 +277,28 @@ ALTER TABLE `categoria`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de la tabla `plan`
+--
+ALTER TABLE `plan`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `servicio`
 --
 ALTER TABLE `servicio`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `suscripcion`
+--
+ALTER TABLE `suscripcion`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_usuario`

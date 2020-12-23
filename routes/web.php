@@ -195,7 +195,19 @@ Route::post('/appcategoriaGeneral', [CategoriaUserController::class, 'loadCatego
 Route::get('/applistaGeneral', function () {
     return view('user/servicio');
 });
-Route::post('/appidservicioGeneral', [CategoriaUserController::class, 'sessionServiceGeneral']);
+Route::get('/applistaservicoxabogadoGeneral', function () {
+    return view('user/servicioabogado');
+});
+Route::get('/appchatabogadoGeneral', function () {
+    return view('user/chat');
+});
+
+Route::post('/appidservicioGeneral', [CategoriaUserController::class, 'sessionServiceGeneral']); // SIRVE PARA GUARDAR TEMPORALMENTE EN SESSION EL ID DE LA CATEGORIA
+Route::post('/appnameservicioGeneral', [CategoriaUserController::class, 'sessionNameServiceGeneral']); // SIRVE PARA GUARDAR TEMPORALMENTE EN SESSION EL NOMBRE DEL SERVICIO
+Route::post('/appnombreabogadoGeneral', [CategoriaUserController::class, 'loadServiceAbogadosGeneral']);
+Route::post('/appchatinfoabogadoGeneral', [CategoriaUserController::class, 'loadCatInfoAbogadoGeneral']); // CARGA INFORMACION DEL CHAT DEL ABOGADO
+Route::post('/appidabogadoGeneral', [CategoriaUserController::class, 'sessionIdLawyerChatGeneral']);
+
 Route::post('/appservicioGeneral', [CategoriaUserController::class, 'loadServiceGeneral']);
 Route::get('/appprofileGeneral', function () {
     return view('user/profile');

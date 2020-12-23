@@ -19,11 +19,11 @@
         </div>
     </div>
     <ul>
-        <li><a href="messages.html" title="" style="font-size: 18px;"><i class="lni lni-inbox"></i>inbox</a></li>
+        <!--<li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-inbox"></i>Mi Perfil</a></li>-->
         <li><a href="notifications.html" title="" style="font-size: 18px;"><i class="lni lni-alarm"></i>Notificaciones</a></li>
         <li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-pencil-alt"></i>Configuración</a></li>
         <!--<li><a href="lock-screen.html" title=""><i class="lni lni-key"></i>Lock screen</a></li>-->
-        <li><a href="settings.html" title="" style="font-size: 18px;"><i class="lni lni-control-panel"></i>setting</a></li>
+        <!--<li><a href="settings.html" title="" style="font-size: 18px;"><i class="lni lni-control-panel"></i>setting</a></li>-->
         <!--<li><a href="privacy.html" title=""><i class="lni lni-sort-amount-asc"></i>Privacy & Help</a></li>-->
         <!--<li><a href="create-new.html" title=""><i class="lni lni-pencil"></i>Create Page</a></li>-->
         <!--<li><a href="create-new.html" title=""><i class="lni lni-cloud-network"></i>Create Group</a></li>-->

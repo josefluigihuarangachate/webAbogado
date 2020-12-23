@@ -44,7 +44,7 @@ header('Content-Type: text/html; charset=UTF-8');
                                 <div class="card-body">
                                     <div class="row no-gutters">
                                         <div class="col-8">
-                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Visits</h2>
+                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Clientes</h2>
                                             <h1 class="tx-uppercase tx-24 tx-dark tx-rubik">12.5K</h1>
                                             <p class="mb-0 tx-10">Up From Yesterday<span class="tx-success ml-2">(<span data-feather="arrow-up" class="wd-10 ht-10"></span>5.3%)</span></p>
                                         </div>
@@ -66,7 +66,7 @@ header('Content-Type: text/html; charset=UTF-8');
                                 <div class="card-body">
                                     <div class="row no-gutters">
                                         <div class="col-8">
-                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Orders</h2>
+                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Abogados</h2>
                                             <h1 class="tx-uppercase tx-24 tx-dark tx-rubik">590</h1>
                                             <p class="mb-0 tx-10">Down From Yesterday<span class="tx-danger ml-2">(<span data-feather="arrow-down" class="wd-10 ht-10"></span>2.3%)</span></p>
                                         </div>
@@ -88,7 +88,7 @@ header('Content-Type: text/html; charset=UTF-8');
                                 <div class="card-body">
                                     <div class="row no-gutters">
                                         <div class="col-8">
-                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Sales</h2>
+                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Administradores</h2>
                                             <h1 class="tx-uppercase tx-24 tx-dark tx-rubik">2.2K</h1>
                                             <p class="mb-0 tx-10">Up From Yesterday<span class="tx-success ml-2">(<span data-feather="arrow-up" class="wd-10 ht-10"></span>6.5%)</span></p>
                                         </div>
@@ -110,7 +110,7 @@ header('Content-Type: text/html; charset=UTF-8');
                                 <div class="card-body">
                                     <div class="row no-gutters">
                                         <div class="col-8">
-                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Revenue</h2>
+                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Planes</h2>
                                             <h1 class="tx-uppercase tx-24 tx-dark tx-rubik">$25.6K</h1>
                                             <p class="mb-0 tx-10">Up From Yesterday<span class="tx-success ml-2">(<span data-feather="arrow-up" class="wd-10 ht-10"></span>5.3%)</span></p>
                                         </div>
