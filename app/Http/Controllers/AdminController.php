@@ -93,8 +93,11 @@ class AdminController extends Controller {
                 session(['acceso' => true]);
                 session(['id' => $data->id]);
                 session(['foto' => $foto]);
+                session(['dni' => $data->dni]);
+                session(['celular' => $data->celular]);
+                session(['direccion' => $data->direccion]);
                 session(['nombre' => $data->nombre]);
-                session(['nombre_corto' => $nombre[0] . ' ' . @$nombre[1]]);
+                session(['nombre_corto' => @$nombre[0] . ' ' . @$nombre[1]]);
                 session(['correo' => $data->correo]);
                 session(['usuario' => $data->usuario]);
                 session(['clave' => $data->clave]);
@@ -103,6 +106,9 @@ class AdminController extends Controller {
                 session(['estado' => $data->estado]);
                 session(['tipo_usuario' => $data->tipo_usuario]);
                 session(['estado_tipo' => $data->estado_tipo]);
+                session(['latitud' => $data->latitud]);
+                session(['longitud' => $data->longitud]);
+                session(['modificado_por' => $data->modificado_por]);
             } else {
                 $json = json('error', strings('error_login'), '');
             }

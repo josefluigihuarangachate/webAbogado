@@ -6,6 +6,8 @@ if (session('acceso') <> true) {
 }
 
 header('Content-Type: text/html; charset=UTF-8');
+
+$v = "?v=" . date('YmdHis');
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,283 +37,53 @@ header('Content-Type: text/html; charset=UTF-8');
                 <!-- Page Inner Start -->
                 <!--================================-->
                 <div class="page-inner">
-                    <!--================================-->
-                    <!-- Card Count Start -->
-                    <!--================================-->
-                    <div class="row row-xs">
-                        <div class="col-md-6 col-xl-3">
-                            <div class="card mg-b-20">
-                                <div class="card-body">
-                                    <div class="row no-gutters">
-                                        <div class="col-8">
-                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Clientes</h2>
-                                            <h1 class="tx-uppercase tx-24 tx-dark tx-rubik">12.5K</h1>
-                                            <p class="mb-0 tx-10">Up From Yesterday<span class="tx-success ml-2">(<span data-feather="arrow-up" class="wd-10 ht-10"></span>5.3%)</span></p>
-                                        </div>
-                                        <div class="col-4">
-                                            <p class="data-attributes mb-0 tx-center">
-                                                <span data-peity='{ "fill": ["#3355ff", "#EFF4F8"],   "innerRadius": 40, "radius": 43 }'>5/9</span>
-                                            </p>
-                                            <div class="pos-absolute a-0 d-flex flex-column align-items-center justify-content-center">
-                                                <h3 class="tx-20 tx-rubik tx-spacing-1 mg-b-0">56%</h3>
-                                                <span class="tx-8 tx-semibold tx-uppercase">New Visits</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3">
-                            <div class="card mg-b-20">
-                                <div class="card-body">
-                                    <div class="row no-gutters">
-                                        <div class="col-8">
-                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Abogados</h2>
-                                            <h1 class="tx-uppercase tx-24 tx-dark tx-rubik">590</h1>
-                                            <p class="mb-0 tx-10">Down From Yesterday<span class="tx-danger ml-2">(<span data-feather="arrow-down" class="wd-10 ht-10"></span>2.3%)</span></p>
-                                        </div>
-                                        <div class="col-4">
-                                            <p class="data-attributes mb-0 tx-center">
-                                                <span data-peity='{ "fill": ["#FF3D57", "#EFF4F8"],   "innerRadius": 40, "radius": 43 }'>5/6</span>
-                                            </p>
-                                            <div class="pos-absolute a-0 d-flex flex-column align-items-center justify-content-center">
-                                                <h3 class="tx-20 tx-rubik tx-spacing-1 mg-b-0">76%</h3>
-                                                <span class="tx-8 tx-semibold tx-uppercase">New Orders</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3">
-                            <div class="card mg-b-20">
-                                <div class="card-body">
-                                    <div class="row no-gutters">
-                                        <div class="col-8">
-                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Administradores</h2>
-                                            <h1 class="tx-uppercase tx-24 tx-dark tx-rubik">2.2K</h1>
-                                            <p class="mb-0 tx-10">Up From Yesterday<span class="tx-success ml-2">(<span data-feather="arrow-up" class="wd-10 ht-10"></span>6.5%)</span></p>
-                                        </div>
-                                        <div class="col-4">
-                                            <p class="data-attributes mb-0 tx-center">
-                                                <span data-peity='{ "fill": ["#22CCE2", "#EFF4F8"],   "innerRadius": 40, "radius": 43 }'>5/8</span>
-                                            </p>
-                                            <div class="pos-absolute a-0 d-flex flex-column align-items-center justify-content-center">
-                                                <h3 class="tx-20 tx-rubik tx-spacing-1 mg-b-0">65%</h3>
-                                                <span class="tx-8 tx-semibold tx-uppercase">New Sales</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xl-3">
-                            <div class="card mg-b-20">
-                                <div class="card-body">
-                                    <div class="row no-gutters">
-                                        <div class="col-8">
-                                            <h2 class="tx-medium tx-13 tx-dark tx-spacing-1">Planes</h2>
-                                            <h1 class="tx-uppercase tx-24 tx-dark tx-rubik">$25.6K</h1>
-                                            <p class="mb-0 tx-10">Up From Yesterday<span class="tx-success ml-2">(<span data-feather="arrow-up" class="wd-10 ht-10"></span>5.3%)</span></p>
-                                        </div>
-                                        <div class="col-4">
-                                            <p class="data-attributes mb-0 tx-center">
-                                                <span data-peity='{ "fill": ["#FDBF5E", "#EFF4F8"],   "innerRadius": 40, "radius": 43 }'>7/9</span>
-                                            </p>
-                                            <div class="pos-absolute a-0 d-flex flex-column align-items-center justify-content-center">
-                                                <h3 class="tx-20 tx-rubik tx-spacing-1 mg-b-0">79%</h3>
-                                                <span class="tx-8 tx-semibold tx-uppercase">Total Earn</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--/ Card Count End --> 
-                    <div class="row row-xs">
-                        <!--================================-->
-                        <!-- Sales Overview Start -->
-                        <!--================================-->
-                        <div class="col-lg-8">
-                            <div class="card mg-b-20">
-                                <div class="d-block d-md-flex justify-content-between align-items-center pd-15 bd-b">
-                                    <h2 class="tx-13 tx-medium mb-0 tx-dark">Sales Overview</h2>
-                                    <ul class="nav nav-fill custom-btn-group mg-t-10 mg-md-t-0" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="tx-uppercase tx-center active show waves-effect" data-toggle="pill" href="#pills-1" role="tab" aria-selected="false">
-                                                <h2 class="tx-12 tx-spacing-1 mb-0">Day</h2>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="tx-uppercase tx-12 waves-effect" data-toggle="pill" href="#pills-2" role="tab" aria-selected="true">
-                                                <h2 class="tx-12 tx-spacing-1 mb-0">Week</h2>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="tx-uppercase tx-12 waves-effect" data-toggle="pill" href="#pills-3" role="tab" aria-selected="false">
-                                                <h2 class="tx-12 tx-spacing-1 mb-0">Month</h2>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card-body">
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade active show" id="pills-1" role="tabpanel" aria-labelledby="pills-1">
-                                            <canvas id="dailySalesChart" height="122"></canvas>
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2">
-                                            <canvas id="weeklySalesChart" height="122"></canvas>
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3">
-                                            <canvas id="monthlySalesChart" height="122"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pd-20 bd-t">
-                                    <div class="row clearfix">
-                                        <div class="col-6 col-sm bd-r bd-gray-200">
-                                            <label class="tx-11 mb-0">Total Cost</label>
-                                            <div class="d-flex align-items-baseline">
-                                                <h5 class="tx-16 tx-sm-14 tx-md-16 mg-b-0 tx-rubik tx-dark tx-normal"><span>$</span>852.80</h5>
-                                                <span class="tx-12 ml-1 tx-success"><i class="ti-arrow-up tx-8 tx-8"></i> 3.4%</span>
-                                            </div>
-                                        </div>
-                                        <!-- col -->
-                                        <div class="col-6 col-sm bd-r bd-gray-200">
-                                            <label class="tx-11 mb-0">Impressions</label>
-                                            <div class="d-flex align-items-baseline">
-                                                <h5 class="tx-16 tx-sm-14 tx-md-16 mg-b-0 tx-rubik tx-dark tx-normal">2,145</h5>
-                                                <span class="tx-12 ml-1 tx-success"><i class="ti-arrow-up tx-8 tx-8"></i> 0.4%</span>
-                                            </div>
-                                        </div>
-                                        <!-- col -->
-                                        <div class="col-6 col-sm mg-t-15 mg-sm-t-0 bd-r bd-gray-200">
-                                            <label class="tx-11 mb-0">Total Clicks</label>
-                                            <div class="d-flex align-items-baseline">
-                                                <h5 class="tx-16 tx-sm-14 tx-md-16 mg-b-0 tx-rubik tx-dark tx-normal">2,485</h5>
-                                                <span class="tx-12 ml-1 tx-danger"><i class="ti-arrow-down tx-8 tx-8"></i> 0.8%</span>
-                                            </div>
-                                        </div>
-                                        <!-- col -->
-                                        <div class="col-6 col-sm mg-t-15 mg-sm-t-0 bd-r bd-gray-200">
-                                            <label class="tx-11 mb-0">Click-Through Rate</label>
-                                            <div class="d-flex align-items-baseline">
-                                                <h5 class="tx-16 tx-sm-14 tx-md-16 mg-b-0 tx-rubik tx-dark tx-normal">01.84%</h5>
-                                                <span class="tx-12 ml-1 tx-danger"><i class="ti-arrow-down tx-8 tx-8"></i> 0.5%</span>
-                                            </div>
-                                        </div>
-                                        <!-- col -->
-                                        <div class="col-6 col-sm mg-t-15 mg-sm-t-0">
-                                            <label class="tx-11 mb-0">Cost Per Click</label>
-                                            <div class="d-flex align-items-baseline">
-                                                <h5 class="tx-16 tx-sm-14 tx-md-16 mg-b-0 tx-rubik tx-dark tx-normal"><span>$</span>5.45</h5>
-                                                <span class="tx-12 ml-1 tx-success"><i class="ti-arrow-up tx-8 tx-8"></i>0.5%</span>
-                                            </div>
-                                        </div>
-                                        <!-- col -->
-                                    </div>
-                                    <!-- row -->
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ Sales Overview End --> 
-                        <!--================================-->
-                        <!-- Total Profit Start -->
-                        <!--================================-->
-                        <div class="col-lg-4">
-                            <div class="card mg-b-20">
-                                <div class="card-header d-flex justify-content-between">
-                                    <h2 class="tx-13 mb-0 tx-dark">Total Profit</h2>
-                                    <div class="dropdown pd-l-15">
-                                        <a href="" data-toggle="dropdown"><i data-feather="more-horizontal" class="wd-16 ht-16"></i></a>
-                                        <div class="dropdown-menu dropdown-menu-right settings-dropdown">
-                                            <a href="" class="dropdown-item"><i data-feather="clock" class="wd-16 ht-16 mr-2"></i>Today</a>
-                                            <a href="" class="dropdown-item"><i data-feather="clock" class="wd-16 ht-16 mr-2"></i>Yesterday</a>
-                                            <a href="" class="dropdown-item"><i data-feather="clock" class="wd-16 ht-16 mr-2"></i>This Week</a>
-                                            <a href="" class="dropdown-item"><i data-feather="clock" class="wd-16 ht-16 mr-2"></i>Last Week</a>
-                                            <a href="" class="dropdown-item"><i data-feather="clock" class="wd-16 ht-16 mr-2"></i>This Month</a>
-                                            <a href="" class="dropdown-item"><i data-feather="clock" class="wd-16 ht-16 mr-2"></i>Last Month</a>
-                                            <a href="" class="dropdown-item"><i data-feather="clock" class="wd-16 ht-16 mr-2"></i>This Year</a>
-                                            <a href="" class="dropdown-item"><i data-feather="clock" class="wd-16 ht-16 mr-2"></i>Last Year</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="totalProfitDount" height="250"></canvas>
-                                </div>
-                                <div class="card-footer pd-0 bd-t-0-force">
-                                    <div class="table-responsive">
-                                        <table class="table mb-0 table-bordered table-hover">
-                                            <tr>
-                                                <td><span class="wd-10 ht-10 bg-primary mr-2 d-inline-block rounded-circle"></span>Current</td>
-                                                <td class="tx-rubik tx-normal">$5,253<span data-feather="arrow-up-circle" class="wd-12 ht-12 ml-2 tx-success"></span></td>
-                                                <td class="tx-rubik tx-normal">67%</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="wd-10 ht-10 mr-2 d-inline-block rounded-circle" style="background:#e0e7fd"></span>Target</td>
-                                                <td class="tx-rubik tx-normal">$8,510<span data-feather="arrow-up-circle" class="wd-12 ht-12 ml-2 tx-success"></span></td>
-                                                <td class="tx-rubik tx-normal">22%</td>
-                                            </tr>
-                                            <tr>
-                                                <td><span class="wd-10 ht-10 mr-2 d-inline-block rounded-circle" style="background:#4ac7ec"></span>Lost</td>
-                                                <td class="tx-rubik tx-normal">$2,533<span data-feather="arrow-down-circle" class="wd-12 ht-12 ml-2 tx-danger"></span></td>
-                                                <td class="tx-rubik tx-normal">11%</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/ Total Profit End --> 
-                    </div>
                     <div class="row">
                         <!--================================-->
                         <!-- Mini Card Start -->
                         <!--================================-->
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="row row-xs">
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-12 col-lg-3">
                                     <div class="card mg-b-20">
                                         <div class="card-body tx-center pd-y-30">
                                             <div class="card-icon-primary wd-60 ht-60 d-flex align-items-center justify-content-center rounded-circle m-auto">
-                                                <span data-feather="shopping-bag" class="wd-24 ht-24"></span>
+                                                <span data-feather="briefcase" class="wd-24 ht-24"></span>
                                             </div>
-                                            <h2 class="tx-13 mg-t-20 mb-0">New Products</h2>
-                                            <h1 class="tx-20 mg-t-10 tx-rubik tx-normal tx-dark mb-0">2.35K</h1>
+                                            <h2 class="tx-13 mg-t-20 mb-0">Administradores</h2>
+                                            <h1 class="tx-20 mg-t-10 tx-rubik tx-normal tx-dark mb-0" id="panelAdministrador">Total : 0</h1>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-12 col-lg-3">
                                     <div class="card mg-b-20">
                                         <div class="card-body tx-center pd-y-30">
                                             <div class="card-icon-success wd-60 ht-60 d-flex align-items-center justify-content-center rounded-circle m-auto">
                                                 <span data-feather="users" class="wd-24 ht-24"></span>
                                             </div>
-                                            <h2 class="tx-13 mg-t-20 mb-0">New Users</h2>
-                                            <h1 class="tx-20 mg-t-10 tx-rubik tx-normal tx-dark mb-0">5.23K</h1>
+                                            <h2 class="tx-13 mg-t-20 mb-0">Abogados</h2>
+                                            <h1 class="tx-20 mg-t-10 tx-rubik tx-normal tx-dark mb-0" id="panelAbogado">Total : 0</h1>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-12 col-lg-3">
                                     <div class="card mg-b-20">
                                         <div class="card-body tx-center pd-y-30">
                                             <div class="card-icon-danger wd-60 ht-60 d-flex align-items-center justify-content-center rounded-circle m-auto">
-                                                <span data-feather="credit-card" class="wd-24 ht-24"></span>
+                                                <span data-feather="shopping-bag" class="wd-24 ht-24"></span>
                                             </div>
-                                            <h2 class="tx-13 mg-t-20 mb-0">Gross Earnings</h2>
-                                            <h1 class="tx-20 mg-t-10 tx-rubik tx-normal tx-dark mb-0">22.84K</h1>
+                                            <h2 class="tx-13 mg-t-20 mb-0">Clientes</h2>
+                                            <h1 class="tx-20 mg-t-10 tx-rubik tx-normal tx-dark mb-0" id="panelCliente">Total : 0</h1>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-6">
+                                <div class="col-md-12 col-lg-3">
                                     <div class="card mg-b-20">
                                         <div class="card-body tx-center pd-y-30">
                                             <div class="card-icon-teal wd-60 ht-60 d-flex align-items-center justify-content-center rounded-circle m-auto">
-                                                <span data-feather="briefcase" class="wd-24 ht-24"></span>
+                                                <span data-feather="credit-card" class="wd-24 ht-24"></span>
                                             </div>
-                                            <h2 class="tx-13 mg-t-20 mb-0">Net Earnings</h2>
-                                            <h1 class="tx-20 mg-t-10 tx-rubik tx-normal tx-dark mb-0">52.43K</h1>
+                                            <h2 class="tx-13 mg-t-20 mb-0">Planes</h2>
+                                            <h1 class="tx-20 mg-t-10 tx-rubik tx-normal tx-dark mb-0" id="panelPlan">Total : 0</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -321,7 +93,7 @@ header('Content-Type: text/html; charset=UTF-8');
                         <!--================================-->
                         <!-- Revenue by country Start -->
                         <!--================================-->
-                        <div class="col-lg-6 revenue-country">
+                        <div class="col-lg-12 revenue-country">
                             <div class="card mg-b-20">
                                 <div class="d-block d-md-flex justify-content-between align-items-center pd-15 bd-b">
                                     <h2 class="tx-13 tx-medium mb-0 tx-dark">Revenue by country</h2>
@@ -1932,5 +1704,21 @@ header('Content-Type: text/html; charset=UTF-8');
         <!--================================-->
 
         @include('admin/include/script_all')
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.post(ruta() + "listadoDashboard", {cmd: "web"}, function (json) {
+                if (json['status'] === 'Ok') {
+                    var datos = json['data'];
+                    document.getElementById("panelAdministrador").innerHTML = "Total : " + datos.admin;
+                    document.getElementById("panelAbogado").innerHTML = "Total : " + datos.lawyer;
+                    document.getElementById("panelCliente").innerHTML = "Total : " + datos.customer;
+                    document.getElementById("panelPlan").innerHTML = "Total : " + datos.plan;
+                }
+            });
+        </script>
     </body>
 </html>

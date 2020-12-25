@@ -68,7 +68,7 @@ function loadServicios() {
                 var datos = json['data'];
                 for (var i = 0; i < datos.length; i++) {
                     innerHTML += '<div class="activity">';
-                    innerHTML += '<a onclick="saveNameService(\'' + datos[i].nombre + '\')" href="/applistaservicoxabogado' + globalName + '" class="btn btn-danger" style="border-radius: 50px;margin-top: 13px;margin-right: 75px;position: absolute; right: 0;"><i class="lni lni-files"></i></a>';
+                    innerHTML += '<a onclick="saveNameService(\'' + datos[i].nombre + '\')" href="#/applistaservicoxabogado' + globalName + '" class="btn btn-danger" style="border-radius: 50px;margin-top: 13px;margin-right: 75px;position: absolute; right: 0;"><i class="lni lni-files"></i></a>';
                     innerHTML += '<a onclick="saveNameService(\'' + datos[i].nombre + '\')" href="/applistaservicoxabogado' + globalName + '" class="btn btn-primary" style="border-radius: 50px;margin-top: 13px;margin-right: 18px;position: absolute; right: 0;"><i class="lni lni-users"></i></a>';
                     innerHTML += '<figure>';
 

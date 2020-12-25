@@ -43,8 +43,7 @@
                         <span>Planes</span><i class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="#Lista de planes">Lista de Planes</a></li>
-                        <li><a href="#Nuevo Plan">Nuevo Plan</a></li>
+                        <li><a href="./listaPlan">Lista de Planes</a></li>
                     </ul>
                 </li>
                 <li>

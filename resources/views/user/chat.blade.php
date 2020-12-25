@@ -84,7 +84,7 @@ header('Content-Type: text/html; charset=UTF-8');
                             <div class="mesg-write-box">
                                 <form method="post">
                                     <input type="text" placeholder="Escribir mensaje..." class="form-control">
-                                    <button type="submit"><i class="lni lni-pointer"></i></button>
+                                    <button type="button"><i class="lni lni-pointer"></i></button>
                                     <div class="attach-options">
                                         <span class="closed"><i class="lni lni-cross-circle"></i></span>
                                         <a href="#" title=""><i class="lni lni-camera"></i> <label for="upload" onClick="showCamera('Android! Start Camera')">Abrir Camera</label></a>

@@ -114,7 +114,7 @@ class LoginController extends Controller {
                 session(['celular' => $data->celular]);
                 session(['direccion' => $data->direccion]);
                 session(['nombre' => $data->nombre]);
-                session(['nombre_corto' => $nombre[0] . ' ' . @$nombre[1]]);
+                session(['nombre_corto' => @$nombre[0] . ' ' . @$nombre[1]]);
                 session(['correo' => $data->correo]);
                 session(['usuario' => $data->usuario]);
                 session(['clave' => $data->clave]);

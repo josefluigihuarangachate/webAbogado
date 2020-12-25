@@ -2,8 +2,10 @@
 
 function table($name) {
     $table = array(
+        'suscripcion' => 'suscripcion',
+        'plan' => 'plan',
         'calificacion' => 'calificacion',
-        //'solicitud' => 'solicitud',
+        'plan' => 'plan',
         'categoria' => 'categoria',
         'subcategoria' => 'subcategoria',
         'servicio' => 'servicio',

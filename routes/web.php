@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController; // LOGIN (CLIENTE,ABOGADO)
 use App\Http\Controllers\AdminController; // LOGIN, ADMINISTRADOR (ADMINISTRADOR)
+use App\Http\Controllers\DashboardController; // DASHBOARD (ADMINISTRADOR)
+use App\Http\Controllers\PlanController; // PLAN (ADMINISTRADOR)
 use App\Http\Controllers\AbogadoController; // ABOGADO (ADMINISTRADOR)
 use App\Http\Controllers\ClienteController; // CLIENTE (ADMINISTRADOR)
 use App\Http\Controllers\OtroUsuarioController; // OTRO USUARIO (ADMINISTRADOR)
@@ -67,6 +69,15 @@ Route::post('/eliminarAbogado', [AbogadoController::class, 'destroy']);
 Route::post('/registrarAbogado', [AbogadoController::class, 'create']);
 Route::post('/uploadImgAbogado', [AbogadoController::class, 'cargarImgUser']);
 // END ABOGADO
+//
+//
+// PERFIL
+Route::get('/editarProfile', function () {
+    return view('admin/profile');
+});
+Route::post('/editarProfile', [ProfileController::class, 'editProfile']); // Enviar datos para editarlos
+Route::post('/fotoProfile', [ProfileController::class, 'fotoProfile']); // Enviar datos para editarlos
+// END PERFIL
 //
 //
 // CLIENTE
@@ -149,6 +160,23 @@ Route::post('/eliminarSubCategory', [SubCategoriaController::class, 'destroy']);
 // END SUB CATEGORIA
 //
 //
+//// DASHBOARD
+Route::post('/listadoDashboard', [DashboardController::class, 'listadoDashboard']);
+// END DASHBOARD
+// 
+// 
+// PLAN
+Route::get('/listaPlan', function () {
+    return view('admin/plan');
+});
+Route::post('/listadoPlan', [PlanController::class, 'index']);
+Route::post('/registrarPlan', [PlanController::class, 'create']);
+Route::post('/obtenerPlan', [PlanController::class, 'show']);
+Route::post('/editarPlan', [PlanController::class, 'update']);
+Route::post('/eliminarPlan', [PlanController::class, 'destroy']);
+// END PLAN
+// 
+// 
 // SERVICIO
 Route::get('/listaService', function () {
     return view('admin/servicio');

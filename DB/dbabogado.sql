@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-12-2020 a las 18:10:01
+-- Tiempo de generación: 25-12-2020 a las 03:05:12
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -70,9 +70,20 @@ CREATE TABLE `plan` (
   `nombre` varchar(255) NOT NULL,
   `descripcion` text NOT NULL,
   `precio` varchar(255) NOT NULL,
-  `plan` enum('Mensual','Anual') NOT NULL,
-  `horas` varchar(80) NOT NULL DEFAULT '03:00:00'
+  `plan` enum('Gratis','Mensual','Anual') NOT NULL DEFAULT 'Gratis',
+  `horas` varchar(80) NOT NULL DEFAULT '03:00:00',
+  `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
+  `modificado_por` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `plan`
+--
+
+INSERT INTO `plan` (`id`, `nombre`, `descripcion`, `precio`, `plan`, `horas`, `estado`, `modificado_por`) VALUES
+(1, 'Plan Gratis', 'Plan Gratis', '00.00', 'Gratis', '03:00:00', 'activo', NULL),
+(2, 'Plan Mensual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan mensual', '56.00', 'Mensual', '03:00:00', 'activo', 1),
+(3, 'Plan Anual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan anual', '230.00', 'Anual', '03:00:00', 'activo', 1);
 
 -- --------------------------------------------------------
 
@@ -139,9 +150,14 @@ CREATE TABLE `suscripcion` (
   `id` int(25) NOT NULL,
   `idusuario` int(25) NOT NULL,
   `idplan` int(25) NOT NULL,
+  `nombreplan` varchar(255) NOT NULL,
+  `descripcionplan` text NOT NULL,
+  `hora` varchar(25) NOT NULL,
   `precio` varchar(300) NOT NULL,
   `total` varchar(300) NOT NULL,
-  `restan_horas` varchar(80) NOT NULL
+  `ini_fechahora` datetime NOT NULL,
+  `fin_fechahora` datetime NOT NULL,
+  `restan_horas` varchar(80) NOT NULL COMMENT 'AQUI IRAN LAS HORAS QUE HA CONSUMIDO SEGUN SU PLAN'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -196,7 +212,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`) VALUES
-(1, 'AA161220201640452016.1)[1].jpg', 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654321', 'San Miguel', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', NULL, NULL, 1),
+(1, 'Profile25122020020414background_admin.jpg', 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1),
 (3, 'Profile23122020164046abogado.jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1),
 (23, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-12.04335513', '-77.04049551', 1),
 (24, NULL, 'Juan Cliente Huaman Rojas', '987655', 'juancliente@gmail.com', '987654321', 'san marcos mz b lote 100', 'cliente', '$2y$11$wUIXpJURmBy7kDBTcBCj0uvVMFEU.Q7OVgLSKuIW9fssL9A.Gpyqq', 3, 'activo', '1.836919152', '-59.79019192', 24);
@@ -280,7 +296,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `plan`
 --
 ALTER TABLE `plan`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`

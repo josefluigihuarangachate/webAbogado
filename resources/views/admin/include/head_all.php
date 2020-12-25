@@ -15,6 +15,7 @@ $v = "?v=" . date('YmdHis');
 
 <!-- BEGIN: Custom CSS-->  
 <link type="text/css" rel="stylesheet" href="admin/assets/css/style.css<?php echo $v; ?>"/>
+<link type="text/css" rel="stylesheet" href="admin/assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css"/>
 <!-- END: Custom CSS-->
 
 <!-- BEGIN: Custom CSS-->  

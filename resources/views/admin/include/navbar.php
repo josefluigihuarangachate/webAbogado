@@ -411,7 +411,7 @@
                                     <span class="tx-rubik">Conectado</span>
                                 </div>
                             </div>
-                            <a href="" class="dropdown-item d-flex align-items-center"><span data-feather="user" class="wd-16 ht-16 mr-2"></span>Mi Perfil</a>
+                            <a href="./editarProfile" class="dropdown-item d-flex align-items-center"><span data-feather="user" class="wd-16 ht-16 mr-2"></span>Mi Perfil</a>
                             <div class="dropdown-divider"></div>
                             <a href="./cerrarSesion" class="dropdown-item d-flex align-items-center"><span data-feather="log-out" class="wd-16 ht-16 mr-2"></span>Cerrar Sesion</a>
                         </div>
