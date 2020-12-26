@@ -12,7 +12,7 @@ $v = "?v=" . date('YmdHis');
 <!DOCTYPE html>
 <html>
     <head>
-        @include('admin/include/head_all')
+        @include('admin/include/head_all')        
     </head>
     <body>
         <!--================================-->
@@ -187,6 +187,12 @@ $v = "?v=" . date('YmdHis');
                                                         <input name="Eusuario" id="Eusuario" type="text" required class="form-control col-md-12 col-lg-6" placeholder="*Usuario" value="<?php echo session('usuario'); ?>">
                                                         <span class="input-group-addon">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                                         <input name="Eclave" id="Eclave" type="text" required class="form-control col-md-12 col-lg-6" placeholder="*Cambiar Contraseña" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <label>Cambiar de Idioma : &nbsp;&nbsp;</label>
+                                                        @include('admin/include/translate')
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

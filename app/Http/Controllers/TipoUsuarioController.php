@@ -27,7 +27,7 @@ class TipoUsuarioController extends Controller {
     public function index(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $data = DB::table(table('tipo_usuario'))
-                ->where('id', '>', 3)
+                ->where('id', '>', 4)
                 ->get();
         if ($data) {
             $json = json('ok', strings('success_login'), $data);

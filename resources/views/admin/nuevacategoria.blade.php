@@ -114,6 +114,10 @@ $v = "?v=" . date('YmdHis');
         </div>
         <!--/ Page Container End -->
 
+        
+        <div style="display: none;">
+            @include('admin/include/translate')
+        </div>
 
         <!--================================-->
         <!-- Scroll To Top Start-->

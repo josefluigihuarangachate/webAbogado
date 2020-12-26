@@ -2,6 +2,7 @@
 
 function table($name) {
     $table = array(
+        'notificacion' => 'notificacion',
         'suscripcion' => 'suscripcion',
         'plan' => 'plan',
         'calificacion' => 'calificacion',

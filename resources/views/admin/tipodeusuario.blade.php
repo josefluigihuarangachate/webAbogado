@@ -48,7 +48,7 @@ $v = "?v=" . date('YmdHis');
                                     <h2 class="tx-13 tx-medium mb-0 tx-dark">
                                         Listado Tipo de Usuarios
                                         <br>
-                                        <small>*Tipo de usuario: administrador,abogado y cliente son datos registrado por defecto. Estos datos no podran ser modificados ni eliminados. </small>
+                                        <small>*Tipo de usuario: administrador,sub administrador,abogado y cliente son datos registrado por defecto. Estos datos no podran ser modificados ni eliminados. </small>
                                     </h2>
 
                                 </div>
@@ -135,7 +135,9 @@ $v = "?v=" . date('YmdHis');
 
 
 
-
+        <div style="display: none;">
+            @include('admin/include/translate')
+        </div>
 
 
 

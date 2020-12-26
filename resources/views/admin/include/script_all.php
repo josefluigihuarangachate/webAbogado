@@ -170,3 +170,90 @@ $v = "?v=" . date('YmdHis');
     });
 </script>
 <!-- END: Init JS-->
+
+<script src="admin/assets/plugins/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script src="admin/assets/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+<script src="admin/assets/plugins/bootstrap-multiselect/js/multiselect-active.js"></script>
+
+<style>
+    .goog-te-banner-frame{
+        display: none;
+        visibility: hidden;
+        background-color: transparent;
+    }
+
+    #google_translate_element2{
+        display: none;
+        visibility: hidden;
+        background-color: transparent;
+    }
+</style>
+
+<script>
+
+    setTimeout(function () {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/notifyAll",
+            success: function (json) {
+                if (json['status'] == 'Ok') {
+                    if (json['data']) {
+                        var data = json['data'];
+                        var notificaciones = "";
+                        for (var d = 0; d < data.length; d++) {
+                            notificaciones += '<a class="dropdown-item list-group-item" href="">';
+                            notificaciones += '<div class="d-flex justify-content-between">';
+                            notificaciones += '<div class="wd-40 ht-40 mg-r-10 d-flex align-items-center justify-content-center rounded card-icon-' + data[d].color + '">';
+                            notificaciones += '<i class="mdi mdi-bullhorn alert-icon text-' + data[d].color + '" style="font-size: 20px;"></i>';
+                            notificaciones += '</div>';
+                            notificaciones += '</div>';
+                            notificaciones += '<div class="overflow-hidden">';
+                            notificaciones += '<h3 class="tx-11 mb-0 tx-dark">' + data[d].asunto + '</h3>';
+                            notificaciones += '<div class="tx-11 d-block text-truncate">' + data[d].mensaje + '</div>';
+                            notificaciones += '<span class="tx-9 tx-light">' + data[d].fechahora + '</span>';
+                            notificaciones += '</div>';
+                            notificaciones += '</a>';
+                        }
+                        document.getElementById("scrollNotify").innerHTML = notificaciones;
+                    }
+                }
+            }
+        });
+    }, 100);
+
+    function loadNotificacion() {
+        setInterval(function () {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/notifyAll",
+                success: function (json) {
+                    if (json['status'] == 'Ok') {
+                        if (json['data']) {
+                            var data = json['data'];
+                            var notificaciones = "";
+                            for (var d = 0; d < data.length; d++) {
+                                notificaciones += '<a class="dropdown-item list-group-item" href="./verNotificacion/' + data[d].id + '">';
+                                notificaciones += '<div class="d-flex justify-content-between">';
+                                notificaciones += '<div class="wd-40 ht-40 mg-r-10 d-flex align-items-center justify-content-center rounded card-icon-' + data[d].color + '">';
+                                notificaciones += '<i class="mdi mdi-bullhorn alert-icon text-' + data[d].color + '" style="font-size: 20px;"></i>';
+                                notificaciones += '</div>';
+                                notificaciones += '</div>';
+                                notificaciones += '<div class="overflow-hidden">';
+                                notificaciones += '<h3 class="tx-11 mb-0 tx-dark">' + data[d].asunto + '</h3>';
+                                notificaciones += '<div class="tx-11 d-block text-truncate">' + data[d].mensaje + '</div>';
+                                notificaciones += '<span class="tx-9 tx-light">' + data[d].fechahora + '</span>';
+                                notificaciones += '</div>';
+                                notificaciones += '</a>';
+                            }
+                            document.getElementById("scrollNotify").innerHTML = notificaciones;
+                        }
+                    }
+                }
+            });
+        }, 20000);
+    }
+
+    loadNotificacion();
+</script>

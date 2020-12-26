@@ -221,7 +221,9 @@ $v = "?v=" . date('YmdHis');
 
 
 
-
+        <div style="display: none;">
+            @include('admin/include/translate')
+        </div>
 
 
 
@@ -240,63 +242,63 @@ $v = "?v=" . date('YmdHis');
         <script src="admin/assets/js/crud/crud_administrador.js<?php echo $v; ?>"></script>
 
         <script>
-            function uploadChange(id) {
-                var fileInput = document.getElementById('uploadImage' + id);
-                var filePath = fileInput.value;
+                                    function uploadChange(id) {
+                                        var fileInput = document.getElementById('uploadImage' + id);
+                                        var filePath = fileInput.value;
 
-                // Allowing file type 
-                var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+                                        // Allowing file type 
+                                        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
 
-                if (!allowedExtensions.exec(filePath)) {
-                    fileInput.value = '';
-                    document.getElementById("labelUpload" + id).innerHTML = '<i class="fa fa-picture-o"></i>&nbsp;Cargar...';
-                    Swal.fire(
-                            'Mensaje Importante',
-                            'Tipo de imagen  no permitida',
-                            'warning' // question,warning,error
-                            );
-                    listar();
-                    //document.getElementById('btnuploadimage').disabled = true;
-                } else {
-                    var filename = jQuery("#uploadImage" + id).val().split('\\').pop();
-                    document.getElementById("labelUpload" + id).innerHTML = "Cargado!";
-                    document.getElementById('btnupload' + id).disabled = false;
-                }
-            }
+                                        if (!allowedExtensions.exec(filePath)) {
+                                            fileInput.value = '';
+                                            document.getElementById("labelUpload" + id).innerHTML = '<i class="fa fa-picture-o"></i>&nbsp;Cargar...';
+                                            Swal.fire(
+                                                    'Mensaje Importante',
+                                                    'Tipo de imagen  no permitida',
+                                                    'warning' // question,warning,error
+                                                    );
+                                            listar();
+                                            //document.getElementById('btnuploadimage').disabled = true;
+                                        } else {
+                                            var filename = jQuery("#uploadImage" + id).val().split('\\').pop();
+                                            document.getElementById("labelUpload" + id).innerHTML = "Cargado!";
+                                            document.getElementById('btnupload' + id).disabled = false;
+                                        }
+                                    }
 
-            function uploadImageAdministrador(id) {
-                // https://stackoverflow.com/questions/21044798/how-to-use-formdata-for-ajax-file-upload
-                var formData = new FormData($('#formData' + id)[0]);
-                formData.append('cmd', 'web');
-                formData.append('idadmin', id);
-                formData.append('imageFile', $("#uploadImage" + id)[0].files[0]); // PONER UN INPUT FILE EN UN APPEND
-                formData.append('imgAntigua', $("#oldImage" + id).val());
-                $.ajax({
-                    url: ruta() + 'uploadImg' + globalName,
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    dataType: "json",
-                    success: function (json) {
-                        if (json['status'] == 'Ok') {
-                            Swal.fire(
-                                    'Aviso Importante',
-                                    json['msg'],
-                                    'success'
-                                    );
+                                    function uploadImageAdministrador(id) {
+                                        // https://stackoverflow.com/questions/21044798/how-to-use-formdata-for-ajax-file-upload
+                                        var formData = new FormData($('#formData' + id)[0]);
+                                        formData.append('cmd', 'web');
+                                        formData.append('idadmin', id);
+                                        formData.append('imageFile', $("#uploadImage" + id)[0].files[0]); // PONER UN INPUT FILE EN UN APPEND
+                                        formData.append('imgAntigua', $("#oldImage" + id).val());
+                                        $.ajax({
+                                            url: ruta() + 'uploadImg' + globalName,
+                                            type: 'POST',
+                                            data: formData,
+                                            contentType: false,
+                                            processData: false,
+                                            dataType: "json",
+                                            success: function (json) {
+                                                if (json['status'] == 'Ok') {
+                                                    Swal.fire(
+                                                            'Aviso Importante',
+                                                            json['msg'],
+                                                            'success'
+                                                            );
 
-                            listar();
-                        } else {
-                            Swal.fire(
-                                    'Aviso Importante',
-                                    json['msg'],
-                                    'error'
-                                    );
-                        }
-                    }
-                });
-            }
+                                                    listar();
+                                                } else {
+                                                    Swal.fire(
+                                                            'Aviso Importante',
+                                                            json['msg'],
+                                                            'error'
+                                                            );
+                                                }
+                                            }
+                                        });
+                                    }
         </script>
         <script src="general/js/mapa.js<?php echo $v; ?>" type="text/javascript"></script>
     </body>

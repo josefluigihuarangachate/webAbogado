@@ -5,6 +5,8 @@ function strings($name) {
     $string = array(
         'error_ajax' => 'Acceso Denegado',
         'error_cmd' => 'Tipo de cmd no valido',
+        'success_notify' => 'Notificacion enviada exitosamente',
+        'error_notify' => 'No se pudo enviar la notificacion',
         'error_empty' => 'No debe haber campos vacios',
         'error_option' => 'Hubo un error en los datos, verifiquelo',
         'error_anidado' => 'No puede eliminar datos relacionados',

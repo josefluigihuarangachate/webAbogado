@@ -171,10 +171,10 @@ $v = "?v=" . date('YmdHis');
                                 <label for="Edescripcion">Descripción</label>
                                 <textarea type="text" class="form-control" id="Edescripcion" name="Edescripcion" placeholder="*Descripcion" rows="6"></textarea>
                             </div>
-<!--                            <div class="form-group">
-                                <label for="Eprecio">Precio</label>
-                                <input type="text" class="form-control" id="Eprecio" name="Eprecio" placeholder="*Precio : 00.00">
-                            </div>-->
+                            <!--                            <div class="form-group">
+                                                            <label for="Eprecio">Precio</label>
+                                                            <input type="text" class="form-control" id="Eprecio" name="Eprecio" placeholder="*Precio : 00.00">
+                                                        </div>-->
                             <div class="form-group">
                                 <label for="Eprecio">Hora</label>
                                 <input type="text" class="form-control" id="Ehora" name="Ehora" placeholder="*Hora : 00:00:00">
@@ -199,7 +199,9 @@ $v = "?v=" . date('YmdHis');
 
 
 
-
+        <div style="display: none;">
+            @include('admin/include/translate')
+        </div>
 
 
 

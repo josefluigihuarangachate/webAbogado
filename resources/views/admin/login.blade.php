@@ -30,10 +30,6 @@
                                 </div>
                                 <button class="btn btn-lg btn-outline-primary rounded-pill btn-block waves-effect btnsend" type="button">Iniciar Sesión</button>
                             </form>
-                            <div class="pd-y-20 tx-uppercase">- Siguenos En-</div>
-                            <button class="btn bg-facebook">Facebook</button>
-                            <button class="btn bg-twitter">Twitter</button>
-                            <button class="btn bg-linkedin">Linkedin</button>
                         </div>
                     </div>
                 </div>

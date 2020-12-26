@@ -88,7 +88,7 @@ class AdminController extends Controller {
 
                 $foto = $data->foto;
                 if (empty($data->foto)) {
-                    $foto = "general/fotos/empty/empty-photo.jpg";
+                    $foto = "empty/empty-photo.jpg";
                 }
                 session(['acceso' => true]);
                 session(['id' => $data->id]);

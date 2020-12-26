@@ -11,6 +11,7 @@ $v = "?v=" . date('YmdHis');
 <meta name="csrf-token" content="<?php echo csrf_token() ?>" />
 
 <script src="general/js/ruta.js<?php echo $v; ?>"></script>
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 <!-- BEGIN: Custom CSS-->  
@@ -44,3 +45,34 @@ $v = "?v=" . date('YmdHis');
 <link type="text/css" rel="stylesheet" href="admin/assets/plugins/chart.js/chart.min.css"/>
 <link type="text/css" rel="stylesheet" href="admin/assets/plugins/daterangepicker/daterangepicker.css"/>
 <link type="text/css" rel="stylesheet" href="admin/assets/plugins/jqvmap/jquery-jvectormap-2.0.2.css">
+
+<link type="text/css" rel="stylesheet" href="admin/assets/plugins/bootstrap-select/css/bootstrap-select.min.css">
+<link type="text/css" rel="stylesheet" href="admin/assets/plugins/bootstrap-multiselect/css/awesome-bootstrap-checkbox.css">
+<script>
+    (function (w, d, s, id) {
+        if (typeof (w.webpushr) !== 'undefined')
+            return;
+        w.webpushr = w.webpushr || function () {
+            (w.webpushr.q = w.webpushr.q || []).push(arguments)
+        };
+        var js, fjs = d.getElementsByTagName(s)[0];
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://cdn.webpushr.com/app.min.js";
+        fjs.parentNode.appendChild(js);
+    }(window, document, 'script', 'webpushr-jssdk'));
+    webpushr(
+            'setup',
+            {
+                'key': 'BGk7-JRUCYl4IiJzJgdr8w2itrI_r9SD9QiWbpPmsx91Q5Sf3nt7f4pkdJkr84yij1hfl69HhMNA3ahUsmTyI3o',
+                'integration': 'popup'
+            });
+
+    webpushr(
+            'attributes',
+            {
+                "IdProfile<?php echo session('id'); ?>": "IdProfile_<?php echo session('id'); ?>", // ESTE ID ESTA DECLARADO EN EL HEAD QUE SE INCLUYE EN TODOS LOS ARCHIVOS
+            }
+    );
+
+</script>

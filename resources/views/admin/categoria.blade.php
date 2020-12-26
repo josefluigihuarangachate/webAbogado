@@ -171,7 +171,9 @@ $v = "?v=" . date('YmdHis');
 
 
 
-
+        <div style="display: none;">
+            @include('admin/include/translate')
+        </div>
 
 
 

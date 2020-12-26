@@ -235,7 +235,7 @@ class PlanController extends Controller {
         $suscripcion = DB::table(table('suscripcion'))->where('idplan', $id)->first();
 
         if ($id == 1) {
-            $json = json('error', strings('No puede eliminar este dato'), '');
+            $json = json('error', strings('No puede eliminar el plan'), '');
         } else if (!empty($suscripcion)) {
             $json = json('error', strings('error_anidado'), '');
         } else {

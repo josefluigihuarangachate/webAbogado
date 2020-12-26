@@ -71,7 +71,7 @@
                         <span>Notificaciones</span><i class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="#Lista de Notificaciones">Lista de Notificaciones</a></li>
+                        <li><a href="./listaNotificacion">Lista de Notificaciones</a></li>
                     </ul>
                 </li>                
                 <li>

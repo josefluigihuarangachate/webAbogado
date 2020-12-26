@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-12-2020 a las 03:05:12
+-- Tiempo de generación: 26-12-2020 a las 17:17:12
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -58,6 +58,26 @@ INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estad
 (2, 'AA19122020235924penal.jpg', '5TR5UU', 'Penal', 'Acerca de carcel  - En todos los casos', 'activo', 23),
 (12, 'AA19122020235914juridico.jpg', 'ACTIVO', 'Juridica', 'ayuda juridica - En todos los casos', 'activo', 23),
 (13, 'AA20122020051615civil2.jpg', 'RETYU', 'Civil', 'sistema civil - En todos los casos', 'activo', 23);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notificacion`
+--
+
+CREATE TABLE `notificacion` (
+  `id` int(25) NOT NULL,
+  `idusuario` int(25) NOT NULL,
+  `codigo` varchar(500) DEFAULT NULL,
+  `asunto` varchar(500) NOT NULL,
+  `mensaje` text NOT NULL,
+  `fechahora` datetime NOT NULL DEFAULT current_timestamp(),
+  `leido` enum('Visto','Sin Leer') DEFAULT 'Sin Leer',
+  `tipo` enum('Alerta','Aviso','Importante','Urgente') NOT NULL DEFAULT 'Aviso',
+  `class` varchar(20) NOT NULL DEFAULT 'alert alert-primary',
+  `icon` varchar(300) DEFAULT 'mdi-message-alert',
+  `color` varchar(200) NOT NULL DEFAULT 'primary'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -181,8 +201,8 @@ INSERT INTO `tipo_usuario` (`id`, `nombre`, `estado`, `modificado_por`) VALUES
 (1, 'Aministrador', 'activo', NULL),
 (2, 'Abogado', 'activo', NULL),
 (3, 'Cliente', 'activo', NULL),
-(4, 'Responsable', 'inactivo', 1),
-(5, 'Encargado', 'activo', 1);
+(4, 'Sub Administrador', 'inactivo', NULL),
+(5, 'Encargado', 'activo', NULL);
 
 -- --------------------------------------------------------
 
@@ -215,7 +235,7 @@ INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `dire
 (1, 'Profile25122020020414background_admin.jpg', 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1),
 (3, 'Profile23122020164046abogado.jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1),
 (23, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-12.04335513', '-77.04049551', 1),
-(24, NULL, 'Juan Cliente Huaman Rojas', '987655', 'juancliente@gmail.com', '987654321', 'san marcos mz b lote 100', 'cliente', '$2y$11$wUIXpJURmBy7kDBTcBCj0uvVMFEU.Q7OVgLSKuIW9fssL9A.Gpyqq', 3, 'activo', '1.836919152', '-59.79019192', 24);
+(26, NULL, 'Luis Miguel Huaman Quispe', NULL, 'luismiguel@gmil.com', NULL, NULL, 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', NULL, NULL, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -225,7 +245,9 @@ INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `dire
 -- Indices de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_idusuariocalificacion` (`idusuario`),
+  ADD KEY `FK_idclientecalificacion` (`idcliente`);
 
 --
 -- Indices de la tabla `categoria`
@@ -233,6 +255,13 @@ ALTER TABLE `calificacion`
 ALTER TABLE `categoria`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre` (`nombre`);
+
+--
+-- Indices de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_idusuario` (`idusuario`);
 
 --
 -- Indices de la tabla `plan`
@@ -259,7 +288,9 @@ ALTER TABLE `subcategoria`
 -- Indices de la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_idusuariosuscripcion` (`idusuario`),
+  ADD KEY `FK_idplan` (`idplan`);
 
 --
 -- Indices de la tabla `tipo_usuario`
@@ -291,6 +322,12 @@ ALTER TABLE `calificacion`
 --
 ALTER TABLE `categoria`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de la tabla `plan`
@@ -326,11 +363,24 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  ADD CONSTRAINT `FK_idclientecalificacion` FOREIGN KEY (`idcliente`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `FK_idusuariocalificacion` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`);
+
+--
+-- Filtros para la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD CONSTRAINT `FK_idusuario` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `servicio`
@@ -338,6 +388,13 @@ ALTER TABLE `usuario`
 ALTER TABLE `servicio`
   ADD CONSTRAINT `FK_idabogado` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `FK_idcategoria` FOREIGN KEY (`idcategoria`) REFERENCES `categoria` (`id`);
+
+--
+-- Filtros para la tabla `suscripcion`
+--
+ALTER TABLE `suscripcion`
+  ADD CONSTRAINT `FK_idplan` FOREIGN KEY (`idplan`) REFERENCES `plan` (`id`),
+  ADD CONSTRAINT `FK_idusuariosuscripcion` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `usuario`

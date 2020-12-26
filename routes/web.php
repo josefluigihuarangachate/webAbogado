@@ -11,6 +11,7 @@ use App\Http\Controllers\OtroUsuarioController; // OTRO USUARIO (ADMINISTRADOR)
 use App\Http\Controllers\ServicioController; // SERVICIOS (ADMINISTRADOR)
 use App\Http\Controllers\TipoUsuarioController; // TIPO USUARIO (ADMINISTRADOR)
 use App\Http\Controllers\CategoriaController; // CATEGORIA (ADMINISTRADOR)
+use App\Http\Controllers\NotificacionController; // NOTIFICACION (ADMINISTRADOR)
 use App\Http\Controllers\SubCategoriaController; // SUBCATEGORIA (ADMINISTRADOR)
 use App\Http\Controllers\CategoriaUserController; // CATEGORIA (USER,LAWYER)
 use App\Http\Controllers\ProfileController; // PERFIL (USER,LAWYER)
@@ -69,6 +70,25 @@ Route::post('/eliminarAbogado', [AbogadoController::class, 'destroy']);
 Route::post('/registrarAbogado', [AbogadoController::class, 'create']);
 Route::post('/uploadImgAbogado', [AbogadoController::class, 'cargarImgUser']);
 // END ABOGADO
+//
+//
+// NOTIFICACION
+Route::get('/listaNotificacion', function () {
+    return view('admin/notificacion');
+});
+Route::get('/verNotify', function () {
+    return view('admin/vernotificacion');
+});
+
+Route::get('/verNotificacion/{id}', [NotificacionController::class, 'verNotifyAdmin']);
+Route::post('/notifyAll', [NotificacionController::class, 'verNotifyAdminAll']);
+
+Route::get('/leerNotificacion/{id}', [NotificacionController::class, 'verNotifyUser']);
+Route::post('/listadoNotificacion', [NotificacionController::class, 'index']);
+Route::post('/listadoUserNotificacion', [NotificacionController::class, 'listNotify']);
+Route::post('/registrarNotificacion', [NotificacionController::class, 'registerNotify']);
+Route::post('/eliminarNotificacion', [NotificacionController::class, 'eliminarNotify']);
+// END NOTIFICACION
 //
 //
 // PERFIL
