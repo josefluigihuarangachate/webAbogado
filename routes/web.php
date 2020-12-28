@@ -261,6 +261,9 @@ Route::get('/appprofileGeneral', function () {
     return view('user/profile');
 });
 Route::post('/appprofileactualizarGeneral', [ProfileController::class, 'update']);
+
+Route::post('/conversacionGeneral', [CategoriaUserController::class, 'loadMessage']);
+Route::post('/restarHoraGeneral', [CategoriaUserController::class, 'restarHora']);
 // END GENERAL
 //
 //

@@ -89,6 +89,7 @@ class PlanController extends Controller {
                             'horas' => $hour,
                             'plan' => $plan,
                             'estado' => $status,
+                            'segundos' => convertHourToSecond($hour),
                             'modificado_por' => session('id')
                         ]
                 );
@@ -204,6 +205,7 @@ class PlanController extends Controller {
                             'descripcion' => $describe,
                             'horas' => $hour,
                             'estado' => $status,
+                            'segundos' => convertHourToSecond($hour),
                             'modificado_por' => session('id')
                         ],
                 );

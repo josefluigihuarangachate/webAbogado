@@ -7,46 +7,58 @@ $.ajaxSetup({
 
 $(document).ready(function () {
     $(".btnsendreg").click(function () {
-        var formData = new FormData($('#formdataReg')[0]);
-        formData.append("cmd", 'web');
+        var clave = document.getElementById("regClave").value;
+        var claveRep = document.getElementById("regRepClave").value;
+        if (clave != claveRep) {
+            swal({
+                title: "Aviso Importante",
+                text: 'Las contraseñas no coinciden',
+                // icon: "success",
+                button: "Aceptar", // buttons: ["Cancelar", "Aceptar"],
+                closeOnClickOutside: false
+            });
+        } else {
+            var formData = new FormData($('#formdataReg')[0]);
+            formData.append("cmd", 'web');
 
-        $.ajax({
-            url: ruta() + 'register_user',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false
-        })
+            $.ajax({
+                url: ruta() + 'register_user',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false
+            })
 
-                .done(function (json) {
-                    if (json['status'] == 'Ok') {
+                    .done(function (json) {
+                        if (json['status'] == 'Ok') {
 
-                        swal({
-                            title: "Aviso Importante",
-                            text: json['msg'],
-                            // icon: "success",
-                            button: "Aceptar", // buttons: ["Cancelar", "Aceptar"],
-                            closeOnClickOutside: false
-                        });
+                            swal({
+                                title: "Aviso Importante",
+                                text: json['msg'],
+                                // icon: "success",
+                                button: "Aceptar", // buttons: ["Cancelar", "Aceptar"],
+                                closeOnClickOutside: false
+                            });
 
-                        document.getElementById("formdataReg").reset();
+                            document.getElementById("formdataReg").reset();
 
-                    } else if (json['status'] == 'Error') {
-                        swal({
-                            title: "Aviso Importante",
-                            text: json['msg'],
-                            // icon: "success",
-                            button: "Aceptar", // buttons: ["Cancelar", "Aceptar"],
-                            closeOnClickOutside: false
-                        });
-                    }
-                })
-                .always(function () {
-                    // Likewise, if .always is defined last, it will execute last:
-                })
-                .fail(function () {
-                    // console.log("An error occurred, the files couldn't be sent!");
-                });
+                        } else if (json['status'] == 'Error') {
+                            swal({
+                                title: "Aviso Importante",
+                                text: json['msg'],
+                                // icon: "success",
+                                button: "Aceptar", // buttons: ["Cancelar", "Aceptar"],
+                                closeOnClickOutside: false
+                            });
+                        }
+                    })
+                    .always(function () {
+                        // Likewise, if .always is defined last, it will execute last:
+                    })
+                    .fail(function () {
+                        // console.log("An error occurred, the files couldn't be sent!");
+                    });
+        }
     });
 });
 

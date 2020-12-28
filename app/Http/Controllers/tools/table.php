@@ -2,9 +2,10 @@
 
 function table($name) {
     $table = array(
+        'chat' => 'chat',
         'notificacion' => 'notificacion',
         'suscripcion' => 'suscripcion',
-        'plan' => 'plan',
+        'suscripcion_historial' => 'suscripcion_historial',
         'calificacion' => 'calificacion',
         'plan' => 'plan',
         'categoria' => 'categoria',

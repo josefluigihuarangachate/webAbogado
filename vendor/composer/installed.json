@@ -1379,6 +1379,61 @@
             "install-path": "../hamcrest/hamcrest-php"
         },
         {
+            "name": "larasocket/larasocket-driver",
+            "version": "1.0.3",
+            "version_normalized": "1.0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/larasocket/larasocket-driver.git",
+                "reference": "43f709ec2383cbc0805f82df0cc0f39e5a38573f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/larasocket/larasocket-driver/zipball/43f709ec2383cbc0805f82df0cc0f39e5a38573f",
+                "reference": "43f709ec2383cbc0805f82df0cc0f39e5a38573f",
+                "shasum": ""
+            },
+            "time": "2020-08-16T15:40:57+00:00",
+            "type": "project",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Larasocket\\LarasocketServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Larasocket\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zach Vander Velden",
+                    "email": "zachvv11@gmail.com"
+                }
+            ],
+            "description": "Pay as you go broadcast driver for Laravel.",
+            "homepage": "https://larasocket.com",
+            "keywords": [
+                "Broadcast",
+                "driver",
+                "larasocket",
+                "laravel",
+                "websocket"
+            ],
+            "support": {
+                "issues": "https://github.com/larasocket/larasocket-driver/issues",
+                "source": "https://github.com/larasocket/larasocket-driver/tree/master"
+            },
+            "install-path": "../larasocket/larasocket-driver"
+        },
+        {
             "name": "laravel/framework",
             "version": "v8.19.0",
             "version_normalized": "8.19.0.0",

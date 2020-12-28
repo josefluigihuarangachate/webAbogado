@@ -6,6 +6,57 @@
  * and open the template in the editor.
  */
 
+function restarDosHoras2($hour, $second) {
+    $restarHour = strtotime('-' . intval($second) . ' second', strtotime($hour));
+    $newHour = date('H:i:s', $restarHour);
+    return $newHour;
+}
+
+function restarDosHoras($h1, $h2) {
+    $horaInicio = new DateTime($h1);
+    $horaTermino = new DateTime($h2);
+
+    $interval = $horaInicio->diff($horaTermino);
+    return $interval->format('%H:%I:%S');
+}
+
+// SIRVE PARA CONVERTIR DE SEGUNDOS A HORA (HH:MM:SS)
+// EJM : $segundos = 129600
+// SERIA: 36:00:00
+function convertSecondToHour($segundos) {
+    // Ejm : https://aprenderaprogramar.com/foros/index.php?topic=5958.0#:~:text=PHP%20convertir%20dato%20segundos%20a%20horas%2C%20minutos%20y%20segundos%20usando%20funciones%20floor,-%C2%AB%20en%3A%2011%20de&text=%24segundos%20%3D%20%24_POST%5B',horas%20*%203600))%20%2F%2060)%3B
+    if (!empty($segundos)) {
+        $horas = floor($segundos / 3600);
+        $minutos = floor(($segundos - ($horas * 3600)) / 60);
+        $segundos = $segundos - ($horas * 3600) - ($minutos * 60);
+
+        if ($horas <= 9) {
+            $horas = "0" . $horas;
+        }
+        if ($minutos <= 9) {
+            $minutos = "0" . $minutos;
+        }
+        if ($segundos <= 9) {
+            $segundos = "0" . $segundos;
+        }
+        return $horas . ':' . $minutos; // . ":" . $segundos;
+    } else {
+        //return "00:00:00";
+        return "00:00";
+    }
+}
+
+// SIRVE PARA CONVERTIR DE HORA A SEGUNDOS (HH:MM:SS)
+// EJM : $hour = 00:00:02
+// SERIA: 2
+function convertHourToSecond($hour) {
+    if ($hour != '00:00:00') {
+        return strtotime($hour) - strtotime('00:00:00');
+    } else {
+        return 0;
+    }
+}
+
 function objectToArray(&$object) {
     return @json_decode(json_encode($object), true);
 }

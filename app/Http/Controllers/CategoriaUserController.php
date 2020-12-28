@@ -26,6 +26,67 @@ class CategoriaUserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function restarHora(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $segundos = htmlspecialchars(intval(trim($request->input('segundos'))));
+
+        $return = session('restan_horas') - $segundos;
+
+        if ($return <= 0) {
+            $return = "0";
+        }
+        if (convertSecondToHour(session('restan_horas')) == '00:00') {
+            $return = "0";
+        }
+
+        session(['restan_horas' => $return]); // RESTAR_HORAS ESTA EN SEGUNDOS 
+
+        DB::table(table('suscripcion'))
+                ->where('idusuario', session('id'))
+                ->update(
+                        [
+                            'segundos' => $return,
+                            'hora' => convertSecondToHour(session('restan_horas'))
+                        ]
+        );
+
+
+        echo convertSecondToHour(session('restan_horas'));
+    }
+
+    public function loadMessage(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+
+        // Para saber si esta suscrito 
+        $suscrito = DB::table(table('suscripcion'))->where('idusuario', session('id'))->first();
+
+        $mensajes = DB::table(table('chat'))
+                ->join(table('usuario') . ' AS emisor', 'emisor.id', '=', table('chat') . '.idemisor')
+                ->join(table('usuario') . ' AS receptor', 'receptor.id', '=', table('chat') . '.idreceptor')
+                ->select(
+                        table('chat') . '.*',
+                        'emisor.nombre AS nombreEmisor',
+                        'receptor.nombre AS nombreReceptor'
+                )
+                ->where([
+                    [table('chat') . '.idemisor', '=', session('id')],
+                    [table('chat') . '.idreceptor', '=', session('IdLawyerChatTemp')],
+                ])
+                ->orWhere([
+                    [table('chat') . '.idreceptor', '=', session('id')],
+                    [table('chat') . '.idemisor', '=', session('IdLawyerChatTemp')],
+                ])
+                ->limit(500)
+                ->get();
+        $mensajes = @array_unique(objectToArray($mensajes), SORT_REGULAR);
+        sort($mensajes);
+
+        $json = json('ok', strings('success_read'), '');
+        $json['mensajes'] = $mensajes;
+        $json['suscripcion'] = $suscrito;
+        return jsonPrint($json, $cmd);
+    }
+
     public function loadCatInfoAbogadoGeneral(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $data = DB::table(table('usuario'))->where('id', session('IdLawyerChatTemp'))->first();

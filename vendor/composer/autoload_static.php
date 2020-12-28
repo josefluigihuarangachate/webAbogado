@@ -127,6 +127,7 @@ class ComposerStaticInit1bb0f2d49beac333bb8044721e2a9ab6
             'League\\CommonMark\\' => 18,
             'Laravel\\Tinker\\' => 15,
             'Laravel\\Sail\\' => 13,
+            'Larasocket\\' => 11,
         ),
         'I' => 
         array (
@@ -394,6 +395,10 @@ class ComposerStaticInit1bb0f2d49beac333bb8044721e2a9ab6
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
+        'Larasocket\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/larasocket/larasocket-driver/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -516,8 +521,12 @@ class ComposerStaticInit1bb0f2d49beac333bb8044721e2a9ab6
         'App\\Http\\Controllers\\CategoriaUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoriaUserController.php',
         'App\\Http\\Controllers\\ClienteController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClienteController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/LoginController.php',
+        'App\\Http\\Controllers\\NotificacionController' => __DIR__ . '/../..' . '/app/Http/Controllers/NotificacionController.php',
         'App\\Http\\Controllers\\OtroUsuarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/OtroUsuarioController.php',
+        'App\\Http\\Controllers\\PlanController' => __DIR__ . '/../..' . '/app/Http/Controllers/PlanController.php',
+        'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\ServicioController' => __DIR__ . '/../..' . '/app/Http/Controllers/ServicioController.php',
         'App\\Http\\Controllers\\SubCategoriaController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubCategoriaController.php',
         'App\\Http\\Controllers\\TipoUsuarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/TipoUsuarioController.php',
@@ -535,8 +544,12 @@ class ComposerStaticInit1bb0f2d49beac333bb8044721e2a9ab6
         'App\\Models\\Categoria' => __DIR__ . '/../..' . '/app/Models/Categoria.php',
         'App\\Models\\CategoriaUser' => __DIR__ . '/../..' . '/app/Models/CategoriaUser.php',
         'App\\Models\\Cliente' => __DIR__ . '/../..' . '/app/Models/Cliente.php',
+        'App\\Models\\Dashboard' => __DIR__ . '/../..' . '/app/Models/Dashboard.php',
         'App\\Models\\Login' => __DIR__ . '/../..' . '/app/Models/Login.php',
+        'App\\Models\\Notificacion' => __DIR__ . '/../..' . '/app/Models/Notificacion.php',
         'App\\Models\\OtroUsuario' => __DIR__ . '/../..' . '/app/Models/OtroUsuario.php',
+        'App\\Models\\Plan' => __DIR__ . '/../..' . '/app/Models/Plan.php',
+        'App\\Models\\Profile' => __DIR__ . '/../..' . '/app/Models/Profile.php',
         'App\\Models\\Servicio' => __DIR__ . '/../..' . '/app/Models/Servicio.php',
         'App\\Models\\SubCategoria' => __DIR__ . '/../..' . '/app/Models/SubCategoria.php',
         'App\\Models\\TipoUsuario' => __DIR__ . '/../..' . '/app/Models/TipoUsuario.php',
@@ -2520,6 +2533,8 @@ class ComposerStaticInit1bb0f2d49beac333bb8044721e2a9ab6
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'Larasocket\\LarasocketBroadcaster' => __DIR__ . '/..' . '/larasocket/larasocket-driver/src/LarasocketBroadcaster.php',
+        'Larasocket\\LarasocketServiceProvider' => __DIR__ . '/..' . '/larasocket/larasocket-driver/src/LarasocketServiceProvider.php',
         'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',

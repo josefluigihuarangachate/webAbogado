@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-12-2020 a las 17:17:12
+-- Tiempo de generación: 28-12-2020 a las 02:09:00
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -62,6 +62,33 @@ INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estad
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(25) NOT NULL,
+  `idemisor` int(25) NOT NULL,
+  `idreceptor` int(25) NOT NULL,
+  `mensaje` text DEFAULT NULL,
+  `archivo` varchar(500) DEFAULT NULL,
+  `fechahora` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `chat`
+--
+
+INSERT INTO `chat` (`id`, `idemisor`, `idreceptor`, `mensaje`, `archivo`, `fechahora`) VALUES
+(1, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59'),
+(2, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59'),
+(3, 26, 23, 'hola', NULL, '2020-12-26 21:09:59'),
+(4, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59'),
+(5, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59'),
+(6, 26, 23, 'hola', NULL, '2020-12-26 21:09:59');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `notificacion`
 --
 
@@ -93,6 +120,7 @@ CREATE TABLE `plan` (
   `plan` enum('Gratis','Mensual','Anual') NOT NULL DEFAULT 'Gratis',
   `horas` varchar(80) NOT NULL DEFAULT '03:00:00',
   `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
+  `segundos` varchar(500) DEFAULT '10800' COMMENT '10800 = 3 horas\r\nesta por defecto 3 horas',
   `modificado_por` int(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -100,10 +128,10 @@ CREATE TABLE `plan` (
 -- Volcado de datos para la tabla `plan`
 --
 
-INSERT INTO `plan` (`id`, `nombre`, `descripcion`, `precio`, `plan`, `horas`, `estado`, `modificado_por`) VALUES
-(1, 'Plan Gratis', 'Plan Gratis', '00.00', 'Gratis', '03:00:00', 'activo', NULL),
-(2, 'Plan Mensual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan mensual', '56.00', 'Mensual', '03:00:00', 'activo', 1),
-(3, 'Plan Anual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan anual', '230.00', 'Anual', '03:00:00', 'activo', 1);
+INSERT INTO `plan` (`id`, `nombre`, `descripcion`, `precio`, `plan`, `horas`, `estado`, `segundos`, `modificado_por`) VALUES
+(1, 'Plan Gratis', 'Plan Gratis', '00.00', 'Gratis', '03:00:00', 'activo', '10800', NULL),
+(2, 'Plan Mensual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan mensual', '56.00', 'Mensual', '03:00:00', 'activo', '10800', 1),
+(3, 'Plan Anual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan anual', '230.00', 'Anual', '03:00:00', 'activo', '10800', 1);
 
 -- --------------------------------------------------------
 
@@ -167,6 +195,34 @@ INSERT INTO `subcategoria` (`id`, `codigo`, `nombre`, `descripcion`, `estado`, `
 --
 
 CREATE TABLE `suscripcion` (
+  `id` int(25) NOT NULL,
+  `idusuario` int(25) NOT NULL,
+  `idplan` int(25) NOT NULL,
+  `nombreplan` varchar(255) NOT NULL,
+  `descripcionplan` text NOT NULL,
+  `hora` varchar(25) NOT NULL,
+  `precio` varchar(300) NOT NULL,
+  `total` varchar(300) NOT NULL,
+  `ini_fechahora` datetime NOT NULL,
+  `fin_fechahora` datetime NOT NULL,
+  `restan_horas` varchar(80) NOT NULL COMMENT 'AQUI IRAN LAS HORAS QUE HA CONSUMIDO SEGUN SU PLAN',
+  `segundos` varchar(500) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `suscripcion`
+--
+
+INSERT INTO `suscripcion` (`id`, `idusuario`, `idplan`, `nombreplan`, `descripcionplan`, `hora`, `precio`, `total`, `ini_fechahora`, `fin_fechahora`, `restan_horas`, `segundos`) VALUES
+(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '00:00', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '00:01:00', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `suscripcion_historial`
+--
+
+CREATE TABLE `suscripcion_historial` (
   `id` int(25) NOT NULL,
   `idusuario` int(25) NOT NULL,
   `idplan` int(25) NOT NULL,
@@ -257,6 +313,14 @@ ALTER TABLE `categoria`
   ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
+-- Indices de la tabla `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_idemisor` (`idemisor`),
+  ADD KEY `FK_idreceptor` (`idreceptor`);
+
+--
 -- Indices de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
@@ -289,8 +353,17 @@ ALTER TABLE `subcategoria`
 --
 ALTER TABLE `suscripcion`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_idusuariosuscripcion` (`idusuario`),
+  ADD UNIQUE KEY `idusuario` (`idusuario`),
   ADD KEY `FK_idplan` (`idplan`);
+
+--
+-- Indices de la tabla `suscripcion_historial`
+--
+ALTER TABLE `suscripcion_historial`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `idusuario` (`idusuario`),
+  ADD KEY `FK_idusuariosuscripcionhistorial` (`idusuario`),
+  ADD KEY `FK_idplanhistorial` (`idplan`);
 
 --
 -- Indices de la tabla `tipo_usuario`
@@ -324,6 +397,12 @@ ALTER TABLE `categoria`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT de la tabla `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
@@ -333,7 +412,7 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `plan`
 --
 ALTER TABLE `plan`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `servicio`
@@ -351,6 +430,12 @@ ALTER TABLE `subcategoria`
 -- AUTO_INCREMENT de la tabla `suscripcion`
 --
 ALTER TABLE `suscripcion`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `suscripcion_historial`
+--
+ALTER TABLE `suscripcion_historial`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
 
 --
@@ -377,6 +462,13 @@ ALTER TABLE `calificacion`
   ADD CONSTRAINT `FK_idusuariocalificacion` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`);
 
 --
+-- Filtros para la tabla `chat`
+--
+ALTER TABLE `chat`
+  ADD CONSTRAINT `FK_idemisor` FOREIGN KEY (`idemisor`) REFERENCES `usuario` (`id`),
+  ADD CONSTRAINT `FK_idreceptor` FOREIGN KEY (`idreceptor`) REFERENCES `usuario` (`id`);
+
+--
 -- Filtros para la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
@@ -395,6 +487,13 @@ ALTER TABLE `servicio`
 ALTER TABLE `suscripcion`
   ADD CONSTRAINT `FK_idplan` FOREIGN KEY (`idplan`) REFERENCES `plan` (`id`),
   ADD CONSTRAINT `FK_idusuariosuscripcion` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`);
+
+--
+-- Filtros para la tabla `suscripcion_historial`
+--
+ALTER TABLE `suscripcion_historial`
+  ADD CONSTRAINT `FK_idplanhistorial` FOREIGN KEY (`idplan`) REFERENCES `plan` (`id`),
+  ADD CONSTRAINT `FK_idusuariosuscripcionhistorial` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `usuario`

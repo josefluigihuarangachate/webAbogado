@@ -126,6 +126,14 @@ class LoginController extends Controller {
                 session(['latitud' => $data->latitud]);
                 session(['longitud' => $data->longitud]);
                 session(['modificado_por' => $data->modificado_por]);
+
+
+                $suscripcion = DB::table(table('suscripcion'))->where('idusuario', $data->id)->first();
+                $restan_horas = "0";
+                if ($suscripcion) {
+                    $restan_horas = $suscripcion->segundos;
+                }
+                session(['restan_horas' => $restan_horas]);
             } else {
                 $json = json('error', strings('error_login'), '');
             }

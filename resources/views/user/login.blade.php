@@ -24,19 +24,23 @@
                                             <li><a href="#signin"><i class="lni lni-key"></i>&nbsp; Acceso</a></li>
                                             <li><a href="#signup"><i class="lni lni-pencil"></i>&nbsp; Registrate</a></li>
                                         </ul>
-                                        <div class="tabContainer" style="margin-top: 10px;">
-                                            <div id="signin" class="tabContent">
+                                        <div class="tabContainer" style="margin-top: 10px;height: calc(100vh - 295px);">
+                                            <div id="signin" class="tabContent" style="margin-top: 40px;">
                                                 <h5>Proceda con su inicio de sesión</h5>
                                                 <h4><i class="lni lni-key"></i><label>&nbsp;&nbsp;</label> Login </h4>
                                                 <form method="POST" class="form2" id="formdata" name="formdata">
                                                     <div>
-                                                        <input type="text" placeholder="Cuenta de usuario" value="" id="logUser" name="logUser">
+                                                        <input type="text" placeholder="Cuenta de usuario" value="cliente" id="logUser" name="logUser">
                                                         <label><i class="lni lni-user"></i></label>
                                                     </div>
+                                                    <br>
+                                                    <br>
                                                     <div>
-                                                        <input type="password" placeholder="Contraseña" value="" id="logClave" name="logClave">
+                                                        <input type="password" placeholder="Contraseña" value="cliente" id="logClave" name="logClave">
                                                         <label><i class="lni lni-lock"></i></label>
                                                     </div>
+                                                    <br>
+                                                    <br>
                                                     <button class="main-btn color-background btnsend" type="button">Iniciar Sesión</button>
                                                     <a href="#" title="">Olvide mi contraseña?</a>
                                                 </form>
