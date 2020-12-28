@@ -45,7 +45,7 @@ header('Content-Type: text/html; charset=UTF-8');
                                 </div>
 
                                 <figure>
-                                    <img src="" id="imginfoAbogado" name="imginfoAbogado">
+                                    <img src="general/fotos/empty/empty-photo.jpg" id="imginfoAbogado" name="imginfoAbogado">
                                 </figure>
                                 <div class="active-user-name">
                                     <h2 id="nombreinfoAbogado" name="nombreinfoAbogado"></h2>
@@ -66,8 +66,8 @@ header('Content-Type: text/html; charset=UTF-8');
                                 <form method="post">
                                     <input type="text" id="Rmensaje" name="Rmensaje" placeholder="Escribir mensaje..." class="form-control">
                                     <button type="button" id="Rsend" name="Rsend"><i class="lni lni-pointer"></i></button>
-                                    <div class="attach-options" style="z-index: 9999999;">
-                                        <span class="closed"><i class="lni lni-cross-circle"></i></span>
+                                    <div class="attach-options" style="z-index: 9999999;" id="modalUpload" name="modalUpload">
+                                        <span class="closed" id="closeUpload" name="closeUpload"><i class="lni lni-cross-circle"></i></span>
                                         <a href="#" title=""><i class="lni lni-camera"></i> <label for="upload" onClick="showCamera('Android! Start Camera')">Abrir Camera</label></a>
                                         <a href="#" title=""><i class="lni lni-video"></i> <label for="upload">Subir Foto / Video</label></a>
                                         <a href="#" title=""><i class="lni lni-add-files"></i> <label for="upload">Cargar Documento</label></a>
@@ -92,14 +92,17 @@ header('Content-Type: text/html; charset=UTF-8');
         </script>
         <script>
 
-            var formatoHora = "00:00";
+            var formatoHora = "00:00:00";
             function restarHora(segundos) {
                 $.post(ruta() + "restarHora" + globalName, {cmd: 'web', segundos: segundos}, function (html) {
                     if (html == formatoHora) {
                         document.getElementById("tiempo_restante").innerHTML = 'Tiempo Terminado';
+                        document.getElementById("modalUpload").style.display = "none";
                         deshabilitarChat();
                     } else {
-                        document.getElementById("tiempo_restante").innerHTML = 'Faltan : ' + html;
+
+                        var HM = html.split(':');
+                        document.getElementById("tiempo_restante").innerHTML = 'Faltan : ' + HM[0] + ':' + HM[1];
                         habilitarChat();
                     }
                 });
@@ -110,6 +113,7 @@ header('Content-Type: text/html; charset=UTF-8');
                 document.getElementById("Rmensaje").value = "";
                 document.getElementById("Rsend").disabled = true;
                 document.getElementById("Rarchivo").style.display = "none";
+
             }
             deshabilitarChat();
 
@@ -154,8 +158,16 @@ header('Content-Type: text/html; charset=UTF-8');
                             document.getElementById("conversacion").innerHTML = conversacion;
                         }
 
+
+
+
+
 <?php
 if (session('idtipo') == 2) {
+    ?>
+                            habilitarChat();
+    <?php
+} else {
     ?>
                             if (json['suscripcion']) { // SI ESTA SUSCRITO EN ALGUN PLAN
                                 var suscripcion = json['suscripcion'];
@@ -168,32 +180,30 @@ if (session('idtipo') == 2) {
                             } else {
                                 deshabilitarChat();
                             }
-    <?php
-} else {
-    ?>
-                            habilitarChat();
+
+
     <?php
 }
 ?>
+
+
+
+
+
+
                     }
                 });
             }
             tiempo_restante(0);
 
 
-
-
-
-
-
-
             function chat() {
                 setInterval(function () {
 
 
-                    tiempo_restante(5);
+                    tiempo_restante(3);
 
-                }, 5000);
+                }, 3000);
             }
             chat();
         </script>

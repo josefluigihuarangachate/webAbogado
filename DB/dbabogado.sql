@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-12-2020 a las 02:09:00
+-- Tiempo de generación: 28-12-2020 a las 15:55:24
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -71,20 +71,21 @@ CREATE TABLE `chat` (
   `idreceptor` int(25) NOT NULL,
   `mensaje` text DEFAULT NULL,
   `archivo` varchar(500) DEFAULT NULL,
-  `fechahora` datetime NOT NULL DEFAULT current_timestamp()
+  `fechahora` datetime NOT NULL DEFAULT current_timestamp(),
+  `leido` enum('Visto','No Leido') NOT NULL DEFAULT 'No Leido'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `chat`
 --
 
-INSERT INTO `chat` (`id`, `idemisor`, `idreceptor`, `mensaje`, `archivo`, `fechahora`) VALUES
-(1, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59'),
-(2, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59'),
-(3, 26, 23, 'hola', NULL, '2020-12-26 21:09:59'),
-(4, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59'),
-(5, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59'),
-(6, 26, 23, 'hola', NULL, '2020-12-26 21:09:59');
+INSERT INTO `chat` (`id`, `idemisor`, `idreceptor`, `mensaje`, `archivo`, `fechahora`, `leido`) VALUES
+(1, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59', 'No Leido'),
+(2, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59', 'No Leido'),
+(3, 26, 23, 'hola', NULL, '2020-12-26 21:09:59', 'No Leido'),
+(4, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59', 'No Leido'),
+(5, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59', 'No Leido'),
+(6, 26, 23, 'hola', NULL, '2020-12-26 21:09:59', 'No Leido');
 
 -- --------------------------------------------------------
 
@@ -214,7 +215,7 @@ CREATE TABLE `suscripcion` (
 --
 
 INSERT INTO `suscripcion` (`id`, `idusuario`, `idplan`, `nombreplan`, `descripcionplan`, `hora`, `precio`, `total`, `ini_fechahora`, `fin_fechahora`, `restan_horas`, `segundos`) VALUES
-(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '00:00', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '00:01:00', '0');
+(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '00:00:00', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '00:01:00', '0');
 
 -- --------------------------------------------------------
 

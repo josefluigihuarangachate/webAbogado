@@ -29,29 +29,38 @@ class CategoriaUserController extends Controller {
     public function restarHora(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $segundos = htmlspecialchars(intval(trim($request->input('segundos'))));
+        $convertSecondToHour = convertSecondToHour(session('restan_horas'));
 
         $return = session('restan_horas') - $segundos;
 
         if ($return <= 0) {
             $return = "0";
         }
-        if (convertSecondToHour(session('restan_horas')) == '00:00') {
+        if ($convertSecondToHour == '00:00:00') {
             $return = "0";
         }
 
         session(['restan_horas' => $return]); // RESTAR_HORAS ESTA EN SEGUNDOS 
-
+        // ACTUALIZO PARA DESCONTAR LOS SEGUNDOS QUE LE QUEDA
         DB::table(table('suscripcion'))
                 ->where('idusuario', session('id'))
                 ->update(
                         [
                             'segundos' => $return,
-                            'hora' => convertSecondToHour(session('restan_horas'))
+                            'hora' => $convertSecondToHour
                         ]
         );
 
+        // ACTUALIZO A VISTO LOS MENSAJES
+        DB::table(table('chat'))
+                ->where('idreceptor', session('id'))
+                ->update(
+                        [
+                            'leido' => 'Visto',
+                        ]
+        );
 
-        echo convertSecondToHour(session('restan_horas'));
+        echo $convertSecondToHour;
     }
 
     public function loadMessage(Request $request) {
