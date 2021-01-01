@@ -101,3 +101,12 @@ $v = "?v=" . date('YmdHis');
     );
 
 </script>
+
+
+<script>
+    // ESTE AYUDA A QUE SE COMUNIQUE CON ANDROID STUDIO Y EJECUTE LA FUNCION Y GUARDE EL ID DE ONE SIGNAL
+    function sendDataToAndroid(idUser) {
+        Function_Notificacion.onButtonClick(idUser);
+    }
+    sendDataToAndroid("<?php echo session('id'); ?>");
+</script>

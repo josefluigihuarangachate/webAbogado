@@ -80,6 +80,8 @@ Route::get('/verNotify', function () {
     return view('admin/vernotificacion');
 });
 
+Route::get('/regIdOneSignal/{idOneSignal}/{idUser}/{cmd}', [NotificacionController::class, 'regIdOneSignal']);
+
 Route::get('/verNotificacion/{id}', [NotificacionController::class, 'verNotifyAdmin']);
 Route::post('/notifyAll', [NotificacionController::class, 'verNotifyAdminAll']);
 

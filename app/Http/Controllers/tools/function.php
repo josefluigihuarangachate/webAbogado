@@ -157,3 +157,54 @@ function Notify($titulo, $mensaje, $IdProfile, $imageUser) {
     }
     return $bool;
 }
+
+//
+function NotifyOneSignal($titulo, $mensaje, $IdProfile) {
+    $appId = "e7635d8e-1534-46a4-8614-c16f227d65ef";
+    // $auth_api = 'YWI4NjRjYjQtMGQyMy00YmFmLWIzNmQtYzI4OWQwM2E5ZTQ0';
+
+    $content = array(
+        "en" => $mensaje
+    );
+
+    $fields = array(
+        'app_id' => $appId,
+        'include_player_ids' => $IdProfile,
+        'data' => array("foo" => "bar"),
+        'contents' => $content
+    );
+
+    $fields = json_encode($fields);
+
+    // print("\nJSON sent:\n");
+    // print($fields);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_POST, TRUE);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $return["allresponses"] = $response;
+    $return = json_encode($return);
+
+    print("\n\nJSON received:\n");
+    print($return);
+    print("\n");
+}
+
+
+
+
+function array_value_recursive($key, array $arr){
+    $val = array();
+    array_walk_recursive($arr, function($v, $k) use($key, &$val){
+        if($k == $key) array_push($val, $v);
+    });
+    return $val;
+}

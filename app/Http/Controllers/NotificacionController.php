@@ -26,6 +26,18 @@ class NotificacionController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function regIdOneSignal($idOneSignal, $idUser, $cmd) {
+        $affected = DB::table(table('usuario'))
+                ->where('id', $idUser)
+                ->update(
+                [
+                    'idonesignal' => $idOneSignal
+                ],
+        );
+
+        echo "Datos afectados : " . $affected;
+    }
+
     public function verNotifyAdminAll() {
         $data = DB::table(table('notificacion'))
                 ->join(table('usuario'), table('usuario') . '.id', '=', table('notificacion') . '.idusuario')
@@ -111,6 +123,7 @@ class NotificacionController extends Controller {
                 !empty($mensaje) &&
                 !empty($tipo)
         ) {
+            $idsIN = array();
             $insert = array();
             $notifyIds = [];
 
@@ -121,6 +134,7 @@ class NotificacionController extends Controller {
 
             for ($u = 0; $u < count($idsuser); $u++) {
                 $colorAlert = colorAlert($tipo);
+                $idsIN[] = $idsuser[$u];
                 $insert[] = array(
                     'codigo' => $codigo,
                     'idusuario' => $idsuser[$u],
@@ -135,14 +149,25 @@ class NotificacionController extends Controller {
                 $notifyIds['IdProfile' . $idsuser[$u]] = 'IdProfile_' . $idsuser[$u]; // PARA MULTIPLES USUARIOS
             }
 
-            //imprimir(array('IDNegocio' => 'ID1', 'IDNegocio' => 'ID2'));
-            //imprimir($notifyIds);
-            //die();
+            $idsuserOneSignal = array();
+            if ($idsIN) {
+                $idsuserOneSignal = DB::table(table('usuario'))
+                        ->select(['idonesignal'])
+                        ->where('idonesignal', "!=", null)
+                        ->whereIn('id', $idsIN)
+                        ->get();
+
+                $idsuserOneSignal = array_value_recursive('idonesignal', objectToArray($idsuserOneSignal));
+            }
 
             try {
                 $affected = DB::table(table('notificacion'))->insert($insert);
                 if ($affected > 0) {
-                    if (Notify($asunto, $mensaje, $notifyIds, $imgNotify)) {
+                    // NotifyOneSignal($asunto, $mensaje,$idsuserOneSignal);
+                    if (
+                            Notify($asunto, $mensaje, $notifyIds, $imgNotify) &&
+                            NotifyOneSignal($asunto, $mensaje, $idsuserOneSignal)
+                    ) {
                         $json = json('ok', strings('success_notify'), '');
                     } else {
                         $json = json('ok', strings('error_notify'), '');

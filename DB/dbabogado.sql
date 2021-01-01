@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-12-2020 a las 15:55:24
+-- Tiempo de generación: 01-01-2021 a las 02:24:54
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -81,10 +81,10 @@ CREATE TABLE `chat` (
 
 INSERT INTO `chat` (`id`, `idemisor`, `idreceptor`, `mensaje`, `archivo`, `fechahora`, `leido`) VALUES
 (1, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59', 'No Leido'),
-(2, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59', 'No Leido'),
+(2, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59', 'Visto'),
 (3, 26, 23, 'hola', NULL, '2020-12-26 21:09:59', 'No Leido'),
 (4, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59', 'No Leido'),
-(5, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59', 'No Leido'),
+(5, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59', 'Visto'),
 (6, 26, 23, 'hola', NULL, '2020-12-26 21:09:59', 'No Leido');
 
 -- --------------------------------------------------------
@@ -106,6 +106,14 @@ CREATE TABLE `notificacion` (
   `icon` varchar(300) DEFAULT 'mdi-message-alert',
   `color` varchar(200) NOT NULL DEFAULT 'primary'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `notificacion`
+--
+
+INSERT INTO `notificacion` (`id`, `idusuario`, `codigo`, `asunto`, `mensaje`, `fechahora`, `leido`, `tipo`, `class`, `icon`, `color`) VALUES
+(125, 1, 'TY', 'Prueba', 'dsaddsadasdasdsadas', '2020-12-31 19:49:42', 'Sin Leer', 'Importante', 'alert alert-warning', 'mdi-alert-circle', 'warning'),
+(126, 26, 'TY', 'Prueba', 'dsaddsadasdasdsadas', '2020-12-31 19:49:42', 'Sin Leer', 'Importante', 'alert alert-warning', 'mdi-alert-circle', 'warning');
 
 -- --------------------------------------------------------
 
@@ -215,7 +223,7 @@ CREATE TABLE `suscripcion` (
 --
 
 INSERT INTO `suscripcion` (`id`, `idusuario`, `idplan`, `nombreplan`, `descripcionplan`, `hora`, `precio`, `total`, `ini_fechahora`, `fin_fechahora`, `restan_horas`, `segundos`) VALUES
-(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '00:00:00', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '00:01:00', '0');
+(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '00:00:00', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '00:01:00', '20');
 
 -- --------------------------------------------------------
 
@@ -281,18 +289,19 @@ CREATE TABLE `usuario` (
   `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo',
   `latitud` varchar(20) DEFAULT NULL,
   `longitud` varchar(20) DEFAULT NULL,
-  `modificado_por` int(25) DEFAULT NULL
+  `modificado_por` int(25) DEFAULT NULL,
+  `idonesignal` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`) VALUES
-(1, 'Profile25122020020414background_admin.jpg', 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1),
-(3, 'Profile23122020164046abogado.jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1),
-(23, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-12.04335513', '-77.04049551', 1),
-(26, NULL, 'Luis Miguel Huaman Quispe', NULL, 'luismiguel@gmil.com', NULL, NULL, 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', NULL, NULL, NULL);
+INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`, `idonesignal`) VALUES
+(1, 'Profile25122020020414background_admin.jpg', 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
+(3, 'Profile23122020164046abogado.jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
+(23, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-12.04335513', '-77.04049551', 1, NULL),
+(26, NULL, 'Luis Miguel Huaman Quispe', NULL, 'luismiguel@gmil.com', NULL, NULL, 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', NULL, NULL, NULL, '1e084165-1068-4818-9d72-cd265bbec38e');
 
 --
 -- Índices para tablas volcadas
@@ -407,7 +416,7 @@ ALTER TABLE `chat`
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT de la tabla `plan`
