@@ -193,18 +193,17 @@ function NotifyOneSignal($titulo, $mensaje, $IdProfile) {
     $return["allresponses"] = $response;
     $return = json_encode($return);
 
-    print("\n\nJSON received:\n");
-    print($return);
-    print("\n");
+    return true;
+    //print("\n\nJSON received:\n");
+    //print($return);
+    //print("\n");
 }
 
-
-
-
-function array_value_recursive($key, array $arr){
+function array_value_recursive($key, array $arr) {
     $val = array();
-    array_walk_recursive($arr, function($v, $k) use($key, &$val){
-        if($k == $key) array_push($val, $v);
+    array_walk_recursive($arr, function($v, $k) use($key, &$val) {
+        if ($k == $key)
+            array_push($val, $v);
     });
     return $val;
 }
