@@ -68,7 +68,7 @@ function initMap() {
 function cargarMapaUpdate() {
     // AL INICIALIZAR EL MAPA - ACTUALIZAR
     var lat = parseFloat(document.getElementById('txtlatitud').value);
-    var lng = parseFloat(document.getElementById('txtlongitud').value);
+    var lng = parseFloat(document.getElementById('txtlongitud').value);    
     var zoom = 18;
 
 

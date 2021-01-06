@@ -4001,7 +4001,7 @@ input[type=checkbox]:checked:disabled + label:before {
 .attach-options {
     background: #ffffff none repeat scroll 0 0;
     border-radius: 10px;
-    bottom: 100px;
+    bottom: 170px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     left: 14px;
     opacity: 0;

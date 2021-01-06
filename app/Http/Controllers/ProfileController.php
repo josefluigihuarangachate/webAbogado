@@ -318,94 +318,116 @@ class ProfileController extends Controller {
         $usuario = htmlspecialchars(trim($request->input('Eusuario')));
         $clave = htmlspecialchars(trim($request->input('Eclave')));
 
-        $rules = [
-            'Enombre' => 'required|string',
-            'Edni' => 'required|string',
-            'Ecorreo' => 'required|string',
-            'Ecelular' => 'required|string',
-            'Edireccion' => 'required|string',
-            'txtlatitud' => 'required|string',
-            'txtlongitud' => 'required|string',
-            'Eusuario' => 'required|string',
-        ];
-        $validator = Validator::make($request->all(), $rules);
+        $tipo_documento = htmlspecialchars(trim($request->input('Etipo_documento')));
+        $ruc_cedula = htmlspecialchars(trim($request->input('Eruc_cedula')));
 
-        if ($validator->fails()) {
-            if (
-                    empty($id) ||
-                    empty($name) ||
-                    empty($dni) ||
-                    empty($email) ||
-                    empty($phone) ||
-                    empty($address) ||
-                    empty($latitud) ||
-                    empty($longitud) ||
-                    empty($usuario)
-            ) {
-                $json = json('error', strings('error_empty'), '');
-            } else {
-                $json = json('error', strings('error_option'), '');
-            }
+        if (
+                session('idtipo') == 3 && strtolower($tipo_documento) == 'ruc' && (strlen($ruc_cedula) != 10 || !is_numeric($ruc_cedula))
+        ) {
+            $json = json('error', 'Numero de ruc no valida', '');
+        } else if (
+                session('idtipo') == 3 && strtolower($tipo_documento) == 'cedula' && (strlen($ruc_cedula) != 13 || !is_numeric($ruc_cedula))
+        ) {
+            $json = json('error', 'Numero de cédula no valida', '');
         } else {
 
+            $rules = [
+                'Enombre' => 'required|string',
+                'Edni' => 'required|string',
+                'Ecorreo' => 'required|string',
+                'Ecelular' => 'required|string',
+                'Edireccion' => 'required|string',
+                'txtlatitud' => 'required|string',
+                'txtlongitud' => 'required|string',
+                'Eusuario' => 'required|string',
+                    //'Eruc' => 'required|integer',
+                    //'Esedula' => 'required|integer',
+            ];
+            $validator = Validator::make($request->all(), $rules);
 
-            // Registro los datos
-            $affected = DB::table(table('usuario'))
-                    ->where('id', $id)
-                    ->update(
-                    [
-                        'nombre' => $name,
-                        'dni' => $dni,
-                        'correo' => $email,
-                        'celular' => $phone,
-                        'direccion' => $address,
-                        'latitud' => $latitud,
-                        'longitud' => $longitud,
-                        'usuario' => $usuario,
-                        'modificado_por' => session('id')
-                    ],
-            );
+            if ($validator->fails()) {
+                if (
+                        empty($id) ||
+                        //empty($ruc) ||
+                        //empty($sedula) ||
+                        empty($name) ||
+                        empty($dni) ||
+                        empty($email) ||
+                        empty($phone) ||
+                        empty($address) ||
+                        empty($latitud) ||
+                        empty($longitud) ||
+                        empty($usuario)
+                ) {
+                    $json = json('error', strings('error_empty'), '');
+                } else {
+                    $json = json('error', strings('error_option'), '');
+                }
+            } else {
 
-            if (!empty($clave)) {
 
-                $opciones = [
-                    'cost' => 11,
-                ];
-
-                $affected2 = DB::table(table('usuario'))
+                // Registro los datos
+                $affected = DB::table(table('usuario'))
                         ->where('id', $id)
                         ->update(
                         [
-                            'clave' => password_hash($clave, PASSWORD_BCRYPT, $opciones)
+                            'nombre' => $name,
+                            'tipo_documento' => $tipo_documento,
+                            'ruc_cedula' => $ruc_cedula,
+                            'dni' => $dni,
+                            'correo' => $email,
+                            'celular' => $phone,
+                            'direccion' => $address,
+                            'latitud' => $latitud,
+                            'longitud' => $longitud,
+                            'usuario' => $usuario,
+                            'modificado_por' => session('id')
                         ],
                 );
-            }
-
-            if ($affected) {
-
-                $nombre = explode(' ', $name);
-
-
-                // Cambiar el value de un session
-                // Ejm : https://laracasts.com/discuss/channels/eloquent/how-to-set-a-session-variable
-
-                session()->put('dni', $dni);
-                session()->put('celular', $phone);
-                session()->put('direccion', $address);
-                session()->put('nombre', $name);
-                session()->put('nombre_corto', $nombre[0] . ' ' . @$nombre[1]);
-                session()->put('correo', $email);
-                session()->put('usuario', $usuario);
-                session()->put('latitud', $latitud);
-                session()->put('longitud', $longitud);
 
                 if (!empty($clave)) {
-                    session()->put('clave', $clave);
+
+                    $opciones = [
+                        'cost' => 11,
+                    ];
+
+                    $affected2 = DB::table(table('usuario'))
+                            ->where('id', $id)
+                            ->update(
+                            [
+                                'clave' => password_hash($clave, PASSWORD_BCRYPT, $opciones)
+                            ],
+                    );
                 }
 
-                $json = json('ok', strings('success_update'), '');
-            } else {
-                $json = json('error', strings('error_update'), '');
+                if ($affected) {
+
+                    $nombre = explode(' ', $name);
+
+
+                    // Cambiar el value de un session
+                    // Ejm : https://laracasts.com/discuss/channels/eloquent/how-to-set-a-session-variable
+
+                    session()->put('dni', $dni);
+                    session()->put('tipo_documento', $tipo_documento);
+                    session()->put('ruc_cedula', $ruc_cedula);
+                    session()->put('celular', $phone);
+                    session()->put('direccion', $address);
+                    session()->put('nombre', $name);
+                    session()->put('nombre_corto', $nombre[0] . ' ' . @$nombre[1]);
+                    session()->put('correo', $email);
+                    session()->put('usuario', $usuario);
+                    session()->put('latitud', $latitud);
+                    session()->put('longitud', $longitud);
+
+                    if (!empty($clave)) {
+                        session()->put('clave', $clave);
+                    }
+
+                    $json = json('ok', strings('success_update'), '');
+                } else {
+                    $json = json('error', strings('error_update'), '');
+                }
             }
         }
 

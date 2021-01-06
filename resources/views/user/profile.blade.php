@@ -12,6 +12,21 @@ $v = "?v=" . date('YmdHis');
 <html>
     <head>
         @include('user/include/head_all')
+        <style>
+            .form-control-b{
+                background: #fff none repeat scroll 0 0;
+                border: 1px solid #ccc;
+                border-radius: 7px;
+                display: inline-block;
+                font-family: inherit;
+                font-size: 13px;
+                padding: 10px 20px;
+                width: 100%;
+                background-color: #25303b;
+                color: #ffffff;
+                border-color: rgba(255, 255, 255, 0.05);
+            }
+        </style>
     </head>
     <body class="full-page">
 
@@ -47,6 +62,32 @@ $v = "?v=" . date('YmdHis');
                                 <h5 class="main-title">Configuración de datos</h5>
 
                                 <form method="post" class="white-form" action="#" id="formData" name="formData">
+                                    <div <?php
+                                    if (session('idtipo') != 3) {
+                                        echo "style='display:none;'";
+                                    }
+                                    ?>>
+                                        <div>
+                                            <label>Tipo de Documento</label>
+                                            <select class="form-control-b" id="Etipo_documento" name="Etipo_documento">
+                                                <option value="RUC" <?php
+                                                if (strtolower(session('tipo_documento')) == 'ruc') {
+                                                    echo "selected='selected'";
+                                                }
+                                                ?>>RUC</option>
+                                                <option value="Cedula" <?php
+                                                if (strtolower(session('tipo_documento')) == 'cedula') {
+                                                    echo "selected='selected'";
+                                                }
+                                                ?>>CÉDULA</option>
+                                            </select>
+                                        </div>
+                                        <small>&nbsp;</small>
+                                        <div>
+                                            <label>Numero de Documento</label>
+                                            <input class="form-control-b" type="tel" placeholder="*Número de Documento" id="Eruc_cedula" name="Eruc_cedula" value="<?php echo trim(session('ruc_cedula')); ?>" maxlength="13">
+                                        </div>
+                                    </div>
                                     <div>
                                         <label>Nombre Completos</label>
                                         <input type="text" placeholder="*Nombre Completos" id="Enombre" name="Enombre" value="<?php echo ucwords(session('nombre')); ?>">
@@ -74,7 +115,7 @@ $v = "?v=" . date('YmdHis');
                                         <input type="text" placeholder="*Longitud" value="<?php echo session('longitud'); ?>" id="txtlongitud" name="txtlongitud" disabled="disabled">
                                         <br>
                                         <br>  
-                                        <button class="main-btn" style="width: 100%;" type="button" data-toggle="modal" data-target="#popupMap">Ubicación Exacta</button>
+                                        <button class="main-btn" style="width: 100%;" type="button" data-toggle="modal" data-target="#popupMap" onclick="cargarMapaUpdate();">Ubicación Exacta</button>
                                     </div>
                                     <div>
                                         <label>Cuenta de Usuario</label>
@@ -114,12 +155,11 @@ $v = "?v=" . date('YmdHis');
         <!-- Modal -->
         <div id="popupMap" class="modal fade" role="dialog">
             <div class="modal-dialog">
-
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <button type="button" class="close" data-dismiss="modal" onclick="reload();">&times;</button>
+                        <h4 class="modal-title">Mapa</h4>
                     </div>
                     <div class="modal-body">
                         <div id="map" style="width: 100%;height: calc(100vh - 170px);"></div>
@@ -128,7 +168,6 @@ $v = "?v=" . date('YmdHis');
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar Ubicación</button>
                     </div>
                 </div>
-
             </div>
         </div>
 

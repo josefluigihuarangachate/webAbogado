@@ -26,6 +26,214 @@ class CategoriaUserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function sendMessageLibroReclamo(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $correo = htmlspecialchars(trim($request->input('Ecorreo')));
+        $celular = htmlspecialchars(trim($request->input('Ecelular')));
+        $asunto = htmlspecialchars(trim($request->input('Easunto')));
+        $mensaje = htmlspecialchars(trim($request->input('Emensaje')));
+        $archivo = $request->file('Earchivo'); // ($mensaje) ? $mensaje : NULL;
+
+        $destinationPath = 'general/libro_reclamo/';
+
+        $rules = [
+            'Ecorreo' => 'required|string',
+            'Ecelular' => 'required|string',
+            'Easunto' => 'required|string',
+            'Emensaje' => 'required|string',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            if (
+                    empty($cmd) ||
+                    empty($correo) ||
+                    empty($celular) ||
+                    empty($asunto) ||
+                    empty($mensaje)
+            ) {
+                $json = json('error', strings('error_empty'), '');
+            } else {
+                $json = json('error', strings('error_option'), '');
+            }
+        } else {
+
+            $filename = NULL;
+            if ($archivo) {
+                $filename = 'file' . session('id') . date('AYmdHis') . $archivo->getClientOriginalName();
+                $archivo->move($destinationPath, $filename);
+            }
+
+            $data = array(
+                'idusuario' => session('id'),
+                'correo' => $correo,
+                'celular' => $celular,
+                'asunto' => $asunto,
+                'mensaje' => $mensaje,
+                'archivo' => $filename
+            );
+
+            // Registro los datos
+            $affected = DB::table(table('libro_reclamo'))->insert($data); // Query Builder approach
+
+            $admins = DB::table(table('usuario'))->where([
+                        ['idtipo', 1],
+                        ['estado', 'activo']
+                    ])->get();
+
+            $notifyIds = [];
+            foreach ($admins as $admin) {
+                $notifyIds['IdProfile' . $admin->id] = 'IdProfile_' . $admin->id; // PARA MULTIPLES USUARIOS 
+            }
+
+            if ($affected) {
+                NotifyAreaCliente($asunto, $mensaje, $notifyIds, '');
+                $json = json('ok', 'Su mensaje fue enviado', '');
+            } else {
+                $json = json('error', 'No se pudo enviar su mensaje', '');
+            }
+        }
+
+        return jsonPrint($json, $cmd);
+    }
+
+    public function loadConversation(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        //  
+        $data = DB::table(table('usuario'))
+                //->join(table('chat'), table('chat') . '.idreceptor', '=', table('usuario') . '.id')
+                ->join(table('chat'), function ($join) {
+                    $join->on(table('chat') . '.idemisor', '=', table('usuario') . '.id')
+                    ->orOn(table('chat') . '.idreceptor', '=', table('usuario') . '.id');
+                })
+                ->select(table('usuario') . '.*')
+                ->where(table('usuario') . '.id', "!=", session('id')) // solo los que son abogados
+                ->get();
+
+        $data = @array_unique(objectToArray($data), SORT_REGULAR);
+        sort($data);
+
+        if ($data) {
+            $json = json('ok', strings('success_read'), $data);
+        } else {
+            $json = json('error', strings('error_read'), '');
+        }
+        return jsonPrint($json, $cmd);
+    }
+
+    public function countNotify(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        // Para saber si esta suscrito 
+        $data = DB::table(table('notificacion'))->where(
+                        [
+                            ['idusuario', session('id')],
+                            ['leido', 'Sin Leer'],
+                        ]
+                )->count();
+
+        if ($data) {
+            echo $data;
+        }
+    }
+
+    public function loadNotificaciones(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+
+        // Actualizo las notificaciones que no son vistas
+        DB::table(table('notificacion'))
+                ->where(
+                        [
+                            ['idusuario', session('id')],
+                            ['leido', 'Sin Leer'],
+                        ]
+                )
+                ->update(
+                        [
+                            'leido' => 'Visto',
+                        ]
+        );
+
+        // Para saber si esta suscrito 
+        $data = DB::table(table('notificacion'))->where(
+                        [
+                            ['idusuario', session('id')],
+                        ]
+                )->get();
+
+        if ($data) {
+            $json = json('ok', strings('success_read'), $data);
+        } else {
+            $json = json('error', strings('error_read'), '');
+        }
+        return jsonPrint($json, $cmd);
+    }
+
+    public function sendMessageChat(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $mensaje = htmlspecialchars(trim($request->input('Rmensaje')));
+        $archivos = $request->file('upload');
+
+        $fechahora = date('Y-m-d H:i:s');
+
+        $boolean = false;
+        $data = array();
+
+        if (!empty($mensaje)) {
+            $boolean = true;
+
+            $data[] = array(
+                'idemisor' => session('id'),
+                'idreceptor' => session('IdLawyerChatTemp'),
+                'mensaje' => $mensaje,
+                'archivo' => NULL,
+                'fechahora' => $fechahora,
+                'leido' => 'No Leido',
+            );
+        }
+
+        if (!empty($archivos)) {
+            $boolean = true;
+            $destinationPath = 'general/archivosChat/';
+            foreach ($archivos as $archivo) {
+                $filename = 'file' . session('id') . date('AYmdHis') . $archivo->getClientOriginalName();
+                $data[] = array(
+                    'idemisor' => session('id'),
+                    'idreceptor' => session('IdLawyerChatTemp'),
+                    'mensaje' => '',
+                    'archivo' => $filename,
+                    'fechahora' => $fechahora,
+                    'leido' => 'No Leido',
+                );
+                $uploadSuccess = $archivo->move($destinationPath, $filename);
+
+                if (!$uploadSuccess) {
+                    $boolean = false;
+                }
+            }
+        }
+
+        if ($boolean) {
+            $affected = DB::table(table('chat'))->insert($data); // Query Builder approach
+
+            if ($affected) {
+
+                $idOneSignalLawyer = DB::table(table('usuario'))
+                        ->select('idonesignal')
+                        ->where('id', session('IdLawyerChatTemp'))
+                        ->first();
+
+                NotifyChat('Nuevo Mensaje', 'Tienes un nuevo mensaje de ' . session('nombre'), array($idOneSignalLawyer->idonesignal));
+
+                $json = json('ok', strings('success_create'), '');
+            } else {
+                $json = json('error', strings('error_create'), '');
+            }
+        } else {
+            $json = json('error', strings('error_empty'), '');
+        }
+        return jsonPrint($json, $cmd);
+    }
+
     public function restarHora(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $segundos = htmlspecialchars(intval(trim($request->input('segundos'))));
@@ -46,8 +254,8 @@ class CategoriaUserController extends Controller {
                 ->where('idusuario', session('id'))
                 ->update(
                         [
-                            'segundos' => $return,
-                            'hora' => $convertSecondToHour
+                            'segundos' => intval($return),
+                            'restan_horas' => $convertSecondToHour
                         ]
         );
 
@@ -236,48 +444,96 @@ class CategoriaUserController extends Controller {
 
         // Ejm quitar datos duplicados :
         // https://stackoverflow.com/questions/5036403/remove-duplicate-items-from-an-array
-
+//        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+//        $data = "";
+//
+//        if (session('idtipo') == 2) {
+//            // PARA EL ABOGADO
+//            $data = DB::table(table('servicio'))
+//                            ->select(
+//                                    table('categoria') . '.id',
+//                                    table('categoria') . '.foto',
+//                                    table('categoria') . '.nombre',
+//                                    //'users.*',
+//                                    //'contacts.phone',
+//                                    //'orders.price'
+//                            )
+//                            //->join(table('subcategoria'), table('subcategoria') . '.id', '=', table('servicio') . '.idsubcategoria')
+//                            ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
+//                            ->where([
+//                                [table('servicio') . '.idusuario', '=', session('id')],
+//                                [table('servicio') . '.estado', '=', 'activo'],
+//                                [table('categoria') . '.estado', '=', 'activo'],
+//                            ])->get();
+//
+//            $data = @array_unique(objectToArray($data), SORT_REGULAR);
+//            sort($data);
+//        } else {
+//            // PARA EL CLIENTE
+//            $data = DB::table(table('servicio'))
+//                            ->select(
+//                                    table('categoria') . '.id',
+//                                    table('categoria') . '.foto',
+//                                    table('categoria') . '.nombre',
+//                            )
+//                            ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
+//                            ->where([
+//                                [table('servicio') . '.estado', '=', 'activo'],
+//                                [table('categoria') . '.estado', '=', 'activo'],
+//                            ])->get();
+//
+//            $data = @array_unique(objectToArray($data), SORT_REGULAR);
+//            sort($data);
+//        }
+//
+//        if ($data) {
+//            $json = json('ok', strings('success_read'), $data);
+//        } else {
+//            $json = json('error', strings('error_read'), '');
+//        }
+//        return jsonPrint($json, $cmd);
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
-        $data = "";
 
-        if (session('idtipo') == 2) {
-            // PARA EL ABOGADO
+        if (session('idtipo') == 2) { // ABOGADO
             $data = DB::table(table('servicio'))
-                            ->select(
-                                    table('categoria') . '.id',
-                                    table('categoria') . '.foto',
-                                    table('categoria') . '.nombre',
-                                    //'users.*',
-                                    //'contacts.phone',
-                                    //'orders.price'
-                            )
-                            //->join(table('subcategoria'), table('subcategoria') . '.id', '=', table('servicio') . '.idsubcategoria')
-                            ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
-                            ->where([
-                                [table('servicio') . '.idusuario', '=', session('id')],
-                                [table('servicio') . '.estado', '=', 'activo'],
-                                [table('categoria') . '.estado', '=', 'activo'],
-                            ])->get();
-
-            $data = @array_unique(objectToArray($data), SORT_REGULAR);
-            sort($data);
-        } else {
-            // PARA EL CLIENTE
+                    ->join(table('usuario'), table('usuario') . '.id', '=', table('servicio') . '.idusuario')
+                    ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
+                    ->select(
+                            table('servicio') . '.*',
+                            //table('servicio') . '.nombre',
+                            //table('servicio') . '.precio',
+                            //table('usuario') . '.nombre AS nombreAbogado',
+                    )
+                    ->where([
+                        [table('usuario') . '.id', '=', session('id')],
+                        [table('servicio') . '.idusuario', '=', session('id')],
+                        //[table('servicio') . '.idcategoria', '=', session('idCategoryTemp')],
+                        [table('categoria') . '.estado', '=', 'activo'],
+                        [table('servicio') . '.estado', '=', 'activo'],
+                        [table('usuario') . '.idtipo', '=', 2]
+                    ])
+                    ->get();
+        } else if (session('idtipo') == 3) { // CLIENTE            
             $data = DB::table(table('servicio'))
-                            ->select(
-                                    table('categoria') . '.id',
-                                    table('categoria') . '.foto',
-                                    table('categoria') . '.nombre',
-                            )
-                            ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
-                            ->where([
-                                [table('servicio') . '.estado', '=', 'activo'],
-                                [table('categoria') . '.estado', '=', 'activo'],
-                            ])->get();
-
-            $data = @array_unique(objectToArray($data), SORT_REGULAR);
-            sort($data);
+                    ->join(table('usuario'), table('usuario') . '.id', '=', table('servicio') . '.idusuario')
+                    ->join(table('categoria'), table('categoria') . '.id', '=', table('servicio') . '.idcategoria')
+                    ->select(
+                            table('servicio') . '.icono',
+                            table('servicio') . '.nombre',
+                            //table('servicio') . '.precio',
+                            //table('usuario') . '.nombre AS nombreAbogado',
+                    )
+                    ->where([
+                        //[table('servicio') . '.idcategoria', '=', session('idCategoryTemp')],
+                        [table('categoria') . '.estado', '=', 'activo'],
+                        [table('servicio') . '.estado', '=', 'activo'],
+                        [table('usuario') . '.idtipo', '=', 2]
+                    ])
+                    ->get();
         }
+
+        $data = @array_unique(objectToArray($data), SORT_REGULAR);
+        sort($data);
 
         if ($data) {
             $json = json('ok', strings('success_read'), $data);

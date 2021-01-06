@@ -1,7 +1,14 @@
 <div class="bottom-header">
     <ul class="menu-left">
         <li><a class="ico-hover" href="/dashboardUser" title="" style="font-size: 18px;"><i class="lni lni-home"></i></a></li>
-        <li><a class="ico-hover" href="#Falta" title="" style="font-size: 18px;"><i class="lni lni-alarm"></i></a><span>3</span></li>
+        <li>
+            <a class="ico-hover" href="/appnotificacionGeneral" title="" style="font-size: 18px;">
+                <i class="lni lni-alarm"></i>
+            </a>
+            <i id="countNotify" name="countNotify">
+
+            </i>
+        </li>
     </ul>
     <div id="nav-icon2" class="menu-button">
         <span></span>
@@ -12,7 +19,7 @@
         <span></span>
     </div>
     <ul class="menu-right">
-        <li><a class="ico-hover" href="#Falta" title="" style="font-size: 18px;"><i class="lni lni-comments"></i></a></li>
+        <li><a class="ico-hover" href="/appconversacionGeneral" title="" style="font-size: 18px;"><i class="lni lni-comments"></i></a></li>
         <li class=""><a class="ico-hover" href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-user"></i></a></li>
     </ul>
 </div>

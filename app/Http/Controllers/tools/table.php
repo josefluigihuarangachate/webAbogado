@@ -3,6 +3,7 @@
 function table($name) {
     $table = array(
         'chat' => 'chat',
+        'libro_reclamo' => 'libro_reclamo',
         'notificacion' => 'notificacion',
         'suscripcion' => 'suscripcion',
         'suscripcion_historial' => 'suscripcion_historial',

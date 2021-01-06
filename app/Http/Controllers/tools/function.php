@@ -114,7 +114,7 @@ function getUrl() {
     return $http . $host . "/";
 }
 
-function Notify($titulo, $mensaje, $IdProfile, $imageUser) {
+function NotifyAreaCliente($titulo, $mensaje, $IdProfile, $imageUser) {
     $nombreEmpresa = "On Law";
     // Ejm : https://docs.webpushr.com/send-push-to-a-custom-attribute
     // Ejm : https://docs.webpushr.com/custom-attributes
@@ -131,8 +131,8 @@ function Notify($titulo, $mensaje, $IdProfile, $imageUser) {
     $req_data = array(
         'title' => $titulo, //required
         'message' => $mensaje, //required
-        'target_url' => strval(getUrl() . 'listaNotificacion'), //required
-        // array('IDNegocio' => 'ID1','IDNegocio' => 'ID2')
+        'target_url' => strval(getUrl() . 'listaLibroReclamo'), //required
+        // array('IdProfile_1' => 'ID1','IdProfile_1' => 'ID2')
         'attribute' => $IdProfile, //required - in Key/Value Pair(s)
         'name' => $nombreEmpresa,
             //'icon' => strval(getUrl() . 'general/fotos/' . $imageUser), // tiene que estar en https la url y en string
@@ -156,6 +156,90 @@ function Notify($titulo, $mensaje, $IdProfile, $imageUser) {
         $bool = true;
     }
     return $bool;
+}
+
+function Notify($titulo, $mensaje, $IdProfile, $imageUser) {
+    $nombreEmpresa = "On Law";
+    // Ejm : https://docs.webpushr.com/send-push-to-a-custom-attribute
+    // Ejm : https://docs.webpushr.com/custom-attributes
+
+    $bool = false;
+
+    $end_point = 'https://api.webpushr.com/v1/notification/send/attribute';
+    $http_header = array(
+        "Content-Type: Application/Json",
+        "webpushrKey: f059e71c90a831a6729ff13710f1cd91",
+        "webpushrAuthToken: 20662"
+    );
+
+    $req_data = array(
+        'title' => $titulo, //required
+        'message' => $mensaje, //required
+        'target_url' => strval(getUrl() . 'listaNotificacion'), //required
+        // array('IdProfile_1' => 'ID1','IdProfile_1' => 'ID2')
+        'attribute' => $IdProfile, //required - in Key/Value Pair(s)
+        'name' => $nombreEmpresa,
+            //'icon' => strval(getUrl() . 'general/fotos/' . $imageUser), // tiene que estar en https la url y en string
+    );
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $http_header);
+    curl_setopt($ch, CURLOPT_URL, $end_point);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($req_data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+
+    @$prExp = explode(",", $response);
+    unset($response);
+    @$sgExp = explode(":", str_replace('"', "", @$prExp[0]));
+    @$status = @substr(@$sgExp[1], 0, 7);
+
+
+    if ($status == 'success') {
+        $bool = true;
+    }
+    return $bool;
+}
+
+function NotifyChat($titulo, $mensaje, $IdProfile) {
+    $appId = "e7635d8e-1534-46a4-8614-c16f227d65ef";
+    // $auth_api = 'YWI4NjRjYjQtMGQyMy00YmFmLWIzNmQtYzI4OWQwM2E5ZTQ0';
+
+    $content = array(
+        "en" => $mensaje
+    );
+
+    $fields = array(
+        'app_id' => $appId,
+        'include_player_ids' => $IdProfile,
+        'data' => array("foo" => "bar"),
+        'contents' => $content
+    );
+
+    $fields = json_encode($fields);
+
+    // print("\nJSON sent:\n");
+    // print($fields);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://onesignal.com/api/v1/notifications");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json; charset=utf-8'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+    curl_setopt($ch, CURLOPT_POST, TRUE);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $return["allresponses"] = $response;
+    $return = json_encode($return);
+
+    return true;
+    //print("\n\nJSON received:\n");
+    //print($return);
+    //print("\n");
 }
 
 //

@@ -63,15 +63,15 @@ header('Content-Type: text/html; charset=UTF-8');
                             <ul class="chat-desc" id="conversacion" name="conversacion">
                             </ul>
                             <div class="mesg-write-box">
-                                <form method="post">
+                                <form action="#" method="POST" enctype="multipart/form-data" id="formdataChat" name="formdataChat">
                                     <input type="text" id="Rmensaje" name="Rmensaje" placeholder="Escribir mensaje..." class="form-control">
                                     <button type="button" id="Rsend" name="Rsend"><i class="lni lni-pointer"></i></button>
                                     <div class="attach-options" style="z-index: 9999999;" id="modalUpload" name="modalUpload">
                                         <span class="closed" id="closeUpload" name="closeUpload"><i class="lni lni-cross-circle"></i></span>
                                         <a href="#" title=""><i class="lni lni-camera"></i> <label for="upload" onClick="showCamera('Android! Start Camera')">Abrir Camera</label></a>
-                                        <a href="#" title=""><i class="lni lni-video"></i> <label for="upload">Subir Foto / Video</label></a>
+                                        <!--<a href="#" title=""><i class="lni lni-video"></i> <label for="upload">Subir Foto / Video</label></a>-->
                                         <a href="#" title=""><i class="lni lni-add-files"></i> <label for="upload">Cargar Documento</label></a>
-                                        <input type="file" name="upload" id="upload" style="display: none;" accept="image/*;capture=camera">
+                                        <input type="file" name="upload[]" id="upload" style="display: none;" accept="image/jpeg,image/jpg,image/png,application/pdf,image/x-eps" multiple="multiple">
                                     </div>
                                 </form>
                             </div>
@@ -136,7 +136,9 @@ header('Content-Type: text/html; charset=UTF-8');
 
                                 var chat_archivo = ""; // SIRVE PARA CUANDO TIENE ARCHIVO
                                 if (mensaje[m].archivo) {
-                                    chat_archivo = "<br>" + mensaje[m].archivo;
+                                    chat_archivo = "<div style='width: 100%;'></div><center><a href='general/archivosChat/" + mensaje[m].archivo + "' download>";
+                                    chat_archivo += "<img src='general/img/downloadFile.png' style='width: 50px; height: 50px;'/>";
+                                    chat_archivo += "</a></center><div style='width: 100%;'></div>";
                                 }
 
                                 if (mensaje[m].idemisor === idUserChat) {
@@ -201,11 +203,71 @@ if (session('idtipo') == 2) {
                 setInterval(function () {
 
 
-                    tiempo_restante(3);
+                    tiempo_restante(5);
 
-                }, 3000);
+                }, 5000);
             }
             chat();
+
+
+
+
+
+
+
+
+
+
+
+            // ENVIAR MENSAJE DE TEXTO
+            $(document).ready(function () {
+                $("#Rsend").click(function () {
+                    var formData = new FormData($('#formdataChat')[0]);
+                    var cmd = 'web';
+                    formData.append("cmd", cmd);
+
+                    $.ajax({
+                        url: ruta() + 'registrarChat' + globalName,
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false
+                    })
+
+                            .done(function (json) {
+                                if (json['status'] == 'Ok') {
+                                    //Swal.fire(
+                                    //        'Mensaje Importante',
+                                    //        json['msg'],
+                                    //        'success' // question,warning,error
+                                    //        );
+                                    //console.log(json['msg']);
+                                    document.getElementById("formdataChat").reset();
+                                    tiempo_restante(0);
+                                    scrollToBottomChat();
+                                } else if (json['status'] == 'Error') {
+                                    console.log(json['msg']);
+                                }
+                            })
+                            .always(function () {
+                                // Likewise, if .always is defined last, it will execute last:
+                            })
+                            .fail(function () {
+                                // console.log("An error occurred, the files couldn't be sent!");
+                            });
+                });
+            });
+
+            function scrollToBottomChat() {
+                // conversacion
+                $("#conversacion").animate({scrollTop: $('ul#conversacion li:last').offset().top + 30});
+            }
+
+            setTimeout(function () {
+                scrollToBottomChat();
+            }, 2000);
+
+
         </script>
     </body>
 </html>

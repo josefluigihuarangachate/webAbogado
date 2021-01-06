@@ -92,6 +92,8 @@ class AdminController extends Controller {
                 }
                 session(['acceso' => true]);
                 session(['id' => $data->id]);
+                session(['tipo_documento' => $data->tipo_documento]);
+                session(['ruc_cedula' => $data->ruc_cedula]);
                 session(['foto' => $foto]);
                 session(['dni' => $data->dni]);
                 session(['celular' => $data->celular]);

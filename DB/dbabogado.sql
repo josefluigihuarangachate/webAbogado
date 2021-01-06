@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-01-2021 a las 02:24:54
+-- Tiempo de generación: 06-01-2021 a las 07:08:41
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -80,12 +80,41 @@ CREATE TABLE `chat` (
 --
 
 INSERT INTO `chat` (`id`, `idemisor`, `idreceptor`, `mensaje`, `archivo`, `fechahora`, `leido`) VALUES
-(1, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59', 'No Leido'),
-(2, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59', 'Visto'),
-(3, 26, 23, 'hola', NULL, '2020-12-26 21:09:59', 'No Leido'),
-(4, 26, 23, 'doctor buenas tardes', NULL, '2020-12-26 20:06:59', 'No Leido'),
-(5, 23, 26, 'buenos dias, en que le podemos ayudar. gracias', NULL, '2020-12-26 20:06:59', 'Visto'),
-(6, 26, 23, 'hola', NULL, '2020-12-26 21:09:59', 'No Leido');
+(7, 26, 23, 'te envio el archivo', NULL, '2021-01-02 16:10:07', 'No Leido'),
+(22, 26, 23, 'Hola doctor', NULL, '2021-01-02 18:10:00', 'No Leido'),
+(23, 26, 23, '', 'file26PM20210102191622images (5).jpg', '2021-01-02 19:16:22', 'No Leido'),
+(24, 26, 23, 'Hola doctor', NULL, '2021-01-06 04:55:05', 'No Leido'),
+(25, 26, 23, 'hola doctora', NULL, '2021-01-06 05:17:20', 'No Leido'),
+(26, 26, 23, 'que paso', NULL, '2021-01-06 05:21:16', 'No Leido'),
+(27, 26, 23, 'f', NULL, '2021-01-06 05:39:21', 'No Leido'),
+(28, 26, 23, 'hola', NULL, '2021-01-06 05:48:52', 'No Leido'),
+(29, 26, 23, 'h', NULL, '2021-01-06 05:50:04', 'No Leido'),
+(30, 26, 23, 'hola', NULL, '2021-01-06 06:01:37', 'No Leido');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `libro_reclamo`
+--
+
+CREATE TABLE `libro_reclamo` (
+  `id` int(25) NOT NULL,
+  `idusuario` int(25) NOT NULL,
+  `correo` varchar(200) NOT NULL,
+  `celular` varchar(20) NOT NULL,
+  `asunto` varchar(200) NOT NULL,
+  `mensaje` text NOT NULL,
+  `archivo` varchar(500) DEFAULT NULL,
+  `fechahora` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `libro_reclamo`
+--
+
+INSERT INTO `libro_reclamo` (`id`, `idusuario`, `correo`, `celular`, `asunto`, `mensaje`, `archivo`, `fechahora`) VALUES
+(17, 26, 'luismiguel@gmil.com', '7542342342432', 'Asunto 1', 'sadasdasdas', NULL, '2021-01-04 22:10:49'),
+(19, 26, 'luismiguel@gmil.com', '7542342342432', 'Queja acerca del servicio de uno de sus abogados', 'Buenas tardes señores de onlw, quería quejarme acerca del pésimo servicio que recibí al contratar a uno de sus abogados.', NULL, '2021-01-05 00:11:25');
 
 -- --------------------------------------------------------
 
@@ -112,8 +141,8 @@ CREATE TABLE `notificacion` (
 --
 
 INSERT INTO `notificacion` (`id`, `idusuario`, `codigo`, `asunto`, `mensaje`, `fechahora`, `leido`, `tipo`, `class`, `icon`, `color`) VALUES
-(125, 1, 'TY', 'Prueba', 'dsaddsadasdasdsadas', '2020-12-31 19:49:42', 'Sin Leer', 'Importante', 'alert alert-warning', 'mdi-alert-circle', 'warning'),
-(126, 26, 'TY', 'Prueba', 'dsaddsadasdasdsadas', '2020-12-31 19:49:42', 'Sin Leer', 'Importante', 'alert alert-warning', 'mdi-alert-circle', 'warning');
+(1, 26, 'ERTYU', 'aviso de cobro', 'debe pagar su cuenta', '2021-01-02 15:19:13', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(2, 26, 'UIWR', 'aviso de cobro', 'debe pagar su cuenta', '2021-01-02 15:19:13', 'Visto', 'Importante', 'alert alert-danger', 'mdi-message-alert', 'danger');
 
 -- --------------------------------------------------------
 
@@ -215,15 +244,16 @@ CREATE TABLE `suscripcion` (
   `ini_fechahora` datetime NOT NULL,
   `fin_fechahora` datetime NOT NULL,
   `restan_horas` varchar(80) NOT NULL COMMENT 'AQUI IRAN LAS HORAS QUE HA CONSUMIDO SEGUN SU PLAN',
-  `segundos` varchar(500) NOT NULL DEFAULT '0'
+  `segundos` varchar(500) NOT NULL DEFAULT '0',
+  `fechahora` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `suscripcion`
 --
 
-INSERT INTO `suscripcion` (`id`, `idusuario`, `idplan`, `nombreplan`, `descripcionplan`, `hora`, `precio`, `total`, `ini_fechahora`, `fin_fechahora`, `restan_horas`, `segundos`) VALUES
-(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '00:00:00', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '00:01:00', '20');
+INSERT INTO `suscripcion` (`id`, `idusuario`, `idplan`, `nombreplan`, `descripcionplan`, `hora`, `precio`, `total`, `ini_fechahora`, `fin_fechahora`, `restan_horas`, `segundos`, `fechahora`) VALUES
+(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '36:35:45', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '36:07:52', '130067', '2021-01-05 23:15:29');
 
 -- --------------------------------------------------------
 
@@ -278,6 +308,8 @@ INSERT INTO `tipo_usuario` (`id`, `nombre`, `estado`, `modificado_por`) VALUES
 CREATE TABLE `usuario` (
   `id` int(25) NOT NULL,
   `foto` varchar(500) DEFAULT NULL COMMENT 'Guardar la ruta de la imagen completa con toda y carpeta\r\n\r\nEjemplo :\r\nassets/images/photos/gerente.png\r\n\r\nSi esta vacio el campo foto se pondra :\r\nassets/images/photos/empty/empty-avatar.png',
+  `tipo_documento` enum('RUC','Cedula') DEFAULT NULL,
+  `ruc_cedula` varchar(15) DEFAULT NULL,
   `nombre` varchar(255) NOT NULL,
   `dni` varchar(15) DEFAULT NULL,
   `correo` varchar(255) NOT NULL,
@@ -297,11 +329,11 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `foto`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`, `idonesignal`) VALUES
-(1, 'Profile25122020020414background_admin.jpg', 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
-(3, 'Profile23122020164046abogado.jpg', 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
-(23, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-12.04335513', '-77.04049551', 1, NULL),
-(26, NULL, 'Luis Miguel Huaman Quispe', NULL, 'luismiguel@gmil.com', NULL, NULL, 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', NULL, NULL, NULL, '1e084165-1068-4818-9d72-cd265bbec38e');
+INSERT INTO `usuario` (`id`, `foto`, `tipo_documento`, `ruc_cedula`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`, `idonesignal`) VALUES
+(1, 'Profile25122020020414background_admin.jpg', NULL, NULL, 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
+(3, 'Profile23122020164046abogado.jpg', NULL, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
+(23, NULL, 'RUC', '', 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-9.73950979', '-52.95631814', 23, '1e084165-1068-4818-9d72-cd265bbec38e'),
+(26, NULL, 'Cedula', '1234567890123', 'Luis Miguel Huaman Quispe', '6363453535', 'luismiguel@gmil.com', '7542342342432', 'ghdhfgfdgdfgfd', 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', '-20.81523006', '-67.70102495', 26, '1e084165-1068-4818-9d72-cd265bbec38e');
 
 --
 -- Índices para tablas volcadas
@@ -329,6 +361,12 @@ ALTER TABLE `chat`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_idemisor` (`idemisor`),
   ADD KEY `FK_idreceptor` (`idreceptor`);
+
+--
+-- Indices de la tabla `libro_reclamo`
+--
+ALTER TABLE `libro_reclamo`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `notificacion`
@@ -410,13 +448,19 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT de la tabla `libro_reclamo`
+--
+ALTER TABLE `libro_reclamo`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT de la tabla `plan`

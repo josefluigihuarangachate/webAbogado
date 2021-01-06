@@ -5,8 +5,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="head-meta">
-                        <h5><?php echo @$titulo; ?></h5>
-                        
+                        <h5 style="color: #151d26;"><?php echo @$titulo; ?></h5>
+
                     </div>
                 </div>
             </div>

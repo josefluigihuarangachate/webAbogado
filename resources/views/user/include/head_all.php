@@ -73,7 +73,7 @@ $v = "?v=" . date('YmdHis');
     defer
 ></script>
 
-<script>
+<!--<script>
     (function (w, d, s, id) {
         if (typeof (w.webpushr) !== 'undefined')
             return;
@@ -96,11 +96,11 @@ $v = "?v=" . date('YmdHis');
     webpushr(
             'attributes',
             {
-                "IdProfile<?php echo session('id'); ?>": "IdProfile_<?php echo session('id'); ?>", // ESTE ID ESTA DECLARADO EN EL HEAD QUE SE INCLUYE EN TODOS LOS ARCHIVOS
+                "IdProfile<?php //echo session('id');  ?>": "IdProfile_<?php //echo session('id');  ?>", // ESTE ID ESTA DECLARADO EN EL HEAD QUE SE INCLUYE EN TODOS LOS ARCHIVOS
             }
     );
 
-</script>
+</script>-->
 
 
 <script>

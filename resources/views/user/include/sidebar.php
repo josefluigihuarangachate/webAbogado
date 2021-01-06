@@ -19,9 +19,19 @@
         </div>
     </div>
     <ul>
+        <!-- Icono : http://sigmadigitalpartners.com/themes/templatemonster/html/dashield/pages/icons/lineicons.html-->
         <!--<li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-inbox"></i>Mi Perfil</a></li>-->
-        <li><a href="notifications.html" title="" style="font-size: 18px;"><i class="lni lni-alarm"></i>Notificaciones</a></li>
         <li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-pencil-alt"></i>Configuración</a></li>
+
+        <?php
+        // SOLO PARA CLIENTES
+        if (session('idtipo') == 3) {
+            ?>
+            <li><a href="/applibroreclamoGeneral" title="" style="font-size: 18px;"><i class="lni lni-library"></i>Area de Cliente</a></li>
+            <?php
+        }
+        ?>
+        <li><a href="notifications.html" title="" style="font-size: 18px;"><i class="lni lni-alarm"></i>Notificaciones</a></li>
         <!--<li><a href="lock-screen.html" title=""><i class="lni lni-key"></i>Lock screen</a></li>-->
         <!--<li><a href="settings.html" title="" style="font-size: 18px;"><i class="lni lni-control-panel"></i>setting</a></li>-->
         <!--<li><a href="privacy.html" title=""><i class="lni lni-sort-amount-asc"></i>Privacy & Help</a></li>-->

@@ -5,6 +5,8 @@ use App\Http\Controllers\LoginController; // LOGIN (CLIENTE,ABOGADO)
 use App\Http\Controllers\AdminController; // LOGIN, ADMINISTRADOR (ADMINISTRADOR)
 use App\Http\Controllers\DashboardController; // DASHBOARD (ADMINISTRADOR)
 use App\Http\Controllers\PlanController; // PLAN (ADMINISTRADOR)
+use App\Http\Controllers\AreaClienteController; // AREA DEL CLIENTE (ADMINISTRADOR)
+use App\Http\Controllers\SuscripcionController; // SUSCRIPCION (ADMINISTRADOR)
 use App\Http\Controllers\AbogadoController; // ABOGADO (ADMINISTRADOR)
 use App\Http\Controllers\ClienteController; // CLIENTE (ADMINISTRADOR)
 use App\Http\Controllers\OtroUsuarioController; // OTRO USUARIO (ADMINISTRADOR)
@@ -70,6 +72,22 @@ Route::post('/eliminarAbogado', [AbogadoController::class, 'destroy']);
 Route::post('/registrarAbogado', [AbogadoController::class, 'create']);
 Route::post('/uploadImgAbogado', [AbogadoController::class, 'cargarImgUser']);
 // END ABOGADO
+//
+//
+// SUSCRIPCION
+Route::get('/listaSuscripcion', function () {
+    return view('admin/suscripcion');
+});
+Route::get('/listadoSuscripcion', [SuscripcionController::class, 'index']);
+// FIN SUSCRIPCION
+// 
+// 
+// // LIBRO DE RECLAMO
+Route::get('/listaLibroReclamo', function () {
+    return view('admin/librodereclamo');
+});
+Route::get('/listadoAreaCliente', [AreaClienteController::class, 'index']);
+// FIN LIBRO DE RECLAMO
 //
 //
 // NOTIFICACION
@@ -252,11 +270,27 @@ Route::get('/appchatabogadoGeneral', function () {
     return view('user/chat');
 });
 
+Route::get('/appnotificacionGeneral', function () {
+    return view('user/notificacion');
+});
+
+Route::get('/appconversacionGeneral', function () {
+    return view('user/conversacion');
+});
+
+Route::get('/applibroreclamoGeneral', function () {
+    return view('user/areacliente');
+});
+
 Route::post('/appidservicioGeneral', [CategoriaUserController::class, 'sessionServiceGeneral']); // SIRVE PARA GUARDAR TEMPORALMENTE EN SESSION EL ID DE LA CATEGORIA
 Route::post('/appnameservicioGeneral', [CategoriaUserController::class, 'sessionNameServiceGeneral']); // SIRVE PARA GUARDAR TEMPORALMENTE EN SESSION EL NOMBRE DEL SERVICIO
 Route::post('/appnombreabogadoGeneral', [CategoriaUserController::class, 'loadServiceAbogadosGeneral']);
 Route::post('/appchatinfoabogadoGeneral', [CategoriaUserController::class, 'loadCatInfoAbogadoGeneral']); // CARGA INFORMACION DEL CHAT DEL ABOGADO
 Route::post('/appidabogadoGeneral', [CategoriaUserController::class, 'sessionIdLawyerChatGeneral']);
+Route::post('/appnotificacionesGeneral', [CategoriaUserController::class, 'loadNotificaciones']);
+Route::post('/appcontarnotificacionGeneral', [CategoriaUserController::class, 'countNotify']);
+
+Route::post('/appconversationGeneral', [CategoriaUserController::class, 'loadConversation']);
 
 Route::post('/appservicioGeneral', [CategoriaUserController::class, 'loadServiceGeneral']);
 Route::get('/appprofileGeneral', function () {
@@ -266,6 +300,10 @@ Route::post('/appprofileactualizarGeneral', [ProfileController::class, 'update']
 
 Route::post('/conversacionGeneral', [CategoriaUserController::class, 'loadMessage']);
 Route::post('/restarHoraGeneral', [CategoriaUserController::class, 'restarHora']);
+
+Route::post('/registrarChatGeneral', [CategoriaUserController::class, 'sendMessageChat']);
+
+Route::post('/registrarLibroReclamoGeneral', [CategoriaUserController::class, 'sendMessageLibroReclamo']);
 // END GENERAL
 //
 //

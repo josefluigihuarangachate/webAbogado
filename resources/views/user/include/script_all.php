@@ -7,6 +7,11 @@ $v = "?v=" . date('YmdHis');
 <script src="user/assets/js/jquery-stories.js<?php echo $v; ?>"></script>
 <script src="user/assets/js/script.js<?php echo $v; ?>"></script>
 <script src="user/assets/js/crud/menuCategoria.js<?php echo $v; ?>"></script>
+<script>
+    function reload() {
+        location.reload();
+    }
+</script>
 <!--<script>
     swal({
         title: "Aviso Importante",
