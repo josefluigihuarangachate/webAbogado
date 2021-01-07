@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-01-2021 a las 07:08:41
+-- Tiempo de generación: 07-01-2021 a las 06:03:23
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -333,7 +333,7 @@ INSERT INTO `usuario` (`id`, `foto`, `tipo_documento`, `ruc_cedula`, `nombre`, `
 (1, 'Profile25122020020414background_admin.jpg', NULL, NULL, 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
 (3, 'Profile23122020164046abogado.jpg', NULL, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
 (23, NULL, 'RUC', '', 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-9.73950979', '-52.95631814', 23, '1e084165-1068-4818-9d72-cd265bbec38e'),
-(26, NULL, 'Cedula', '1234567890123', 'Luis Miguel Huaman Quispe', '6363453535', 'luismiguel@gmil.com', '7542342342432', 'ghdhfgfdgdfgfd', 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', '-20.81523006', '-67.70102495', 26, '1e084165-1068-4818-9d72-cd265bbec38e');
+(26, 'Profile07012021050207f608x342-988126_1017849_0.jpg', 'Cedula', '1234567890123', 'Luis Miguel Huaman Quispe', '6363453535', 'luismiguel@gmil.com', '7542342342432', 'ghdhfgfdgdfgfd', 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', '-20.81523006', '-67.70102495', 26, '1e084165-1068-4818-9d72-cd265bbec38e');
 
 --
 -- Índices para tablas volcadas

@@ -26,6 +26,71 @@ class CategoriaUserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function loadphotoProfileApp(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $archivo = $request->file('inputFile');
+
+        if (empty(@$_FILES['inputFile']['name'])) {
+            $json = json('error', 'Debe subir una imagen', '');
+        } else {
+
+            $rules = [
+                'cmd' => 'required|string',
+                'inputFile' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ];
+            $validator = Validator::make($request->all(), $rules);
+
+            if ($validator->fails()) {
+                if (
+                        empty($cmd) ||
+                        empty($archivo)
+                ) {
+                    $json = json('error', strings('error_empty'), '');
+                } else {
+                    $json = json('error', strings('error_option'), '');
+                }
+            } else {
+
+                try {
+
+                    // Ejm : https://stackoverrun.com/es/q/5101323
+
+                    $image = $request->file('inputFile');
+                    $rutaTemporal = @$_FILES['inputFile']['tmp_name'];
+                    $nombreImagen = 'Profile' . date('dmYHis') . str_replace(" ", "", basename(@$_FILES["inputFile"]["name"]));
+                    $rutaDestino = FOLDER_CATEGORIA . $nombreImagen;
+
+                    // Registro los datos
+                    $affected = DB::table(table('usuario'))
+                            ->where('id', session('id'))
+                            ->update(
+                            [
+                                'foto' => $nombreImagen,
+                                'modificado_por' => session('id')
+                            ],
+                    );
+
+                    if ($affected && $image->move(public_path(FOLDER_CATEGORIA), $nombreImagen)) {
+
+                        if (!empty(@session('foto'))) {
+                            @unlink(FOLDER_CATEGORIA . @session('foto'));
+                        }
+
+                        session(['foto' => $nombreImagen]);
+
+                        $json = json('ok', strings('success_update'), '');
+                    } else {
+                        $json = json('error', strings('error_update'), '');
+                    }
+                } catch (Exception $e) {
+                    $json = json('error', strings('error_update'), '');
+                }
+            }
+
+            return jsonPrint($json, $cmd);
+        }
+    }
+
     public function sendMessageLibroReclamo(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $correo = htmlspecialchars(trim($request->input('Ecorreo')));

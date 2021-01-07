@@ -19,6 +19,17 @@
         </div>
     </div>
     <ul>
+        <li>
+            <form action="#" method="post" enctype="multipart/form-data" id="formDataProfile" name="formDataProfile">
+                <input type="file" id="inputFile" name="inputFile" style="display: none;" onchange="loadFile();"> 
+            </form>
+            <label for="inputFile" class="btn btn-default" style="border-radius: 50px 0px 0px 50px;" id="labelUploadProfile" name="labelUploadProfile">
+                <i class="lni lni-gallery"></i>&nbsp; Cargar...
+            </label><button class="btn btn-success" style="border-radius: 0px 50px 50px 0px;background-color: #eeda68;border: 1px solid #ccba57;" id="guardarFotoPerfil" name="guardarFotoPerfil">
+                <i class="lni lni-save"></i>&nbsp; Guardar
+            </button>
+            
+        </li>
         <!-- Icono : http://sigmadigitalpartners.com/themes/templatemonster/html/dashield/pages/icons/lineicons.html-->
         <!--<li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-inbox"></i>Mi Perfil</a></li>-->
         <li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-pencil-alt"></i>Configuración</a></li>

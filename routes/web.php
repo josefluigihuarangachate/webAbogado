@@ -304,6 +304,8 @@ Route::post('/restarHoraGeneral', [CategoriaUserController::class, 'restarHora']
 Route::post('/registrarChatGeneral', [CategoriaUserController::class, 'sendMessageChat']);
 
 Route::post('/registrarLibroReclamoGeneral', [CategoriaUserController::class, 'sendMessageLibroReclamo']);
+
+Route::post('/photoProfileGeneral', [CategoriaUserController::class, 'loadphotoProfileApp']);
 // END GENERAL
 //
 //
