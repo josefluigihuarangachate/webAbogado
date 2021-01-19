@@ -120,7 +120,7 @@ class LoginController extends Controller {
                 session(['correo' => $data->correo]);
                 session(['usuario' => $data->usuario]);
                 session(['clave' => $data->clave]);
-//                session(['fecha_registro' => $data->fecha_registro]);
+                session(['idonesignal' => $data->idonesignal]);
                 session(['idtipo' => $data->idtipo]);
                 session(['estado' => $data->estado]);
                 session(['tipo_usuario' => $data->tipo_usuario]);

@@ -93,6 +93,7 @@ header('Content-Type: text/html; charset=UTF-8');
         <script>
 
             var formatoHora = "00:00:00";
+
             function restarHora(segundos) {
                 $.post(ruta() + "restarHora" + globalName, {cmd: 'web', segundos: segundos}, function (html) {
                     if (html == formatoHora) {
@@ -102,7 +103,8 @@ header('Content-Type: text/html; charset=UTF-8');
                     } else {
 
                         var HM = html.split(':');
-                        document.getElementById("tiempo_restante").innerHTML = 'Faltan : ' + HM[0] + ':' + HM[1];
+                        //document.getElementById("tiempo_restante").innerHTML = 'Faltan : ' + HM[0] + ':' + HM[1] + ':' + HM[2];
+                        document.getElementById("tiempo_restante").innerHTML = 'Faltan : ' + html;
                         habilitarChat();
                     }
                 });
@@ -174,7 +176,9 @@ if (session('idtipo') == 2) {
                             if (json['suscripcion']) { // SI ESTA SUSCRITO EN ALGUN PLAN
                                 var suscripcion = json['suscripcion'];
                                 if (suscripcion.restan_horas != null || suscripcion.restan_horas != formatoHora) {
+
                                     restarHora(segundos);
+
                                 } else {
                                     deshabilitarChat();
                                 }
@@ -201,13 +205,55 @@ if (session('idtipo') == 2) {
 
             function chat() {
                 setInterval(function () {
+                    tiempo_restante(4);
 
-
-                    tiempo_restante(5);
-
-                }, 5000);
+                }, 4000);
             }
             chat();
+
+
+
+            function correrSegundos() {
+
+                var s = '00';
+                var sep = document.getElementById("tiempo_restante").innerHTML;
+
+
+                if (sep != "" && sep != "Faltan : 00:00:00" && sep != "Tiempo Terminado") {
+                    var str = sep.split(" ");
+                    var t = str[2].split(":");
+
+                    if (0 < parseInt(t[2]) && parseInt(t[2]) < 60) {
+                        if (0 < parseInt(t[2]) && parseInt(t[2]) < 10) {
+                            t[2] = "0" + (parseInt(t[2] - 1));
+                        } else if (10 <= parseInt(t[2]) && parseInt(t[2]) < 60) {
+                            t[2] = t[2] - 1;
+                            if (0 < parseInt(t[2]) && parseInt(t[2]) < 10) {
+                                t[2] = "0" + parseInt(t[2]);
+                            }
+                        }
+
+                        console.log(s);
+                        document.getElementById("tiempo_restante").innerHTML = 'Faltan : ' + t[0] + ':' + t[1] + ':' + t[2];
+                    } else {
+                        document.getElementById("tiempo_restante").innerHTML = 'Faltan : ' + t[0] + ':' + t[1] + ':59';
+                    }
+
+                } else if (sep === "Faltan : 00:00:00" || sep === "Tiempo Terminado") {
+
+                    // ENVIO NOTIFICACION PAR QUE EVALUE A LOS ABOGADOS
+                    $.post(ruta() + 'notificarCalificarAbogado' + globalName, {'cmd': 'web'}, function (data) {
+                        console.log("Notificacion Enviada");
+                    });
+
+                    clearInterval(runTime);
+                }
+
+            }
+
+            var runTime = setInterval(function () {
+                correrSegundos();
+            }, 1000);
 
 
 
@@ -259,15 +305,35 @@ if (session('idtipo') == 2) {
             });
 
             function scrollToBottomChat() {
-                // conversacion
-                $("#conversacion").animate({scrollTop: $('ul#conversacion li:last').offset().top + 30});
+                // conversacion (Chat scroll bottom)
+                // https://jsfiddle.net/Truezplaya/phncn241/2/
+                // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_element_scrollleft
+
+                var elmnt = document.getElementById("conversacion");
+                var y = elmnt.scrollTop;
+
+                $("#conversacion").animate({scrollTop: $('ul#conversacion li:last').offset().top + y});
             }
 
             setTimeout(function () {
                 scrollToBottomChat();
-            }, 2000);
+            }, 3000);
 
 
+        </script>
+
+
+        <script type="text/javascript">
+            // Teclado enter
+            // https://www.jose-aguilar.com/blog/deshabilitar-tecla-enter-de-los-formularios/
+            // Para deshabilitar la tecla enter, porque me estaba saliendo error
+            $(document).ready(function () {
+                $("form").keypress(function (e) {
+                    if (e.which == 13) {
+                        return false;
+                    }
+                });
+            });
         </script>
     </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CronController; // CRON (ADMINISTRADOR,CLIENTE,ABOGADO)
 use App\Http\Controllers\LoginController; // LOGIN (CLIENTE,ABOGADO)
 use App\Http\Controllers\AdminController; // LOGIN, ADMINISTRADOR (ADMINISTRADOR)
 use App\Http\Controllers\DashboardController; // DASHBOARD (ADMINISTRADOR)
@@ -244,6 +245,11 @@ Route::post('/eliminarService', [ServicioController::class, 'destroy']);
 //
 //
 // ------------------------------- PARA LA APP --------------------------------------------
+// CRON - RUC Y SEDULA
+Route::get('/cronrucsedula', [CronController::class, 'cronRucSedula']);
+// FIN CRON
+// 
+// 
 // USUARIO
 Route::get('/app', function () {
     return view('user/login');
@@ -262,6 +268,16 @@ Route::post('/appcategoriaGeneral', [CategoriaUserController::class, 'loadCatego
 
 Route::get('/applistaGeneral', function () {
     return view('user/servicio');
+});
+Route::get('/appverplanesGeneral', function () {
+    return view('user/verplanes');
+});
+Route::get('/appcalificarGeneral', function () {
+    return view('user/calificar');
+});
+
+Route::get('/appreseñaGeneral', function () {
+    return view('user/resena');
 });
 Route::get('/applistaservicoxabogadoGeneral', function () {
     return view('user/servicioabogado');
@@ -306,6 +322,13 @@ Route::post('/registrarChatGeneral', [CategoriaUserController::class, 'sendMessa
 Route::post('/registrarLibroReclamoGeneral', [CategoriaUserController::class, 'sendMessageLibroReclamo']);
 
 Route::post('/photoProfileGeneral', [CategoriaUserController::class, 'loadphotoProfileApp']);
+
+Route::post('/notificarCalificarAbogadoGeneral', [CategoriaUserController::class, 'notifyQualifyLawyer']);
+
+Route::post('/appcalificarabogadoGeneral', [CategoriaUserController::class, 'laodLawyerForQualify']);
+Route::post('/appregistrarcalificacionabogadoGeneral', [CategoriaUserController::class, 'registrarCalificacion']);
+
+Route::post('/appresenaabogadoGeneral', [CategoriaUserController::class, 'loadResenaAbogado']);
 // END GENERAL
 //
 //

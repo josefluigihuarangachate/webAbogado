@@ -26,6 +26,237 @@ class CategoriaUserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    public function loadResenaAbogado(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+
+        // https://reinink.ca/articles/calculating-totals-in-laravel-using-conditional-aggregates
+        $total = DB::table(table('calificacion'))
+                ->selectRaw("count(case when estrellas = '1' then 1 end) as uno")
+                ->selectRaw("count(case when estrellas = '2' then 1 end) as dos")
+                ->selectRaw("count(case when estrellas = '3' then 1 end) as tres")
+                ->selectRaw("count(case when estrellas = '4' then 1 end) as cuatro")
+                ->selectRaw("count(case when estrellas = '5' then 1 end) as cinco")
+                ->where(
+                        [
+                            ['idusuario', '=', session('id')]
+                        ]
+                )
+                ->first();
+
+        $total = objectToArray($total);
+
+
+        $rate = 0;
+
+        if ($total['uno'] > $rate) {
+            $rate = 1;
+        }
+        if ($total['dos'] > $rate) {
+            $rate = 2;
+        }
+        if ($total['tres'] > $rate) {
+            $rate = 3;
+        }
+        if ($total['cuatro'] > $rate) {
+            $rate = 4;
+        }
+        if ($total['cinco'] > $rate) {
+            $rate = 5;
+        }
+
+        $loving = DB::table(table('calificacion'))
+                ->select(
+                        table('calificacion') . '.idcliente',
+                )
+                ->where(
+                        [
+                            ['idusuario', '=', session('id')],
+                            ['estrellas', '=', 5]
+                        ]
+                )
+                ->count();
+
+
+        $qualifity = DB::table(table('calificacion'))
+                ->select(
+                        table('calificacion') . '.idcliente',
+                )
+                ->where(
+                        [
+                            ['idusuario', '=', session('id')]
+                        ]
+                )
+                ->count();
+
+        $data = DB::table(table('usuario'))
+                ->join(table('calificacion'), table('usuario') . '.id', '=', table('calificacion') . '.idcliente')
+                ->select(
+                        table('usuario') . '.nombre AS nombre_cliente',
+                        table('usuario') . '.foto AS foto',
+                        table('calificacion') . '.*'
+                )
+                ->where(table('calificacion') . '.idusuario', session('id'))
+                ->get();
+        $data = objectToArray($data);
+        if ($data) {
+            $json = json('ok', strings('success_read'), $data);
+
+            $json['cant_calificacion'] = intval($rate);
+            $json['cant_favoritos'] = intval($loving);
+            $json['cant_client'] = intval($qualifity);
+
+            unset($data);
+            unset($total);
+            unset($rate);
+            unset($loving);
+            unset($qualifity);
+        } else {
+            $json = json('error', strings('error_read'), '');
+        }
+
+        return jsonPrint($json, $cmd);
+    }
+
+    public function registrarCalificacion(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+        $idabogado = htmlspecialchars(intval(trim($request->input('idAbogado'))));
+        $mensaje = htmlspecialchars(trim($request->input('mensaje')));
+        $calificacion = htmlspecialchars(intval(trim($request->input('calificacion'))));
+        $idonesignal = htmlspecialchars(trim($request->input('idonesignal')));
+
+        $rules = [
+            'cmd' => 'required|string',
+            'idAbogado' => 'required|integer',
+            'mensaje' => 'required|string',
+            'calificacion' => 'required|integer',
+            'idonesignal' => 'required|string',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            if (
+                    empty($cmd) ||
+                    empty($idabogado) ||
+                    empty($mensaje) ||
+                    empty($calificacion) ||
+                    empty($idonesignal)
+            ) {
+                $json = json('error', strings('error_empty'), '');
+            } else {
+                $json = json('error', strings('error_option'), '');
+            }
+        } else {
+
+            try {
+                $affected = DB::table(table('calificacion'))->insert([
+                    'codigo' => $idabogado . session('id'),
+                    'idusuario' => $idabogado,
+                    'idcliente' => session('id'),
+                    'mensaje' => $mensaje,
+                    'estrellas' => $calificacion,
+                    'fechahora' => date('Y-m-d H:i:s'),
+                ]);
+
+                if ($affected) {
+                    NotifyOneSignal('Aviso Importante', 'Hola, El cliente ' . session('nombre') . ' ha califico tus servicios, revisa tus reseñas.', array($idonesignal));
+                    $json = json('ok', strings('success_create'), '');
+                } else {
+                    $json = json('error', strings('error_create'), '');
+                }
+            } catch (Exception $e) {
+                $json = json('error', strings('error_update'), '');
+            }
+        }
+
+        return jsonPrint($json, $cmd);
+    }
+
+    public function laodLawyerForQualify(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+
+        $calificacion = DB::table(table('calificacion'))
+                ->select(
+                        table('calificacion') . '.idusuario',
+                )
+                ->where(
+                        [
+                            ['idcliente', '=', session('id'),]
+                        ]
+                )
+                ->get();
+
+        $calificacion = objectToArray($calificacion);
+
+        $data = DB::table(table('usuario'))
+                ->join(table('chat'), function ($join) {
+                    $join->on(table('chat') . '.idreceptor', '=', table('usuario') . '.id')
+                    ->orOn(table('chat') . '.idemisor', '=', table('usuario') . '.id');
+                })
+                ->select(
+                        table('usuario') . '.id',
+                        table('usuario') . '.foto',
+                        table('usuario') . '.nombre',
+                        table('usuario') . '.idonesignal',
+                )
+                ->where(
+                        [
+                            [table('usuario') . '.id', "!=", session('id')],
+                            [table('chat') . '.idreceptor', '=', session('id')]
+                        ]
+                )
+                ->orWhere(
+                        [
+                            [table('usuario') . '.id', "!=", session('id')],
+                            [table('chat') . '.idemisor', '=', session('id')]
+                        ]
+                )
+                ->get();
+        //->unique(table('usuario') . '.id');
+        $data = objectToArray($data);
+        $data = @array_unique(objectToArray($data), SORT_REGULAR);
+        sort($data);
+
+        if ($calificacion) {
+            for ($c = 0; $c < count($calificacion); $c++) {
+                for ($d = 0; $d < count($data); $d++) {
+                    if (@$data[$d]['id'] == @$calificacion[$c]['idusuario']) {
+                        @$data[$d] = array();
+                    }
+                }
+            }
+        }
+        $data = array_filter($data);
+        sort($data);
+
+        if ($data) {
+            $json = json('ok', strings('success_read'), $data);
+        } else {
+            $json = json('error', strings('error_read'), '');
+        }
+
+        return jsonPrint($json, $cmd);
+    }
+
+    public function notifyQualifyLawyer(Request $request) {
+        $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
+
+        NotifyOneSignal('Aviso Importante', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias.', array(session('idonesignal')));
+
+        $affected = DB::table(table('notificacion'))->insert([
+            'idusuario' => session('id'),
+            'asunto' => 'aviso de calificacion',
+            'mensaje' => 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href="' . RUTA . 'appcalificarGeneral" class="btn btn-info"><i class="lni lni-medall-alt"></i>&nbsp;Calificar Ahora</a>',
+            'fechahora' => date('Y-m-d H:i:s'),
+            'leido' => 'Sin Leer',
+        ]);
+
+        if ($affected) {
+            $json = json('ok', strings('success_create'), '');
+        } else {
+            $json = json('error', strings('error_create'), '');
+        }
+    }
+
     public function loadphotoProfileApp(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $archivo = $request->file('inputFile');
@@ -302,7 +533,11 @@ class CategoriaUserController extends Controller {
     public function restarHora(Request $request) {
         $cmd = htmlspecialchars(strtolower(trim($request->input('cmd'))));
         $segundos = htmlspecialchars(intval(trim($request->input('segundos'))));
+
+
         $convertSecondToHour = convertSecondToHour(session('restan_horas'));
+        $convertSecondToHour = str_replace(".", "", $convertSecondToHour);
+        $convertSecondToHour = str_replace(",", "", $convertSecondToHour);
 
         $return = session('restan_horas') - $segundos;
 

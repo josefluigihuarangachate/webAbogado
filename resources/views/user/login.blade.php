@@ -28,22 +28,25 @@
                                             <div id="signin" class="tabContent" style="margin-top: 40px;">
                                                 <h5>Proceda con su inicio de sesión</h5>
                                                 <h4><i class="lni lni-key"></i><label>&nbsp;&nbsp;</label> Login </h4>
-                                                <form method="POST" class="form2" id="formdata" name="formdata">
-                                                    <div>
-                                                        <input type="text" placeholder="Cuenta de usuario" value="cliente" id="logUser" name="logUser">
-                                                        <label><i class="lni lni-user"></i></label>
-                                                    </div>
-                                                    <br>
-                                                    <br>
-                                                    <div>
-                                                        <input type="password" placeholder="Contraseña" value="cliente" id="logClave" name="logClave">
-                                                        <label><i class="lni lni-lock"></i></label>
-                                                    </div>
-                                                    <br>
-                                                    <br>
-                                                    <button class="main-btn color-background btnsend" type="button">Iniciar Sesión</button>
-                                                    <a href="#" title="">Olvide mi contraseña?</a>
-                                                </form>
+
+                                                <div class="scroll-form-login" style="overflow: auto;height: 190px;">
+                                                    <form method="POST" class="form2" id="formdata" name="formdata">
+                                                        <div>
+                                                            <input type="text" placeholder="Cuenta de usuario" value="cliente" id="logUser" name="logUser">
+                                                            <label><i class="lni lni-user"></i></label>
+                                                        </div>
+                                                        <br>
+                                                        <br>
+                                                        <div>
+                                                            <input type="password" placeholder="Contraseña" value="cliente" id="logClave" name="logClave">
+                                                            <label><i class="lni lni-lock"></i></label>
+                                                        </div>
+                                                        <br>
+                                                        <br>
+                                                        <button class="main-btn color-background btnsend" type="button">Iniciar Sesión</button>
+                                                        <a href="#" title="">Olvide mi contraseña?</a>
+                                                    </form>
+                                                </div>
                                             </div>
                                             <div id="signup" class="tabContent">
                                                 <h5>Proceda con su registro</h5>

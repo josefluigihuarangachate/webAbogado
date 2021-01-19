@@ -32,3 +32,4 @@ function strings($name) {
 }
 
 define('FOLDER_CATEGORIA', 'general/fotos/');
+define('RUTA', 'http://192.168.0.105:8000/');

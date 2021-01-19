@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2021 a las 06:03:23
+-- Tiempo de generación: 18-01-2021 a las 21:46:09
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -29,10 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `calificacion` (
   `id` int(25) NOT NULL,
+  `codigo` varchar(255) NOT NULL COMMENT 'Es la convinacion del id del abogado con el id del cliente',
   `idusuario` int(25) NOT NULL,
   `idcliente` int(25) NOT NULL,
-  `estrellas` enum('1','2','3','4','5') DEFAULT NULL
+  `mensaje` text DEFAULT NULL,
+  `estrellas` enum('1','2','3','4','5') DEFAULT NULL,
+  `fechahora` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `calificacion`
+--
+
+INSERT INTO `calificacion` (`id`, `codigo`, `idusuario`, `idcliente`, `mensaje`, `estrellas`, `fechahora`) VALUES
+(32, '326', 3, 26, 'Buenos días, sus serviccios para este abogado son muy bueno, lo recomendaria a otras personas que desean saber acerca de su trato y su profesionalismo.', '3', '2021-01-16 16:37:35'),
+(33, '2326', 23, 26, 'Buenos días, sus serviccios para este abogado son muy bueno, lo recomendaria a otras personas que desean saber acerca de su trato y su profesionalismo.', '3', '2021-01-16 16:38:00');
 
 -- --------------------------------------------------------
 
@@ -89,7 +100,21 @@ INSERT INTO `chat` (`id`, `idemisor`, `idreceptor`, `mensaje`, `archivo`, `fecha
 (27, 26, 23, 'f', NULL, '2021-01-06 05:39:21', 'No Leido'),
 (28, 26, 23, 'hola', NULL, '2021-01-06 05:48:52', 'No Leido'),
 (29, 26, 23, 'h', NULL, '2021-01-06 05:50:04', 'No Leido'),
-(30, 26, 23, 'hola', NULL, '2021-01-06 06:01:37', 'No Leido');
+(30, 26, 23, 'hola', NULL, '2021-01-06 06:01:37', 'No Leido'),
+(31, 26, 23, 'hola', NULL, '2021-01-08 17:31:49', 'No Leido'),
+(32, 26, 23, 'que tal', NULL, '2021-01-08 17:32:02', 'No Leido'),
+(33, 26, 23, 'como le va', NULL, '2021-01-08 17:32:53', 'No Leido'),
+(34, 26, 3, 'hola doctor', NULL, '2021-01-16 00:54:18', 'No Leido'),
+(35, 3, 26, 'hola', NULL, '2021-01-16 01:22:49', 'Visto'),
+(36, 23, 26, 'hola que tal', NULL, '2021-01-18 18:15:16', 'Visto'),
+(37, 23, 26, 'como le va', NULL, '2021-01-18 18:15:28', 'Visto'),
+(38, 23, 26, 'que tal', NULL, '2021-01-18 19:05:22', 'Visto'),
+(39, 23, 26, 'que tal', NULL, '2021-01-18 19:13:46', 'Visto'),
+(40, 23, 26, 'da', NULL, '2021-01-18 19:17:07', 'Visto'),
+(41, 23, 26, 'hol', NULL, '2021-01-18 19:49:20', 'Visto'),
+(42, 23, 26, 'tu que tal', NULL, '2021-01-18 19:49:33', 'Visto'),
+(43, 23, 26, 'como esta', NULL, '2021-01-18 20:18:35', 'Visto'),
+(44, 23, 26, 'abogado buenos dias', NULL, '2021-01-18 20:18:47', 'Visto');
 
 -- --------------------------------------------------------
 
@@ -142,7 +167,10 @@ CREATE TABLE `notificacion` (
 
 INSERT INTO `notificacion` (`id`, `idusuario`, `codigo`, `asunto`, `mensaje`, `fechahora`, `leido`, `tipo`, `class`, `icon`, `color`) VALUES
 (1, 26, 'ERTYU', 'aviso de cobro', 'debe pagar su cuenta', '2021-01-02 15:19:13', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
-(2, 26, 'UIWR', 'aviso de cobro', 'debe pagar su cuenta', '2021-01-02 15:19:13', 'Visto', 'Importante', 'alert alert-danger', 'mdi-message-alert', 'danger');
+(2, 26, 'UIWR', 'aviso de cobro', 'debe pagar su cuenta', '2021-01-02 15:19:13', 'Visto', 'Importante', 'alert alert-danger', 'mdi-message-alert', 'danger'),
+(142, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-16 01:12:08', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(143, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-16 01:24:51', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(144, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-18 20:19:34', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary');
 
 -- --------------------------------------------------------
 
@@ -168,8 +196,7 @@ CREATE TABLE `plan` (
 
 INSERT INTO `plan` (`id`, `nombre`, `descripcion`, `precio`, `plan`, `horas`, `estado`, `segundos`, `modificado_por`) VALUES
 (1, 'Plan Gratis', 'Plan Gratis', '00.00', 'Gratis', '03:00:00', 'activo', '10800', NULL),
-(2, 'Plan Mensual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan mensual', '56.00', 'Mensual', '03:00:00', 'activo', '10800', 1),
-(3, 'Plan Anual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan anual', '230.00', 'Anual', '03:00:00', 'activo', '10800', 1);
+(2, 'Plan 3 Mensual', '- Chat de 3 horas\r\n- Leer Documentos\r\n- Plan mensual', '56.00', 'Mensual', '03:00:00', 'activo', '10800', 1);
 
 -- --------------------------------------------------------
 
@@ -253,7 +280,7 @@ CREATE TABLE `suscripcion` (
 --
 
 INSERT INTO `suscripcion` (`id`, `idusuario`, `idplan`, `nombreplan`, `descripcionplan`, `hora`, `precio`, `total`, `ini_fechahora`, `fin_fechahora`, `restan_horas`, `segundos`, `fechahora`) VALUES
-(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '36:35:45', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '36:07:52', '130067', '2021-01-05 23:15:29');
+(1, 26, 2, 'Plan Mensual', 'dasdasdasddsadsadasdas\r\nasdasdasdasdas\r\ndasd\r\nasdasdasdasda', '36:35:45', '34.00', '34.00', '2020-12-01 21:51:27', '2020-12-31 21:51:27', '00:00:00', '0', '2021-01-05 23:15:29');
 
 -- --------------------------------------------------------
 
@@ -310,6 +337,7 @@ CREATE TABLE `usuario` (
   `foto` varchar(500) DEFAULT NULL COMMENT 'Guardar la ruta de la imagen completa con toda y carpeta\r\n\r\nEjemplo :\r\nassets/images/photos/gerente.png\r\n\r\nSi esta vacio el campo foto se pondra :\r\nassets/images/photos/empty/empty-avatar.png',
   `tipo_documento` enum('RUC','Cedula') DEFAULT NULL,
   `ruc_cedula` varchar(15) DEFAULT NULL,
+  `noveno_numero` varchar(10) DEFAULT NULL COMMENT 'Aqui se guarda el dia y el mes, el cual se le hara recordar su fecha de pago.\r\n\r\nEjm : 27/03',
   `nombre` varchar(255) NOT NULL,
   `dni` varchar(15) DEFAULT NULL,
   `correo` varchar(255) NOT NULL,
@@ -329,11 +357,11 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `foto`, `tipo_documento`, `ruc_cedula`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`, `idonesignal`) VALUES
-(1, 'Profile25122020020414background_admin.jpg', NULL, NULL, 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
-(3, 'Profile23122020164046abogado.jpg', NULL, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
-(23, NULL, 'RUC', '', 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-9.73950979', '-52.95631814', 23, '1e084165-1068-4818-9d72-cd265bbec38e'),
-(26, 'Profile07012021050207f608x342-988126_1017849_0.jpg', 'Cedula', '1234567890123', 'Luis Miguel Huaman Quispe', '6363453535', 'luismiguel@gmil.com', '7542342342432', 'ghdhfgfdgdfgfd', 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', '-20.81523006', '-67.70102495', 26, '1e084165-1068-4818-9d72-cd265bbec38e');
+INSERT INTO `usuario` (`id`, `foto`, `tipo_documento`, `ruc_cedula`, `noveno_numero`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`, `idonesignal`) VALUES
+(1, 'Profile25122020020414background_admin.jpg', NULL, NULL, NULL, 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
+(3, 'Profile23122020164046abogado.jpg', NULL, NULL, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
+(23, NULL, 'RUC', NULL, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-9.73950979', '-52.95631814', 23, '1e084165-1068-4818-9d72-cd265bbec38e'),
+(26, 'Profile07012021050207f608x342-988126_1017849_0.jpg', 'Cedula', '1234567890123', '26/04', 'Luis Miguel Huaman Quispe', '6363453535', 'luismiguel@gmil.com', '7542342342432', 'ghdhfgfdgdfgfd', 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', '-20.81523006', '-67.70102495', 26, '1e084165-1068-4818-9d72-cd265bbec38e');
 
 --
 -- Índices para tablas volcadas
@@ -344,6 +372,7 @@ INSERT INTO `usuario` (`id`, `foto`, `tipo_documento`, `ruc_cedula`, `nombre`, `
 --
 ALTER TABLE `calificacion`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `codigo` (`codigo`),
   ADD KEY `FK_idusuariocalificacion` (`idusuario`),
   ADD KEY `FK_idclientecalificacion` (`idcliente`);
 
@@ -436,7 +465,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -448,7 +477,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `libro_reclamo`
@@ -460,7 +489,7 @@ ALTER TABLE `libro_reclamo`
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT de la tabla `plan`

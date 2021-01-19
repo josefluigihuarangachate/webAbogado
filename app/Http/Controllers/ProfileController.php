@@ -365,8 +365,7 @@ class ProfileController extends Controller {
                 }
             } else {
 
-
-                // Registro los datos
+                // Actualizo los datos
                 $affected = DB::table(table('usuario'))
                         ->where('id', $id)
                         ->update(
@@ -374,6 +373,7 @@ class ProfileController extends Controller {
                             'nombre' => $name,
                             'tipo_documento' => $tipo_documento,
                             'ruc_cedula' => $ruc_cedula,
+                            'noveno_numero' => novenoNumeroDayMonth($tipo_documento, $ruc_cedula),
                             'dni' => $dni,
                             'correo' => $email,
                             'celular' => $phone,

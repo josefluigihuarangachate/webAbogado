@@ -6,6 +6,47 @@
  * and open the template in the editor.
  */
 
+function novenoNumero($ruc_sedula) {
+    $return = NULL;
+
+    if (strlen($ruc_sedula) == 13) {
+        $return = substr(strval($ruc_sedula), 8, -4);
+    } else if (strlen($ruc_sedula) == 10) {
+        $return = substr(strval($ruc_sedula), 8, -1);
+    }
+
+    return $return;
+}
+
+function novenoNumeroDayMonth($tipo_documento, $ruc_sedula) {
+    $return = NULL;
+    $dia = '';
+
+    $dias = array(
+        0 => '28',
+        1 => '10',
+        2 => '12',
+        3 => '14',
+        4 => '16',
+        5 => '18',
+        6 => '20',
+        7 => '22',
+        8 => '24',
+        9 => '26',
+    );
+
+    @$dia = @novenoNumero($ruc_sedula);
+
+    if ($dia >= 0) {
+        if (strtolower($tipo_documento) === 'ruc') {
+            $return = $dias[$dia] . "/03";
+        } else if (strtolower($tipo_documento) === 'cedula') {
+            $return = $dias[$dia] . "/04";
+        }
+    }
+    return $return;
+}
+
 function restarDosHoras2($hour, $second) {
     $restarHour = strtotime('-' . intval($second) . ' second', strtotime($hour));
     $newHour = date('H:i:s', $restarHour);

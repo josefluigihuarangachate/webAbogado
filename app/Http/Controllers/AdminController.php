@@ -75,7 +75,7 @@ class AdminController extends Controller {
                             ]
                     )->whereNotIn(table('usuario') . '.idtipo', [2, 3]) // QUE SEA ADMINISTRADOR
                     ->first();
-
+                    
             if ($data && password_verify($clave, $data->clave)) {
                 $json = json('ok', strings('success_login'), $data);
                 $json['redirect'] = "/dashboardAdmin";
@@ -103,7 +103,7 @@ class AdminController extends Controller {
                 session(['correo' => $data->correo]);
                 session(['usuario' => $data->usuario]);
                 session(['clave' => $data->clave]);
-//                session(['fecha_registro' => $data->fecha_registro]);
+                session(['idonesignal' => $data->idonesignal]);
                 session(['idtipo' => $data->idtipo]);
                 session(['estado' => $data->estado]);
                 session(['tipo_usuario' => $data->tipo_usuario]);

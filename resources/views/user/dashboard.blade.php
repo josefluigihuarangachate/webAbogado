@@ -45,7 +45,7 @@ header('Content-Type: text/html; charset=UTF-8');
                         <p>On Law pone a su disposición este medio para que realice
                             sus consultas y/o sugerencias, las cuales serán atendidas a la brevedad.<br></p>
                         <div class="day-icon">
-                            <img src="user/assets/images/consult.jpg" alt="" width="60">
+                            <img src="user/assets/images/consult.jpg" alt="" width="50">
                         </div>
                     </div>
                 </div>

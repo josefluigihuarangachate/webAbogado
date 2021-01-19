@@ -28,21 +28,30 @@
             </label><button class="btn btn-success" style="border-radius: 0px 50px 50px 0px;background-color: #eeda68;border: 1px solid #ccba57;" id="guardarFotoPerfil" name="guardarFotoPerfil">
                 <i class="lni lni-save"></i>&nbsp; Guardar
             </button>
-            
+
         </li>
         <!-- Icono : http://sigmadigitalpartners.com/themes/templatemonster/html/dashield/pages/icons/lineicons.html-->
         <!--<li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-inbox"></i>Mi Perfil</a></li>-->
         <li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-pencil-alt"></i>Configuración</a></li>
 
         <?php
+        // SOLO PARA ABOGADOS
+        if (session('idtipo') == 2) {
+            ?>
+            <li><a href="/appreseñaGeneral" title="" style="font-size: 18px;"><i class="lni lni-graduation"></i>Reseña</a></li>
+            <?php
+        }
+        ?>
+        <?php
         // SOLO PARA CLIENTES
         if (session('idtipo') == 3) {
             ?>
             <li><a href="/applibroreclamoGeneral" title="" style="font-size: 18px;"><i class="lni lni-library"></i>Area de Cliente</a></li>
+            <li><a href="/appverplanesGeneral" title="" style="font-size: 18px;"><i class="lni lni-credit-cards"></i>Planes</a></li>
             <?php
         }
         ?>
-        <li><a href="notifications.html" title="" style="font-size: 18px;"><i class="lni lni-alarm"></i>Notificaciones</a></li>
+        <li><a href="/appnotificacionGeneral" title="" style="font-size: 18px;"><i class="lni lni-alarm"></i>Notificaciones</a></li>
         <!--<li><a href="lock-screen.html" title=""><i class="lni lni-key"></i>Lock screen</a></li>-->
         <!--<li><a href="settings.html" title="" style="font-size: 18px;"><i class="lni lni-control-panel"></i>setting</a></li>-->
         <!--<li><a href="privacy.html" title=""><i class="lni lni-sort-amount-asc"></i>Privacy & Help</a></li>-->
