@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2021 a las 21:46:09
+-- Tiempo de generación: 19-01-2021 a las 22:30:28
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -360,8 +360,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `foto`, `tipo_documento`, `ruc_cedula`, `noveno_numero`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`, `idonesignal`) VALUES
 (1, 'Profile25122020020414background_admin.jpg', NULL, NULL, NULL, 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
 (3, 'Profile23122020164046abogado.jpg', NULL, NULL, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
-(23, NULL, 'RUC', NULL, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-9.73950979', '-52.95631814', 23, '1e084165-1068-4818-9d72-cd265bbec38e'),
-(26, 'Profile07012021050207f608x342-988126_1017849_0.jpg', 'Cedula', '1234567890123', '26/04', 'Luis Miguel Huaman Quispe', '6363453535', 'luismiguel@gmil.com', '7542342342432', 'ghdhfgfdgdfgfd', 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', '-20.81523006', '-67.70102495', 26, '1e084165-1068-4818-9d72-cd265bbec38e');
+(23, 'Profile18012021205002foto-de-perfil.jpg', 'RUC', NULL, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-9.73950979', '-52.95631814', 23, '1e084165-1068-4818-9d72-cd265bbec38e'),
+(26, 'Profile180120212049021-intro-photo-final.jpg', 'Cedula', '1234567890123', '26/04', 'Luis Miguel Huaman Quispe', '6363453535', 'luismiguel@gmil.com', '7542342342432', 'ghdhfgfdgdfgfd', 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', '-20.81523006', '-67.70102495', 26, '1e084165-1068-4818-9d72-cd265bbec38e');
 
 --
 -- Índices para tablas volcadas
