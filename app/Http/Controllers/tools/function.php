@@ -10,12 +10,12 @@ function novenoNumero($ruc_sedula) {
     $return = NULL;
 
     if (strlen($ruc_sedula) == 13) {
-        $return = substr(strval($ruc_sedula), 8, -4);
-    } else if (strlen($ruc_sedula) == 10) {
-        $return = substr(strval($ruc_sedula), 8, -1);
+        @$return = substr(strval(@$ruc_sedula), 8, -4);
+    } else if (strlen(@$ruc_sedula) == 10) {
+        @$return = substr(strval(@$ruc_sedula), 8, -1);
     }
 
-    return $return;
+    return @$return;
 }
 
 function novenoNumeroDayMonth($tipo_documento, $ruc_sedula) {
@@ -39,12 +39,12 @@ function novenoNumeroDayMonth($tipo_documento, $ruc_sedula) {
 
     if ($dia >= 0) {
         if (strtolower($tipo_documento) === 'ruc') {
-            $return = $dias[$dia] . "/03";
+            @$return = @$dias[$dia] . "/03";
         } else if (strtolower($tipo_documento) === 'cedula') {
-            $return = $dias[$dia] . "/04";
+            @$return = @$dias[$dia] . "/04";
         }
     }
-    return $return;
+    return @$return;
 }
 
 function restarDosHoras2($hour, $second) {
@@ -331,4 +331,27 @@ function array_value_recursive($key, array $arr) {
             array_push($val, $v);
     });
     return $val;
+}
+
+// SIRVE PARA ELIMINAR CARPETA CON SUS ARCHIVOS
+function delete_files($target) {
+    if (is_dir(@$target)) {
+        @$files = glob(@$target . '*', GLOB_MARK); //GLOB_MARK adds a slash to directories returned
+
+        foreach (@$files as $file) {
+            @delete_files(@$file);
+        }
+
+        @rmdir(@$target);
+    } elseif (@is_file(@$target)) {
+        @unlink(@$target);
+    }
+}
+
+function find_word_in_string($string, $find) {
+    if (preg_match($find, $string)) {
+        return true;
+    } else {
+        return false;
+    }
 }

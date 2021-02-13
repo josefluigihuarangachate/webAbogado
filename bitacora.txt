@@ -1,5 +1,11 @@
 PARA LOS INCLUDE NO BLADE
 -------------------------
+        composer dump-autoload
+        php artisan route:cache
+        php artisan cache:clear
+        composer update
+
+
         composer update --no-scripts
 
 
@@ -25,3 +31,17 @@ COMO PUEDO VER MI PROYECTO LARAVEL EN UNA RED LOCAL:
         * EN HOST PONER LA IP DE TU PC
         * EN PORT DEJARLO ASI
         php artisan serve --host=192.168.0.105 --port=8000
+
+
+
+PROBLEMAS CUANDO GENERAMOS UN CONTROLADOR Y UN MODEL - SOLUCION
+ESTO SIRVE CUANDO ES LOCAL O EN LA NUBE (HOSTING)
+---------------------------------------------------------------
+
+1.- INGRESAMOS A ESTA RUTA DE LARAVEL
+
+    C:\xampp\htdocs\webAbogado\bootstrap\cache
+
+2.- ELIMINAMOS TODOS LOS ARCHIVOS  MENOS EL .gitignore
+
+3.- LISTO

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-01-2021 a las 22:30:28
+-- Tiempo de generación: 13-02-2021 a las 20:09:16
 -- Versión del servidor: 10.4.17-MariaDB
--- Versión de PHP: 8.0.0
+-- Versión de PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,9 +66,9 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id`, `foto`, `codigo`, `nombre`, `descripcion`, `estado`, `modificado_por`) VALUES
-(2, 'AA19122020235924penal.jpg', '5TR5UU', 'Penal', 'Acerca de carcel  - En todos los casos', 'activo', 23),
-(12, 'AA19122020235914juridico.jpg', 'ACTIVO', 'Juridica', 'ayuda juridica - En todos los casos', 'activo', 23),
-(13, 'AA20122020051615civil2.jpg', 'RETYU', 'Civil', 'sistema civil - En todos los casos', 'activo', 23);
+(2, 'Category28012021201411dinero.jpeg', '5TR5UU', 'Asesoria Tributaria', 'Acerca de Asesoria Tributaria', 'activo', 1),
+(12, 'Category28012021201709asesoria.jpeg', 'ACTIVO', 'Asesoria', 'ayuda Asesoria', 'activo', 1),
+(13, 'Category28012021201537foco.jpeg', 'RETYU', 'Propiedad Intelectual', 'sistema civil - Propiedad Intelectual', 'activo', 1);
 
 -- --------------------------------------------------------
 
@@ -170,7 +170,35 @@ INSERT INTO `notificacion` (`id`, `idusuario`, `codigo`, `asunto`, `mensaje`, `f
 (2, 26, 'UIWR', 'aviso de cobro', 'debe pagar su cuenta', '2021-01-02 15:19:13', 'Visto', 'Importante', 'alert alert-danger', 'mdi-message-alert', 'danger'),
 (142, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-16 01:12:08', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
 (143, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-16 01:24:51', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
-(144, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-18 20:19:34', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary');
+(144, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-18 20:19:34', 'Visto', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(145, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:50:03', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(146, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:51:15', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(147, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:51:27', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(148, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:52:45', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(149, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:53:10', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(150, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:53:20', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(151, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:53:47', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(152, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:55:09', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(153, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:55:37', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(154, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:56:26', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(155, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:56:46', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(156, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:57:56', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(157, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:58:24', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary'),
+(158, 26, NULL, 'aviso de calificacion', 'Su tiempo de chat ha terminado. No olvide que debe calificar a los abogados, Gracias. <br><br><a href=\"http://192.168.0.105:8000/appcalificarGeneral\" class=\"btn btn-info\"><i class=\"lni lni-medall-alt\"></i>&nbsp;Calificar Ahora</a>', '2021-01-28 17:58:42', 'Sin Leer', 'Aviso', 'alert alert-primary', 'mdi-message-alert', 'primary');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagina`
+--
+
+CREATE TABLE `pagina` (
+  `id` int(25) NOT NULL,
+  `carpeta` varchar(255) NOT NULL,
+  `ruta` varchar(255) NOT NULL COMMENT '/blogView/Carpeta Nueva/index/\r\n\r\nAl final se enviara un valor\r\npor ejempplo :\r\n\r\n/blogView/Carpeta Nueva/index/yes\r\n\r\nEsto sirvira para los que puedan ver los archivos adjuntos ',
+  `all_files` text DEFAULT NULL,
+  `estado` enum('activo','inactivo') NOT NULL DEFAULT 'activo'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -222,11 +250,11 @@ CREATE TABLE `servicio` (
 --
 
 INSERT INTO `servicio` (`id`, `icono`, `foto`, `idcategoria`, `idusuario`, `nombre`, `descripcion`, `precio`, `estado`, `modificado_por`) VALUES
-(6, 'Icono21122020224128descarga.png', 'Service20122020053836Imagen1.png', 2, 3, 'Carcel', 'EEFSDFS F', '58.00', 'activo', 24),
-(7, 'Icono22122020025918descarga.jpg', NULL, 2, 23, 'Publico', 'gsfdfsdf ds fsd f dsf sd fds f dsf dfs', '78.00', 'activo', 1),
-(8, NULL, NULL, 12, 23, 'Juridico Judicial', 'dasdasd sad asdasd asd sa dasdasd ad sa as dasd asdas dasd ads', '67.00', 'activo', 23),
-(9, NULL, NULL, 13, 23, 'Civil de Casas', 'Civil de Casas', '80.00', 'activo', 1),
-(10, 'Icono22122020025918descarga.jpg', NULL, 2, 3, 'Publico', 'gsfdfsdf ds fsd f dsf sd fds f dsf dfs', '', 'activo', 1);
+(6, 'Icono28012021201956dinero.jpeg', 'Service20122020053836Imagen1.png', 2, 3, 'Asesoria Tributaria', 'Asesoria Tributaria', '0.00', 'activo', 1),
+(7, 'Icono28012021202223maleta.jpeg', NULL, 2, 23, 'Asesoria Laboral', 'Asesoria Laboral', '0.00', 'activo', 1),
+(8, 'Icono28012021202342grupo.jpeg', NULL, 2, 23, 'Asesoria Societaria', 'Asesoria Societaria', '0.00', 'activo', 1),
+(9, 'Icono28012021202515cuaderno.jpeg', NULL, 2, 23, 'Licencias De Funcionamiento', 'Licencias de Funcionamiento', '0.00', 'activo', 1),
+(10, 'Icono28012021202044foco.jpeg', NULL, 13, 3, 'Propiedad Intelectual', 'Propiedad Intelectual', '0.00', 'activo', 1);
 
 -- --------------------------------------------------------
 
@@ -360,7 +388,7 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `foto`, `tipo_documento`, `ruc_cedula`, `noveno_numero`, `nombre`, `dni`, `correo`, `celular`, `direccion`, `usuario`, `clave`, `idtipo`, `estado`, `latitud`, `longitud`, `modificado_por`, `idonesignal`) VALUES
 (1, 'Profile25122020020414background_admin.jpg', NULL, NULL, NULL, 'Lisette Gonzales', '7896431', 'lisettegonzales@gmail.com', '987654320', 'San Miguel crd 10', 'admin', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 1, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
 (3, 'Profile23122020164046abogado.jpg', NULL, NULL, NULL, 'Luigi Huaranga', '7896431', 'luigihuaranga@gmail.com', '987654321', 'San Miguel - Plaza Vea', 'admin25', '$2y$11$jJDsMGYNuFClkrmQeOkahO6NYxQxJiwjJbNhWbMsoXjBRHwcOEWBK', 2, 'activo', '-32.84964672', '-55.2205562', 1, NULL),
-(23, 'Profile18012021205002foto-de-perfil.jpg', 'RUC', NULL, NULL, 'Ana Maria Polo', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-9.73950979', '-52.95631814', 23, '1e084165-1068-4818-9d72-cd265bbec38e'),
+(23, 'Profile28012021192933ab7-m-prado1_1.jpg', 'RUC', '', '/03', 'Mario Prado', '09956555', 'anamariapolo@gmail.com', '987654321', 'av san juan de lurigancho', 'abogado', '$2y$11$7n0/3jPhf.hGT11cNobFpu4oXcaLtOpyckKGRphRDli9WuOOBOii6', 2, 'activo', '-9.73950979', '-52.95631814', 23, '1e084165-1068-4818-9d72-cd265bbec38e'),
 (26, 'Profile180120212049021-intro-photo-final.jpg', 'Cedula', '1234567890123', '26/04', 'Luis Miguel Huaman Quispe', '6363453535', 'luismiguel@gmil.com', '7542342342432', 'ghdhfgfdgdfgfd', 'cliente', '$2y$11$hhaHAqP4zpxMYP7LDFWige5SQWIEmbw22PGIV9WkYcicF1fZ4610q', 3, 'activo', '-20.81523006', '-67.70102495', 26, '1e084165-1068-4818-9d72-cd265bbec38e');
 
 --
@@ -403,6 +431,13 @@ ALTER TABLE `libro_reclamo`
 ALTER TABLE `notificacion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_idusuario` (`idusuario`);
+
+--
+-- Indices de la tabla `pagina`
+--
+ALTER TABLE `pagina`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `carpeta` (`carpeta`);
 
 --
 -- Indices de la tabla `plan`
@@ -489,7 +524,13 @@ ALTER TABLE `libro_reclamo`
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+
+--
+-- AUTO_INCREMENT de la tabla `pagina`
+--
+ALTER TABLE `pagina`
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `plan`

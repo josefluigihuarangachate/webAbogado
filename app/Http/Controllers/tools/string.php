@@ -32,4 +32,10 @@ function strings($name) {
 }
 
 define('FOLDER_CATEGORIA', 'general/fotos/');
+define('FOLDER_FILES_BLOG', 'general/archivosblog/');
 define('RUTA', 'http://192.168.0.105:8000/');
+
+
+// https://laravel.io/forum/08-09-2016-how-to-create-views-using-artisan-command
+$view = realpath(base_path('resources/views'));
+define('FOLDER_PAGES', str_replace("\\", '/', $view) . "/pages/");

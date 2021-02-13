@@ -55,7 +55,7 @@ a.main-btn2,
 .tab-content > p a,
 .new-create .white-form label.fileContainer
 {
-	color: #eeda68;	
+	color: #e49c04;	
 }
 
 
@@ -100,11 +100,11 @@ a.view-cart,
 .ui-datepicker-calendar tbody td a.ui-state-active,
 a.create-event
 {
-	background: #eeda68;
+	background: #e39706;
 }
 
 .stroke-solid {
-	fill: #eeda68;
+	fill: #e39706;
 }
 
 
@@ -119,22 +119,22 @@ input[type=checkbox]:checked + label:before,
 .search-area > form button:hover,
 .attachments > ul li.more-alt
 {
-	border-color: #eeda68;	
+	border-color: #e39706;	
 }
 
 .abc{
-	border-left-color: #eeda68;
+	border-left-color: #e39706;
 }
 
 
 ul.tabs li.active a::before
 {
-	border-top-color: #eeda68;		
+	border-top-color: #e39706;		
 }
 
 
 .login-area ul.tabs li.active a::before,
 .topbar
 {
-	border-bottom-color: #eeda68;
+	border-bottom-color: #e39706;
 }

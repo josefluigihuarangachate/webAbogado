@@ -219,7 +219,7 @@ class ServicioController extends Controller {
         $category = htmlspecialchars(ucwords(trim($request->input('Rcategoria'))));
         $name = htmlspecialchars(trim($request->input('Rnombre')));
         $describe = htmlspecialchars(trim($request->input('Rdescripcion')));
-        $price = htmlspecialchars(strtolower(trim($request->input('Rprecio'))));
+        //$price = htmlspecialchars(strtolower(trim($request->input('Rprecio'))));
         $status = htmlspecialchars(strtolower(trim($request->input('Restado'))));
 
         $rules = [
@@ -227,7 +227,7 @@ class ServicioController extends Controller {
             'Rcategoria' => 'required|integer',
             'Rnombre' => 'required|string|min:3|max:255',
             'Rdescripcion' => 'required|string',
-            'Rprecio' => 'required|string',
+            //'Rprecio' => 'required|string',
             'Restado' => 'required|string',
         ];
 
@@ -240,7 +240,7 @@ class ServicioController extends Controller {
                     empty($name) ||
                     empty($describe) ||
                     empty($category) ||
-                    empty($price) ||
+                    //empty($price) ||
                     empty($status)
             ) {
                 $json = json('error', strings('error_empty'), '');
@@ -257,7 +257,7 @@ class ServicioController extends Controller {
                             'idusuario' => $lawyer,
                             'nombre' => $name,
                             'descripcion' => $describe,
-                            'precio' => number_format($price, 2, '.', ''),
+                            //'precio' => number_format($price, 2, '.', ''),
                             'estado' => $status,
                             'modificado_por' => session('id')
                         ]
@@ -336,7 +336,7 @@ class ServicioController extends Controller {
 
         $id = htmlspecialchars(strtolower(trim($request->input('Eid'))));
         $name = htmlspecialchars(ucwords(trim($request->input('Enombre'))));
-        $price = htmlspecialchars(trim($request->input('Eprecio')));
+        //$price = htmlspecialchars(trim($request->input('Eprecio')));
         $describe = htmlspecialchars(trim($request->input('Edescripcion')));
         $idlawyer = htmlspecialchars(trim($request->input('Eabogado')));
         $idcategory = htmlspecialchars(trim($request->input('Ecategoria')));
@@ -346,7 +346,7 @@ class ServicioController extends Controller {
         $rules = [
             'Eid' => 'required|integer',
             'Enombre' => 'required|string',
-            'Eprecio' => 'required|string',
+            //'Eprecio' => 'required|string',
             'Edescripcion' => 'required|string',
             'Eabogado' => 'required|integer',
             'Ecategoria' => 'required|integer',
@@ -357,7 +357,7 @@ class ServicioController extends Controller {
         if ($validator->fails()) {
             if (
                     empty($id) ||
-                    empty($price) ||
+                    //empty($price) ||
                     empty($name) ||
                     empty($describe) ||
                     empty($idlawyer) ||
@@ -377,7 +377,7 @@ class ServicioController extends Controller {
                     ->update(
                     [
                         'nombre' => $name,
-                        'precio' => number_format($price, 2, '.', ''),
+                        //'precio' => number_format($price, 2, '.', ''),
                         'descripcion' => $describe,
                         'idusuario' => $idlawyer,
                         'idcategoria' => $idcategory,

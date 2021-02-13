@@ -65,57 +65,27 @@ header('Content-Type: text/html; charset=UTF-8');
             </section>
 
             <section>
-                <div class="gap no-bottom">
+                <div class="gap grey-bg">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12">
-                                <h5 class="main-title">Abogados Destacados</h5>
-                                <div class="activity">
-                                    <figure>
-                                        <img alt="" src="user/assets/images/resources/user1.jpg" >
-                                        <span><img src="user/assets/images/svg/aaa.png" alt=""></span>
-                                    </figure>
-                                    <div class="history-meta">
-                                        <h5><a title="" href="#">Peter react to maria's pictures</a></h5>
-                                        <span>Disponible</span>
-                                        <br><span><img src="user/assets/images/star.png" width="18" height="18"> <sup style="font-size: 12px;color: #eeda68;">89</sup></span>
+                            <div class="col-lg-12 col-12">
+                                <div class="tabBox">
+                                    <div class="tabContainer">
+                                        <div id="tab1" class="tabContent">
+                                            <h5 class="main-title">Documentos Publicados</h5>
+                                            <div class="row" id="folders" name="folders">                                                
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="activity">
-                                    <figure>
-                                        <img alt="" src="user/assets/images/resources/user6.jpg" >
-                                        <span><img src="user/assets/images/svg/about.png" alt=""></span>
-                                    </figure>
-                                    <div class="history-meta">
-                                        <h5><a title="" href="#">jack comment on the carter's post</a></h5>
-                                        <span>Disponible</span>
-                                        <br><span><img src="user/assets/images/star.png" width="18" height="18"> <sup style="font-size: 12px;color: #eeda68;">4</sup></span>
-
-                                    </div>
-                                </div>
-                                <div class="activity">
-                                    <figure>
-                                        <img alt="" src="user/assets/images/resources/user2.jpg" >
-                                        <span><img src="user/assets/images/svg/angry.png" alt=""></span>
-                                    </figure>
-                                    <div class="history-meta">
-                                        <h5><a title="" href="#">gian reply the your comment</a></h5>
-                                        <span>Disponible</span>
-                                        <br><span><img src="user/assets/images/star.png" width="18" height="18"> <sup style="font-size: 12px;color: #eeda68;">64</sup></span>
-
-                                    </div>
-                                </div>
-
-                                <!-- load more -->
-                                <br>
-                                <br>
-                                <br>
-                                <br>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+
+
 
             <div class="create-new">
                 <div class="post-form">
@@ -235,11 +205,42 @@ header('Content-Type: text/html; charset=UTF-8');
 
         </div>
 
-        
-        
+
+
         <div style="text-align: center;display: none;">
             @include('user/include/translate')
         </div>
         @include('user/include/script_all')
+
+        <script>
+            function saveNameFolder(name, route) {
+                $.post(ruta() + "sessionNameFolder", {cmd: 'web', nameFolder: name, ruta: route}, function (json) {
+                    location.href = "/userblog";
+                });
+            }
+
+            function getFolder() {
+                $.post(ruta() + "getFolders", {cmd: 'web', nameFolder: name}, function (json) {
+                    if (json['status'] == 'Ok') {
+                        var datos = json['data'];
+                        var html = '';
+
+                        for (var d = 0; d < datos.length; d++) {
+                            html += '<div class="col-6">';
+                            html += '<div class="nearby-user">';
+                            html += '<img src="general/img/folder-icon.png" alt="" style="width: 80px;">';
+                            html += '<span>' + datos[d].carpeta + '</span>';
+                            html += '<a href="#" onclick="saveNameFolder(\'' + datos[d].carpeta + '\',\'' + datos[d].ruta + '\')" title="" class="main-btn">Ver Documento</a>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
+                        document.getElementById('folders').innerHTML = html;
+                    } else {
+                        document.getElementById('folders').innerHTML = '<center>' + json['msg'] + '</center>';
+                    }
+                });
+            }
+            getFolder();
+        </script>
     </body>
 </html>

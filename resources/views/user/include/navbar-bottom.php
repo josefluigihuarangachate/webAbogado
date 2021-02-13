@@ -10,14 +10,34 @@
             </i>
         </li>
     </ul>
-    <div id="nav-icon2" class="menu-button">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+
+    <?php
+    if (session('idtipo') == 2) {
+        ?>
+        <a href="./appreseñaGeneral" id="nav-icon2" class="menu-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+
+        <?php
+    } else {
+        ?>
+        <div id="nav-icon2" class="menu-button">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <?php
+    }
+    ?>
+
     <ul class="menu-right">
         <li><a class="ico-hover" href="/appconversacionGeneral" title="" style="font-size: 18px;"><i class="lni lni-comments"></i></a></li>
         <li class=""><a class="ico-hover" href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-user"></i></a></li>

@@ -1,0 +1,26 @@
+Instalar Mysql:
+---------------
+
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04-es
+
+Instalar PHP 7.4 en Ubuntu 20.04 :
+----------------------------------
+
+https://comoinstalar.me/como-instalar-php-en-ubuntu-20-04-lts/
+
+
+-------------------------------------------------------------------------------------------------
+
+Desinstalar Mysql :
+------------------
+
+sudo apt remove --purge mysql-server mysql-client mysql-common
+sudo apt autoremove
+sudo mv -iv /var/lib/mysql /var/tmp/mysql-backup
+sudo rm -rf /var/lib/mysql*
+sudo apt install mysql-server
+
+
+
+// solucion de mysql password
+http://systemadmin.es/2009/02/error-2002-hy000-cant-connect-to-local-mysql-server-through-socket-tmpmysqlsock-2

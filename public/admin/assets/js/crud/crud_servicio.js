@@ -17,7 +17,7 @@ function listar() {
         $.post(ruta() + "listado" + globalName, {cmd: 'web'}, function (json) {
 
             var tbody = '<tr>';
-            tbody += '<td colspan="9">';
+            tbody += '<td colspan="8">';
             tbody += '<center>';
             tbody += 'No se encontraron datos';
             tbody += '</center>';
@@ -132,10 +132,10 @@ function listar() {
                         tbody += '<td>';
                         tbody += datos[i].descripcion;
                         tbody += '</td>';
-                        tbody += '<td>';
-                        tbody += 'S/. ';
-                        tbody += datos[i].precio;
-                        tbody += '</td>';
+                        //tbody += '<td>';
+                        //tbody += 'S/. ';
+                        //tbody += datos[i].precio;
+                        //tbody += '</td>';
                         tbody += '<td>';
                         if (datos[i].estado == 'activo') {
                             tbody += '<span class="badge badge-success">' + datos[i].estado.charAt(0).toUpperCase() + datos[i].estado.slice(1) + '</span>';
@@ -207,7 +207,7 @@ function obtener(id) {
 
             document.getElementById("Eid").value = Odatos.id;
             document.getElementById("Enombre").value = Odatos.nombre;
-            document.getElementById("Eprecio").value = Odatos.precio;
+            //document.getElementById("Eprecio").value = Odatos.precio;
             document.getElementById("Edescripcion").value = Odatos.descripcion;
 
 

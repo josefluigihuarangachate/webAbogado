@@ -83,12 +83,12 @@ $v = "?v=" . date('YmdHis');
 
             .rating > input:checked ~ label, /* show gold star when clicked */
             .rating:not(:checked) > label:hover, /* hover current star */
-            .rating:not(:checked) > label:hover ~ label { color: #eeda68;  } /* hover previous stars in list */
+            .rating:not(:checked) > label:hover ~ label { color: #e39706;  } /* hover previous stars in list */
 
             .rating > input:checked + label:hover, /* hover current star when changing rating */
             .rating > input:checked ~ label:hover,
             .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-            .rating > input:checked ~ label:hover ~ label { color: #eeda68;  } 
+            .rating > input:checked ~ label:hover ~ label { color: #e39706;  } 
         </style>
         <style>
             .card {
@@ -206,7 +206,7 @@ $v = "?v=" . date('YmdHis');
             <!-- End Sidebar Right -->
 
             <!-- Footer Page -->
-            @php($titulo = "Reseña")
+            @php($titulo = "Mi muro")
             @include('user/include/header-page')
             <!-- End Footer Page -->
 
@@ -251,19 +251,19 @@ $v = "?v=" . date('YmdHis');
                                 <div class="btn-group" role="group">
                                     <button type="button" id="stars" class="btn btn-warning" style="background-color: #f2efae;border: 1px solid #e5e052;color: #a09d36;" href="#tab1" data-toggle="tab">
                                         <span class="glyphicon glyphicon-star" aria-hidden="true"><sup id="star" name="star">0</sup></span>
-                                        <div class="hidden-xs">Estrellas</div>
+                                        <div class="">Calificaciones</div>
                                     </button>
                                 </div>
                                 <div class="btn-group" role="group">
                                     <button type="button" id="favorites" class="btn btn-danger" style="background-color: #ea9993;border: 1px solid #e58780;color: #aa3c34;" href="#tab2" data-toggle="tab">
-                                        <span class="glyphicon glyphicon-heart" aria-hidden="true"><sup id="favorite" name="favorite">0</sup></span>
-                                        <div class="hidden-xs">Favoritos</div>
+                                        <span class="glyphicon glyphicon-briefcase" aria-hidden="true"><sup id="favorite" name="favorite">0</sup></span>
+                                        <div class="">Servicios</div>
                                     </button>
                                 </div>
                                 <div class="btn-group" role="group">
                                     <button type="button" id="following" class="btn btn-primary" style="background-color: #88acc9;border: 1px solid #7b95aa;color: #3d617c;" href="#tab3" data-toggle="tab">
                                         <span class="glyphicon glyphicon-user" aria-hidden="true"><sup id="client" name="client">0</sup></span>
-                                        <div class="hidden-xs">Clientes</div>
+                                        <div class="">Conversaciones</div>
                                     </button>
                                 </div>
                             </div>  
@@ -277,7 +277,6 @@ $v = "?v=" . date('YmdHis');
                             <br>
                         </div>
                     </div>
-
                 </div>
             </section>
         </div>

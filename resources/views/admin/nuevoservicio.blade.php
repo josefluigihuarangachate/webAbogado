@@ -88,17 +88,16 @@ $v = "?v=" . date('YmdHis');
                                                 <br>
                                                 <div class="input-group" style="justify-content: center;">
                                                     <div class="row col-md-5">
-                                                        <label for="Rprecio">Precio</label>
-                                                        <input type="text" class="form-control" id="Rprecio" name="Rprecio" placeholder="*Precio : 00.00">
-                                                    </div>
-                                                    <div class="row col-md-2">
-                                                    </div>
-                                                    <div class="row col-md-5">
                                                         <label for="Restado">Estado</label>                                                
                                                         <select class="form-control" id="Restado" name="Restado">
                                                             <option value="activo">Activo</option>
                                                             <option value="inactivo">Inactivo</option>
                                                         </select>
+                                                    </div>
+                                                    <div class="row col-md-2">
+                                                    </div>
+                                                    <div class="row col-md-5">
+
                                                     </div>
                                                 </div>                                           
                                                 <br>

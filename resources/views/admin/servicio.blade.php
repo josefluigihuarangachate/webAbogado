@@ -95,7 +95,7 @@ $v = "?v=" . date('YmdHis');
                                                             <th>Nombre del Abogado</th>
                                                             <th>Nombre</th>
                                                             <th>Descripcion</th>
-                                                            <th>Precio</th>
+                                                            <!-- <th>Precio</th> -->
                                                             <th>Estado</th>
                                                             <th>Opciones</th>
                                                         </tr>
@@ -146,10 +146,10 @@ $v = "?v=" . date('YmdHis');
                                 <label for="Enombre">Nombre</label>
                                 <input type="text" class="form-control" id="Enombre" name="Enombre" placeholder="*Nombre">
                             </div>
-                            <div class="form-group">
-                                <label for="Eprecio">Precio</label>
-                                <input type="text" class="form-control" id="Eprecio" name="Eprecio" placeholder="*Precio : 00.00">
-                            </div>
+                            <!--                            <div class="form-group">
+                                                            <label for="Eprecio">Precio</label>
+                                                            <input type="text" class="form-control" id="Eprecio" name="Eprecio" placeholder="*Precio : 00.00">
+                                                        </div>-->
                             <div class="form-group">
                                 <label for="Edescripcion">Descripcion</label>
                                 <textarea type="text" class="form-control" id="Edescripcion" name="Edescripcion" placeholder="*Descripcion" style="resize: none;" rows="3"></textarea>

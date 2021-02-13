@@ -68,12 +68,12 @@ $v = "?v=" . date('YmdHis');
 
             .rating > input:checked ~ label, /* show gold star when clicked */
             .rating:not(:checked) > label:hover, /* hover current star */
-            .rating:not(:checked) > label:hover ~ label { color: #eeda68;  } /* hover previous stars in list */
+            .rating:not(:checked) > label:hover ~ label { color: #e39706;  } /* hover previous stars in list */
 
             .rating > input:checked + label:hover, /* hover current star when changing rating */
             .rating > input:checked ~ label:hover,
             .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-            .rating > input:checked ~ label:hover ~ label { color: #eeda68;  } 
+            .rating > input:checked ~ label:hover ~ label { color: #e39706;  } 
         </style>
         <style>
             .card {
@@ -127,14 +127,6 @@ $v = "?v=" . date('YmdHis');
 
                                     <!-- Three columns of text below the carousel -->
                                     <div class="row" id="calificarAbogados" name="calificarAbogados">
-
-
-
-
-
-
-
-
                                     </div><!-- /.row -->
                                 </div>
                                 <br>

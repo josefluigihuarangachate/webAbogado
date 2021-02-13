@@ -179,7 +179,7 @@ section {
     background: rgba(255, 255, 255, .9);
 }
 .redish:before {
-    background: #eeda68;
+    background: #e39706;
 }
 .high-opacity:before {
     -webkit-opacity: .95;
@@ -347,7 +347,7 @@ iframe#html5boxiframevideo {
     width: 100%;
 }
 .owl-dot.active::before {
-    background: #eeda68 none repeat scroll 0 0;
+    background: #e39706 none repeat scroll 0 0;
     border-radius: 100%;
     content: "";
     height: 6px;
@@ -1124,7 +1124,7 @@ ul.menu-right > li {
 .menu-button {
     border: 1px solid #dfdfdf;
     border-radius: 100%;
-    box-shadow: 0 7px 10px #f0eb56; /*cambiar*/
+    box-shadow: 0 7px 10px #e49c04; /*cambiar*/
     display: inline-block;
     height: 50px !important;
     line-height: 50px !important;
@@ -1215,7 +1215,7 @@ ul.menu-left > li > a, ul.menu-right > li > a {
     width: 10px;
 }
 .redbg{
-    background: #eeda68;
+    background: #e39706;
 }
 .bluebg{
     background: #00b4f0;
@@ -1227,7 +1227,7 @@ ul.menu-left > li > a, ul.menu-right > li > a {
     background: #09e577;
 }
 .profile-info {
-    background: #eeda68 none repeat scroll 0 0;
+    background: #e39706 none repeat scroll 0 0;
     border-radius: 7px;
     display: block;
     margin: -24px auto 0;
@@ -3277,15 +3277,15 @@ a.main-btn2,
     float: right;
     margin-top: -24px;
 }
-.good-day-notification::before {
-    background: #ffdb50 none repeat scroll 0 0;
+/*.good-day-notification::before {
+    background: #e39706 none repeat scroll 0 0;
     content: "";
     height: 3px;
     left: 0;
     position: absolute;
     top: 0;
     width: 100%;
-}
+}*/
 .more.page {
     background: #eaeaea none repeat scroll 0 0;
     padding: 0 13px;
@@ -3743,7 +3743,7 @@ input[type=checkbox]:checked:disabled + label:before {
     height: 100%;
     width: 100%;
     z-index: 99999;
-    background-color: #eeda68;
+    background-color: #e39706;
 }
 .vh-100 {
     height: 100vh !important;
@@ -5002,7 +5002,7 @@ a.view-cart {
 .movie-cat li > a i {
     background: rgba(255, 44, 85, 0.15) none repeat scroll 0 0;
     border-radius: 100%;
-    color: #eeda68;
+    color: #e39706;
     display: inline-block;
     font-size: 18px;
     height: 45px;
@@ -5268,16 +5268,17 @@ a.view-cart {
     border-radius: 7px;
 }
 /*--- black theme ---*/
+
 .app-layout.theme-black {
-    background: #10171e none repeat scroll 0 0;
+    background: #282828 none repeat scroll 0 0 !important;
     z-index: 0;
 }
 .theme-black .topbar {
-    background: #15202b none repeat scroll 0 0;
+    background: #191919 none repeat scroll 0 0;
     color: #8596a3;
 }
 .theme-black .page-caro {
-    background: #15202b none repeat scroll 0 0;
+    background: #333333 none repeat scroll 0 0;
 }
 .theme-black .main-title {
     color: #fff;
@@ -5340,10 +5341,10 @@ a.view-cart {
     background: #15202b;
 }  
 .theme-black .bottom-header {
-    background: #0b1219 none repeat scroll 0 0;
+    background: #191919 none repeat scroll 0 0;
 }
 .theme-black .side-slide {
-    background: #10171e none repeat scroll 0 0;
+    background: #191919 none repeat scroll 0 0;
 }
 .theme-black .user-avatar {
     border-color: rgba(255, 255, 255, 0.1);
@@ -5430,13 +5431,13 @@ a.view-cart {
     color: #999;
 }
 .theme-black .chat-desc > li {
-    background: #15202b none repeat scroll 0 0;
+    background: #191919 none repeat scroll 0 0;
 }
 .theme-black .chat-desc > li::before {
-    border-top-color: #15202b;
+    border-top-color: #191919;
 }
 .theme-black .mesg-write-box {
-    background: #15202b none repeat scroll 0 0;
+    background: #191919 none repeat scroll 0 0;
 }
 .theme-black .mesg-write-box > form a {
     color: #fff;
@@ -5524,12 +5525,12 @@ a.view-cart {
     color: #fff;
 }
 .theme-black .nearby-user{
-    background: #15202b;
+    background: #191919;
     border-color: rgba(255, 255, 255, 0.05);
 }
 .theme-black .nearby-user > span{color: #fff;}
 .theme-black .good-day-notification {
-    background: #15202b none repeat scroll 0 0;
+    background: #191919 none repeat scroll 0 0;
     border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 .theme-black .story-user > span {

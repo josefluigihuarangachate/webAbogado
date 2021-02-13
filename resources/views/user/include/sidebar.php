@@ -25,7 +25,7 @@
             </form>
             <label for="inputFile" class="btn btn-default" style="border-radius: 50px 0px 0px 50px;" id="labelUploadProfile" name="labelUploadProfile">
                 <i class="lni lni-gallery"></i>&nbsp; Cargar...
-            </label><button class="btn btn-success" style="border-radius: 0px 50px 50px 0px;background-color: #eeda68;border: 1px solid #ccba57;" id="guardarFotoPerfil" name="guardarFotoPerfil">
+            </label><button class="btn btn-success" style="border-radius: 0px 50px 50px 0px;background-color: #e39706;border: 1px solid #ccba57;" id="guardarFotoPerfil" name="guardarFotoPerfil">
                 <i class="lni lni-save"></i>&nbsp; Guardar
             </button>
 
@@ -34,14 +34,6 @@
         <!--<li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-inbox"></i>Mi Perfil</a></li>-->
         <li><a href="/appprofileGeneral" title="" style="font-size: 18px;"><i class="lni lni-pencil-alt"></i>Configuración</a></li>
 
-        <?php
-        // SOLO PARA ABOGADOS
-        if (session('idtipo') == 2) {
-            ?>
-            <li><a href="/appreseñaGeneral" title="" style="font-size: 18px;"><i class="lni lni-graduation"></i>Reseña</a></li>
-            <?php
-        }
-        ?>
         <?php
         // SOLO PARA CLIENTES
         if (session('idtipo') == 3) {
@@ -58,6 +50,14 @@
         <!--<li><a href="create-new.html" title=""><i class="lni lni-pencil"></i>Create Page</a></li>-->
         <!--<li><a href="create-new.html" title=""><i class="lni lni-cloud-network"></i>Create Group</a></li>-->
         <li><a href="./appcerrarSesion" title="" style="font-size: 18px;"><i class="lni lni-power-switch"></i>Cerrar Sesion</a></li>
+        <?php
+        // SOLO PARA ABOGADOS
+        if (session('idtipo') == 2) {
+            ?>
+            <li><a href="/appreseñaGeneral" title="" style="font-size: 18px;"><i class="lni lni-graduation"></i>Reseña</a></li>
+            <?php
+        }
+        ?>
     </ul>
     <div class="night-mode" style="font-size: 18px;">
         <i class="lni lni-night"></i>Modo Oscuro 

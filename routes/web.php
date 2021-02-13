@@ -5,6 +5,7 @@ use App\Http\Controllers\CronController; // CRON (ADMINISTRADOR,CLIENTE,ABOGADO)
 use App\Http\Controllers\LoginController; // LOGIN (CLIENTE,ABOGADO)
 use App\Http\Controllers\AdminController; // LOGIN, ADMINISTRADOR (ADMINISTRADOR)
 use App\Http\Controllers\DashboardController; // DASHBOARD (ADMINISTRADOR)
+use App\Http\Controllers\BlogController; // PUBLICACION (ADMINISTRADOR)
 use App\Http\Controllers\PlanController; // PLAN (ADMINISTRADOR)
 use App\Http\Controllers\AreaClienteController; // AREA DEL CLIENTE (ADMINISTRADOR)
 use App\Http\Controllers\SuscripcionController; // SUSCRIPCION (ADMINISTRADOR)
@@ -36,6 +37,26 @@ Route::get('/', function () {
     return view('admin/login');
 });
 // END PAGINA PRINCIPAL
+//
+//
+// EDITOR DE PAGINA
+Route::get('/blogView/{nameFolder?}/{namePage?}/{value?}', [BlogController::class, 'blogView']);
+Route::post('/getFolders', [BlogController::class, 'getFolders']);
+
+Route::get('/listaPost', function () {
+    return view('admin/blog');
+});
+
+Route::get('/userblog', function () {
+    return view('user/blog');
+});
+
+Route::post('/sessionNameFolder', [BlogController::class, 'saveNameFolder']);
+Route::post('/listadoBlog', [BlogController::class, 'index']);
+Route::post('/verdemoBlog', [BlogController::class, 'verDemo']);
+Route::post('/registrarBlog', [BlogController::class, 'create']);
+Route::post('/eliminarBlog', [BlogController::class, 'destroy']);
+// END  EDITOR DE PAGINA
 //
 //
 // ADMINISTRADOR
@@ -207,6 +228,18 @@ Route::post('/listadoDashboard', [DashboardController::class, 'listadoDashboard'
 // 
 // 
 // PLAN
+Route::get('/nuevoPost', function () {
+    return view('admin/nuevapublicacion');
+});
+Route::post('/listadoPlan', [PlanController::class, 'index']);
+Route::post('/registrarPlan', [PlanController::class, 'create']);
+Route::post('/obtenerPlan', [PlanController::class, 'show']);
+//Route::post('/editarPlan', [PlanController::class, 'update']);
+Route::post('/eliminarPlan', [PlanController::class, 'destroy']);
+// END PLAN
+// 
+// 
+// PLAN
 Route::get('/listaPlan', function () {
     return view('admin/plan');
 });
@@ -244,7 +277,7 @@ Route::post('/eliminarService', [ServicioController::class, 'destroy']);
 //
 //
 //
-// ------------------------------- PARA LA APP --------------------------------------------
+// ------------------------------- PARA LA APP -------------------------------------------- 
 // CRON - RUC Y SEDULA
 Route::get('/cronrucsedula', [CronController::class, 'cronRucSedula']);
 // FIN CRON
